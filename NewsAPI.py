@@ -1,6 +1,8 @@
 # importing requests package 
 import requests	 
 
+
+#I will comment the entire script for you by tonight christian, so you understand what is happening within this entire file at the moment.
 def NewsFromBBC(): 
 	
 	# BBC news api 
