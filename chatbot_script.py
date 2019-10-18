@@ -4,6 +4,14 @@ import random
 from discord.ext import commands
 from googletrans import Translator
 
+# Keywords list - Add keywords here
+keywordsList = {
+    "This",
+    "is",
+    "an",
+    "example"
+}
+
 #[CHRISTIAN] Sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
 
