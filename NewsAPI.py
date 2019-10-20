@@ -24,7 +24,8 @@ def EveryTopHeadline():
 	print(theURL)
 
 #A function for finding news around the world depending on specific words/key terms.
-#However, this search does not allow for country-specific searches.
+#However, this search does not allow for country-specific searches.#
+#[Annija] and referenced from https://newsapi.org/docs/endpoints/everything#
 def SpecificNews():
 	url = ('https://newsapi.org/v2/everything?'
 	#This is the key word that should appear in the title of the article.
