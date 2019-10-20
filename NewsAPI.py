@@ -24,6 +24,7 @@ def NewsFromBBC():
 		#Simply prints all the trending news right now (top ten).
 		print(i + 1, results[i])				 
 
+if __name__ == '__main__':
 	#Calls the function, only using this to ensure that everything is getting called correctly, these function names will
 	#be used to import from chatbot_script.py later on.
-	NewsFromBBC() 
+		NewsFromBBC() 
