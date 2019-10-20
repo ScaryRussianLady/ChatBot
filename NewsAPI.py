@@ -1,7 +1,29 @@
 #This imports the requests package which allows for HTTP requests.
 import requests	 
+from newsapi import NewsApiClient
 
-#Function for fetching the top ten headlines of today.#
+#IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6'
+
+#Function for fetchin all of the top headline news from around UK. (can adjust this for different countries, which may be something to look at later)#
+#[Annija] and referenced from https://newsapi.org/docs/endpoints/top-headlines#
+def EveryTopHeadline():
+	#Gets the top headlines from the UK, 'country=gb' can be changed depending on what country you want to look at.
+	url = ('https://newsapi.org/v2/top-headlines?'
+       'country=gb&'
+	   #Can adjust the category depending on what you want specifically, there are only certain categories available: 
+	   #general, health, science, technology, business, sports, management, entertainment.
+	   'category=general&'
+	   #Returns a set amount of news articles, default will be 20 if you do not specify and the maximum is 100, but we should not go
+	   #above 10 realistically, or however many the user will request for.
+		'pageSize=5&'
+       'apiKey=72742ae51f514418a9a6da52faf58be6')
+	response = requests.get(url)
+	
+	#Fetches the data in JSON format.
+	theURL = response.json()
+	print(theURL)
+
+#Function for fetching the top ten headlines of today from BBC News.#
 #[Annija] and referenced from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/#
 def NewsFromBBC(): 
 	#This is the BBC News API with our own personal API key. 
@@ -22,9 +44,10 @@ def NewsFromBBC():
 	
 	for i in range(len(results)): 
 		#Simply prints all the trending news right now (top ten).
-		print(i + 1, results[i])				 
+		print(i + 1, results[i])
 
 if __name__ == '__main__':
 	#Calls the function, only using this to ensure that everything is getting called correctly, these function names will
 	#be used to import from chatbot_script.py later on.
-		NewsFromBBC() 
+		NewsFromBBC()
+		EveryTopHeadline() 
