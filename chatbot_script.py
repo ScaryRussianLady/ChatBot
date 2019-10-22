@@ -33,6 +33,8 @@ async def bot(com, *, msg):
     print(msgObj.lang)
     print(msgObj.userID)
 
+
+
     botReply = None # Currently set as None because a reply hasn't been generated yet
 
     #------------------------------------------- INSIDE THESE LINES DETERMINES THE BOT'S RESPONSE -------------------------------------------#
@@ -45,6 +47,7 @@ async def bot(com, *, msg):
 
     #------------------------------------------- INSIDE THESE LINES DETERMINES THE BOT'S RESPONSE -------------------------------------------#    
     
+
     # [CHRISTIAN] If the user input was not in English then this will translate botReply from English to the language the user used | then the bot will send the botReply string on discord.
     botReply = translateText(botReply, msgObj.lang)
     await com.send(botReply)
