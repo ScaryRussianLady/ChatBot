@@ -33,7 +33,9 @@ async def bot(com, *, msg):
     print(msgObj.lang)
     print(msgObj.userID)
 
-
+    #Template of what to do for Callum.
+    if msgObj.msg == 'hey':
+        print("message received.")
 
     botReply = None # Currently set as None because a reply hasn't been generated yet
 
