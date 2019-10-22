@@ -33,11 +33,25 @@ async def bot(com, *, msg):
     print(msgObj.lang)
     print(msgObj.userID)
 
-    #Template of what to do for Callum.
-    if msgObj.msg == 'hey':
-        print("message received.")
-
     botReply = None # Currently set as None because a reply hasn't been generated yet
+    welcome = False # to determine if bot has introduced
+    
+    #Template of what to do for Callum.
+    for i in range(len(msgObj.list)):
+        if msgObj.list[i] == 'hey' or msgObj.list[i] == 'hi' or msgObj.list[i] == 'hello':
+            print("message received.")
+            botReply = "Hi, im an Entertainment bot, Want to know what i can do ?"
+            welcome = True
+    if welcome == True:        
+        for i in range(len(msgObj.list)):
+            if msgObj.list[i] == 'yes':
+                print("Message recived")
+                botReply = "ok Cool, so i can search films, music and tv programs for you and give information, reccomendations ands ratings to help you choose what to watch or listen too"
+    
+    #botReply = translateText(botReply, msgObj.lang)           
+    await com.send(botReply)
+    msgObj.list.clear()
+
 
     #------------------------------------------- INSIDE THESE LINES DETERMINES THE BOT'S RESPONSE -------------------------------------------#
     
@@ -45,14 +59,14 @@ async def bot(com, *, msg):
     # from [your file name] import [function/class name]
 
     # Call your script's functions here
-    botReply = "Placeholder reply" # Placeholder
+    #botReply = "Placeholder reply" # Placeholder
 
     #------------------------------------------- INSIDE THESE LINES DETERMINES THE BOT'S RESPONSE -------------------------------------------#    
     
 
     # [CHRISTIAN] If the user input was not in English then this will translate botReply from English to the language the user used | then the bot will send the botReply string on discord.
-    botReply = translateText(botReply, msgObj.lang)
-    await com.send(botReply)
+    #botReply = translateText(botReply, msgObj.lang)
+    #await com.send(botReply)
 
 
 # [CHRISTIAN] This function detects of certain word have been said
