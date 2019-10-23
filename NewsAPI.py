@@ -1,3 +1,4 @@
+#-------------------------------------------------------------IMPORT OF MODULES-------------------------------------------------------------#
 #This imports the requests package which allows for HTTP requests.
 import requests	 
 from newsapi import NewsApiClient
@@ -6,7 +7,10 @@ from newsapi import NewsApiClient
 from datetime import datetime
 
 #IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6'
+#--------------------------------------------------------------------------------------------------------------------------------------------#
 
+
+#-------------------------------------------------------------TOP HEADLINES FUNCTION-------------------------------------------------------------#
 #Function for fetchin all of the top headline news from around UK. (can adjust this for different countries, which may be something to look at later)#
 #[Annija] and referenced from https://newsapi.org/docs/endpoints/top-headlines#
 def EveryTopHeadline():
@@ -25,7 +29,10 @@ def EveryTopHeadline():
 	#Fetches the data in JSON format.
 	theURL = response.json()
 	print(theURL)
+#-----------------------------------------------------------------------------------------------------------------------------------------------#
 
+
+#-------------------------------------------------------------SPECIFIC NEWS FUNCTION-------------------------------------------------------------#
 #A function for finding news around the world depending on specific words/key terms.
 #However, this search does not allow for country-specific searches.#
 #[Annija] and referenced from https://newsapi.org/docs/endpoints/everything#
@@ -59,7 +66,10 @@ def SpecificNews():
 	
 	#Only a print statement for now but will change this to loop back to the beginnig of the function if they wish to search another topic.
 	print("Here is what I found. Hope these are okay for you! Are there any other topics you would like to look at?")
+#------------------------------------------------------------------------------------------------------------------------------------------------#
 
+
+#-------------------------------------------------------------NEWS FROM BBC SPECIFICALLY FUNCTION-------------------------------------------------------------#
 #Function for fetching the top ten headlines of today from BBC News.#
 #[Annija] and referenced from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/#
 def NewsFromBBC(): 
@@ -82,10 +92,14 @@ def NewsFromBBC():
 	for i in range(len(results)): 
 		#Simply prints all the trending news right now (top ten).
 		print(i + 1, results[i])
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
+
+#-------------------------------------------------------------TESTING FUNCTION-------------------------------------------------------------#
 if __name__ == '__main__':
 	#Calls the function, only using this to ensure that everything is getting called correctly, these function names will
 	#be used to import from chatbot_script.py later on.
 		#NewsFromBBC()
 		#EveryTopHeadline() 
 		SpecificNews()
+#-------------------------------------------------------------------------------------------------------------------------------------------#
