@@ -11,6 +11,8 @@ from datetime import datetime
 
 
 #-------------------------------------------------------------INTRODUCTION FUNCTION-------------------------------------------------------------#
+#Function for introducing the possibilities to the user, it allows for the file to know which function to bring up.#
+#[Annija]#
 def IntroductionToUser():
 	print("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.")
 	specificFunction = input("Is there anything specific you want to look at, for example, specific topics? ")
@@ -46,7 +48,7 @@ def IntroductionToUser():
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-------------------------------------------------------------TOP HEADLINES FUNCTION-------------------------------------------------------------#
-#Function for fetchin all of the top headline news from around UK. (can adjust this for different countries, which may be something to look at later)#
+#Function for fetching all of the top headline news from around UK. (can adjust this for different countries, which may be something to look at later)#
 #[Annija] and referenced from https://newsapi.org/docs/endpoints/top-headlines#
 def EveryTopHeadline():
 
