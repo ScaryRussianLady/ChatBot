@@ -5,7 +5,7 @@ import http.client
 #api_key: used to get access to information on TMDB
 api_key = "732f0435865bde3d7f9d58852db87043"
 
-
+UserSelection = int(input("Please select an option: /n 1) movie search /n 2) genre search /n 3) upcomin movies /n 4) top rated /n 5) popularity ")) 
 
 #(Jamie)
 #refernce https://developers.themoviedb.org/3/search/search-movies
