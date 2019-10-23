@@ -1,6 +1,9 @@
 #This imports the requests package which allows for HTTP requests.
 import requests	 
 from newsapi import NewsApiClient
+#This will be used to ensure that no matter when the user accesses the API, the articles that are being pulled down are from the current date.
+#Obviously, the date will be changed but only if the user wishes to do so.
+from datetime import datetime
 
 #IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6'
 
@@ -27,12 +30,22 @@ def EveryTopHeadline():
 #However, this search does not allow for country-specific searches.#
 #[Annija] and referenced from https://newsapi.org/docs/endpoints/everything#
 def SpecificNews():
+#IMPORTANT NOTICE: This is only a rough 'sketch' of how the API will be laid out, as there will be no input statements like this, the bot will handle this differently.#
+
+	#Stores the specific word(s) that the user enters and then will use this variable to search up the relevant articles.
+	chosenTopic = input("Hey there, what topic would you like to look at?" + '\n' + "Give me one word or several words and I will fetch you the most popular article right now based on that topic! ")
+	
+	#Stores the amount of articles that the user wants to see from the topic they chose.
+	amountOfArticles = input("Nice topic! But, before I tell you the relevant articles, how many would you like to see? ")
+
+	#currentDate = str(datetime.now())
+
 	url = ('https://newsapi.org/v2/everything?'
-	#This is the key word that should appear in the title of the article.
-       'q=Murder&'
-	   'pageSize=1&'
+	#This is the key word that should bring up the relevant article.
+       'q='+chosenTopic+'&'
+	   'pageSize='+amountOfArticles+'&'
 	   #From what date it should get searched (depending how old you want the article to be)
-       'from=2019-10-20&'
+	   'from=2019-10-20&'
 	   #How to sort the articles (the most popular will show first, therefore, the most relevant and most likely to be in English)
        'sortBy=popularity&'
        'apiKey=72742ae51f514418a9a6da52faf58be6')
@@ -43,6 +56,9 @@ def SpecificNews():
 	theURL = response.json()
 
 	print(theURL)
+	
+	#Only a print statement for now but will change this to loop back to the beginnig of the function if they wish to search another topic.
+	print("Here is what I found. Hope these are okay for you! Are there any other topics you would like to look at?")
 
 #Function for fetching the top ten headlines of today from BBC News.#
 #[Annija] and referenced from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/#
@@ -70,6 +86,6 @@ def NewsFromBBC():
 if __name__ == '__main__':
 	#Calls the function, only using this to ensure that everything is getting called correctly, these function names will
 	#be used to import from chatbot_script.py later on.
-		NewsFromBBC()
-		EveryTopHeadline() 
+		#NewsFromBBC()
+		#EveryTopHeadline() 
 		SpecificNews()
