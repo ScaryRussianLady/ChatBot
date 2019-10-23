@@ -64,8 +64,14 @@ def SpecificNews():
 
 	print(theURL)
 	
-	#Only a print statement for now but will change this to loop back to the beginnig of the function if they wish to search another topic.
-	print("Here is what I found. Hope these are okay for you! Are there any other topics you would like to look at?")
+	#Loops back to the beginning of the function if they wish to search another topic. Further improvements will be made.
+	findAnotherTopic = input("Here is what I found. Hope these are okay for you!" + '\n' + "Are there any other topics you would like to look at? ")
+	findAnotherTopicList = findAnotherTopic.split(" ")
+	for i in range(len(findAnotherTopicList)):
+		if findAnotherTopicList[i] == "yes":
+			SpecificNews()
+		else:
+			print("Cool. See you soon!")
 #------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
