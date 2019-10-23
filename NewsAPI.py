@@ -88,6 +88,9 @@ def SpecificNews():
 
 
 #-------------------------------------------------------------OLDER ARTICLES FUNCTION-------------------------------------------------------------#
+#Function which allows the user to look at certain articles from within the past month, does not allow for a wider space of time as need to upgrade
+#to a paid plan for that.#
+#[Annija] and referenced from https://newsapi.org/docs/endpoints/everything#
 def OlderNews():
 
 	howOldQuestion = input("Please make sure to write in the format YYYY-MM-DD including the dashes (I know, it's a strange format!)" + '\n' + "From what date within the last month would you like to view news? ")
