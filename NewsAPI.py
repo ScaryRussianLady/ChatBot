@@ -14,12 +14,24 @@ from datetime import datetime
 #Function for fetchin all of the top headline news from around UK. (can adjust this for different countries, which may be something to look at later)#
 #[Annija] and referenced from https://newsapi.org/docs/endpoints/top-headlines#
 def EveryTopHeadline():
+
+	specificCategoryQuestion = input("Is there a specific category you would like to look at? ")
+	specificCategoryQuestionList = specificCategoryQuestion.split(" ")
+
+	#Allows the user to choose a specific category from the top headlines, if they can't think of one, then the choice is set to general as default.
+	for i in range(len(specificCategoryQuestionList)):
+		if specificCategoryQuestionList[i] == 'yes':
+			categoryChoices = input("Your options are as follows: general; health; science; technology; business; sports; management; and entertaintment." + '\n' + "Which category would you like? ")
+		else:
+			print("That's okay. I will just output the general top headline from today! :)")
+			categoryChoices = "general"
+
 	#Gets the top headlines from the UK, 'country=gb' can be changed depending on what country you want to look at.
 	url = ('https://newsapi.org/v2/top-headlines?'
        'country=gb&'
 	   #Can adjust the category depending on what you want specifically, there are only certain categories available: 
 	   #general, health, science, technology, business, sports, management, entertainment.
-	   'category=general&'
+	   'category='+categoryChoices+'&'
 	   #Returns a set amount of news articles, default will be 20 if you do not specify and the maximum is 100, but we should not go
 	   #above 10 realistically, or however many the user will request for.
 		'pageSize=1&'
@@ -75,6 +87,26 @@ def SpecificNews():
 #------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
+#-------------------------------------------------------------OLDER ARTICLES FUNCTION-------------------------------------------------------------#
+def OlderNews():
+
+	howOldQuestion = input("Please make sure to write in the format YYYY-MM-DD including the dashes (I know, it's a strange format!)" + '\n' + "From what date within the last month would you like to view news? ")
+	howOldQuestionStr = str(howOldQuestion)
+	url = ('https://newsapi.org/v2/everything?'
+       'q=apples&'
+	   'pageSize=1&'
+	   'from='+howOldQuestionStr+'&'
+       'sortBy=popularity&'
+       'apiKey=72742ae51f514418a9a6da52faf58be6')
+	
+	response = requests.get(url)
+
+	theURL = response.json()
+
+	print(theURL)
+#-------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
 #-------------------------------------------------------------NEWS FROM BBC SPECIFICALLY FUNCTION-------------------------------------------------------------#
 #Function for fetching the top ten headlines of today from BBC News.#
 #[Annija] and referenced from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/#
@@ -101,11 +133,12 @@ def NewsFromBBC():
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
-#-------------------------------------------------------------TESTING FUNCTION-------------------------------------------------------------#
+#-------------------------------------------------------------TESTING FUNCTION----------------------------------------------------------------#
 if __name__ == '__main__':
 	#Calls the function, only using this to ensure that everything is getting called correctly, these function names will
 	#be used to import from chatbot_script.py later on.
 		#NewsFromBBC()
 		#EveryTopHeadline() 
-		SpecificNews()
-#-------------------------------------------------------------------------------------------------------------------------------------------#
+		#SpecificNews()
+		OlderNews()
+#----------------------------------------------------------------------------------------------------------------------------------------------#
