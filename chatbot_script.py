@@ -18,7 +18,7 @@ client = commands.Bot(command_prefix = "-")
 @client.event
 #[CHRISTIAN] This will print the text to the python terminal when the bot is ready on discord
 async def on_ready():
-    print("Beep boop boss! The bot is online!")
+    print("The E-Bot is online!")
 
 
 @client.command()
@@ -39,15 +39,19 @@ async def bot(com, *, msg):
     #Template of what to do for Callum.
     for i in range(len(msgObj.list)):
         if msgObj.list[i] == 'hey' or msgObj.list[i] == 'hi' or msgObj.list[i] == 'hello':
-            print("message received.")
-            botReply = "Hi, im an Entertainment bot, Want to know what i can do ?"
+            print("Message received.")
+            botReply = "Hey there! I'm E-Bot, I am here to provide you with certain services. Would you like to know what I can do?"
             welcome = True
+
     if welcome == True:        
         for i in range(len(msgObj.list)):
             if msgObj.list[i] == 'yes':
-                print("Message recived")
-                botReply = "ok Cool, so i can search films, music and tv programs for you and give information, reccomendations ands ratings to help you choose what to watch or listen too"
-    
+                print("Message received.")
+                botReply = "Okay, cool! So, I can search films, books and news for you and give information on them, recommendations, ratings and anything else you want to know about them. Would you like to give it a go?"
+            elif msgObj.list[i] == 'no':
+                print("Message received.")
+                botReply = "Well, that's a shame! If you change your mind just come and say hello to me again. Hope to see you soon! :)"
+                
     #botReply = translateText(botReply, msgObj.lang)           
     await com.send(botReply)
     msgObj.list.clear()
