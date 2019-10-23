@@ -36,7 +36,7 @@ async def bot(com, *, msg):
     botReply = None # Currently set as None because a reply hasn't been generated yet
     welcome = False # to determine if bot has introduced
     
-    #Template of what to do for Callum.
+    #[callum] begining of the basic responses code, working on a way to make previous responses determine the next allowed inputs ard responses, can currently give a brief summary of the bots functions
     for i in range(len(msgObj.list)):
         if msgObj.list[i] == 'hey' or msgObj.list[i] == 'hi' or msgObj.list[i] == 'hello':
             print("Message received.")
@@ -52,7 +52,7 @@ async def bot(com, *, msg):
                 print("Message received.")
                 botReply = "Well, that's a shame! If you change your mind just come and say hello to me again. Hope to see you soon! :)"
                 
-    #botReply = translateText(botReply, msgObj.lang)           
+    botReply = translateText(botReply, msgObj.lang) #small issue with translate, truns bot into not       
     await com.send(botReply)
     msgObj.list.clear()
 
