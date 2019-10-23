@@ -5,7 +5,6 @@ import http.client
 #api_key: used to get access to information on TMDB
 api_key = "732f0435865bde3d7f9d58852db87043"
 
-UserSelection = int(input("Please select an option: /n 1) movie search /n 2) genre search /n 3) upcomin movies /n 4) top rated /n 5) popularity ")) 
 
 #(Jamie)
 #refernce https://developers.themoviedb.org/3/search/search-movies
@@ -113,8 +112,25 @@ def upcoming():
     print(upcDict)
     print(type(upcDict))
 
-#upcoming()
-#search_popular()
-#movie_search()
-#top_rated()
-#genre_list()
+
+
+#prompts a user to input what they would like to do.
+print("1) Movie search")
+print("2) Genre search")
+print("3) See popular")
+print("4) Popular actors/movies")
+print("5) Upcoming")
+UserSelection = int(input("Please enter a corresponding number to what you would like to do: "))
+#iterates through until it finds a match for the user input
+if UserSelection == 1:
+    movie_search()
+elif UserSelection == 2:
+    genre_list()
+elif UserSelection == 3:
+    search_popular()
+elif UserSelection == 4:
+    top_rated()
+elif UserSelection == 5:
+    upcoming()
+else:
+    print("please select a number")
