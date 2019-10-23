@@ -10,6 +10,41 @@ from datetime import datetime
 #--------------------------------------------------------------------------------------------------------------------------------------------#
 
 
+#-------------------------------------------------------------INTRODUCTION FUNCTION-------------------------------------------------------------#
+def IntroductionToUser():
+	print("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.")
+	specificFunction = input("Is there anything specific you want to look at, for example, specific topics? ")
+	specificFunctionList = specificFunction.split(" ")
+
+
+	for i in range(len(specificFunctionList)):
+		#Will later change this to accessing a list of different ways of saying 'yes' so that it can run it and check it against that (more efficient).
+		if specificFunctionList[i] == "yes":
+			userChoice = input("Okay, what would you like to look into? There's like, specific topics, older news, or even specific themes (stuff like sports). ")
+		else:
+			print("Cool, I will just look up the top news of today from BBC! If you want to look into films or books instead, just say 'let me go back' ")
+			userChoice = "no"
+
+	userChoiceList = userChoice.split(" ")
+	
+	for j in range(len(userChoiceList)):
+		#Will also change this later for different ways of saying 'specific'.
+		if userChoiceList[j] == "specific":
+			SpecificNews()
+
+		elif userChoiceList[j] == "older":
+			OlderNews()
+
+		elif userChoiceList[j] == "themes":
+			EveryTopHeadline()
+
+		elif userChoiceList[j] == "no":
+			NewsFromBBC()
+
+		else:
+			print("Sorry, I don't understand what you mean. Try rephrasing! I promise I am doing my best to understand you. :)")		
+#-----------------------------------------------------------------------------------------------------------------------------------------------#
+
 #-------------------------------------------------------------TOP HEADLINES FUNCTION-------------------------------------------------------------#
 #Function for fetchin all of the top headline news from around UK. (can adjust this for different countries, which may be something to look at later)#
 #[Annija] and referenced from https://newsapi.org/docs/endpoints/top-headlines#
@@ -22,6 +57,7 @@ def EveryTopHeadline():
 	for i in range(len(specificCategoryQuestionList)):
 		if specificCategoryQuestionList[i] == 'yes':
 			categoryChoices = input("Your options are as follows: general; health; science; technology; business; sports; management; and entertaintment." + '\n' + "Which category would you like? ")
+			amountOfArticles = input("Alright! But, before I show you the articles, how many would you like to see? ")
 		else:
 			print("That's okay. I will just output the general top headline from today! :)")
 			categoryChoices = "general"
@@ -34,7 +70,7 @@ def EveryTopHeadline():
 	   'category='+categoryChoices+'&'
 	   #Returns a set amount of news articles, default will be 20 if you do not specify and the maximum is 100, but we should not go
 	   #above 10 realistically, or however many the user will request for.
-		'pageSize=1&'
+		'pageSize='+amountOfArticles+'&'
        'apiKey=72742ae51f514418a9a6da52faf58be6')
 	response = requests.get(url)
 	
@@ -52,7 +88,7 @@ def SpecificNews():
 #IMPORTANT NOTICE: This is only a rough 'sketch' of how the API will be laid out, as there will be no input statements like this, the bot will handle this differently.#
 
 	#Stores the specific word(s) that the user enters and then will use this variable to search up the relevant articles.
-	chosenTopic = input("Hey there, what topic would you like to look at?" + '\n' + "Give me one word or several words and I will fetch you the most popular article right now based on that topic! ")
+	chosenTopic = input("What topic would you like to look at?" + '\n' + "Give me one word or several words and I will fetch you the most popular article right now based on that topic! ")
 	
 	#Stores the amount of articles that the user wants to see from the topic they chose.
 	amountOfArticles = input("Nice topic! But, before I tell you the relevant articles, how many would you like to see? ")
@@ -143,5 +179,6 @@ if __name__ == '__main__':
 		#NewsFromBBC()
 		#EveryTopHeadline() 
 		#SpecificNews()
-		OlderNews()
+		#OlderNews()
+		IntroductionToUser()
 #----------------------------------------------------------------------------------------------------------------------------------------------#
