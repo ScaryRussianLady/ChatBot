@@ -5,12 +5,12 @@ from discord.ext import commands
 from googletrans import Translator
 
 # Keywords list - Add keywords here
-keywordsList = {
+keywordsList = [
     "This",
     "is",
     "an",
     "example"
-}
+]
 
 #[CHRISTIAN] Sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
@@ -35,42 +35,18 @@ async def bot(com, *, msg):
 
     botReply = None # Currently set as None because a reply hasn't been generated yet
     welcome = False # to determine if bot has introduced
-    
-    #[callum] begining of the basic responses code, working on a way to make previous responses determine the next allowed inputs ard responses, can currently give a brief summary of the bots functions
-    for i in range(len(msgObj.list)):
-        if msgObj.list[i] == 'hey' or msgObj.list[i] == 'hi' or msgObj.list[i] == 'hello':
-            print("Message received.")
-            botReply = "Hey there! I'm E-Bot, I am here to provide you with certain services. Would you like to know what I can do?"
-            welcome = True
-
-    if welcome == True:        
-        for i in range(len(msgObj.list)):
-            if msgObj.list[i] == 'yes':
-                print("Message received.")
-                botReply = "Okay, cool! So, I can search films, books and news for you and give information on them, recommendations, ratings and anything else you want to know about them. Would you like to give it a go?"
-            elif msgObj.list[i] == 'no':
-                print("Message received.")
-                botReply = "Well, that's a shame! If you change your mind just come and say hello to me again. Hope to see you soon! :)"
-                
-    botReply = translateText(botReply, msgObj.lang) #small issue with translate, truns bot into not       
-    await com.send(botReply)
-    msgObj.list.clear()
-
 
     #------------------------------------------- INSIDE THESE LINES DETERMINES THE BOT'S RESPONSE -------------------------------------------#
-    
-    # List of .py collaborative files (import the functions from the files that you work on)
-    # from [your file name] import [function/class name]
 
-    # Call your script's functions here
-    #botReply = "Placeholder reply" # Placeholder
+    # [CHRISTIAN] This algorthim will search for specific keywords from a list to determine what scripts will be used for replies
+    botReply = generateReplies(msgObj.list) 
 
     #------------------------------------------- INSIDE THESE LINES DETERMINES THE BOT'S RESPONSE -------------------------------------------#    
     
-
     # [CHRISTIAN] If the user input was not in English then this will translate botReply from English to the language the user used | then the bot will send the botReply string on discord.
-    #botReply = translateText(botReply, msgObj.lang)
-    #await com.send(botReply)
+    for i in botReply:
+        Reply = translateText(i, msgObj.lang)
+        await com.send(Reply)
 
 
 # [CHRISTIAN] This function detects of certain word have been said
@@ -114,6 +90,62 @@ def createMsgObj(msg, authorID):
     msg_obj = messageObj(msg, msgList, msgLanguage, authorID)
     return msg_obj
 
+# [CHRISTIAN] This algorthim will search for specific keywords from a list to determine what scripts will be used for replies
+def generateReplies(msgList):
+    greetingKeywords = ["hi", "hello", "good", "greetings", "hey"]
+    appreciationKeywords = ["thank", "thanks"]
+    filmKeywords = ["movie", "film", "series"]
+    newsKeywords = ["news", "article", "weather"]
+    bookKeywords = ["book", "story"]
+    farewellKeywords = ["bye", "goodbye", "farewell"]
+
+    Replies = []
+
+    for i in range(len(msgList)):
+        for j in range(len(greetingKeywords)):
+            if msgList[i].lower() == greetingKeywords[j]:
+                # Call for greeting function inside of the placeholder
+                #Replies.append("Placeholder Greeting")
+                from BasicResponses import greetingReply
+                Replies.append(greetingReply(msgList))
+                break
+
+        for j in range(len(appreciationKeywords)):
+            if msgList[i].lower() == appreciationKeywords[j]:
+                # Call for appreciation function inside of the placeholder
+                #Replies.append("Placeholder Appreciation")
+                from BasicResponses import appreciationReply
+                Replies.append(appreciationReply(msgList))
+                break
+        
+        for j in range(len(filmKeywords)):
+            if msgList[i].lower() == filmKeywords[j]:
+                # Call for film function inside of the placeholder
+                Replies.append("Placeholder Film Info")
+                break
+        
+        for j in range(len(newsKeywords)):
+            if msgList[i].lower() == newsKeywords[j]:
+                # Call for news function inside of the placeholder
+                Replies.append("Placeholder News Info")
+                break
+
+        for j in range(len(bookKeywords)):
+            if msgList[i].lower() == bookKeywords[j]:
+                # Call for book function inside of the placeholder
+                Replies.append("Placeholder Book Info")
+                break
+        
+        for j in range(len(farewellKeywords)):
+            if msgList[i].lower() == farewellKeywords[j]:
+                # Call for farewell function inside of the placeholder
+                # Replies.append("Placeholder Farewell")
+                from BasicResponses import farewellReply
+                Replies.append(farewellReply(msgList))
+                break
     
+    print(Replies)
+    return Replies
+
 # [CHRISTIAN] This runs the bot. Note: The token is specific to the bot
 client.run("NjMzMzQ0NTM5NDk0NzExMzM2.XaTNgA.WhYbdsxRBsY5fVqu4n3pi5lCnVg")
