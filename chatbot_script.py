@@ -83,12 +83,17 @@ def generateReplies(msgList):
 
     for i in range(len(msgList)):
         for j in range(len(greetingKeywords)):
-            if msgList[i].lower() == greetingKeywords[j] or msgList[i].lower() == greetingKeywords[j]+" morning":
-                # Call for greeting function inside of the placeholder
-                #Replies.append("Placeholder Greeting")
-                from BasicResponses import greetingReply
-                Replies.append(greetingReply(msgList))
-                break
+            if msgList[i].lower() == greetingKeywords[j]:
+                if greetingKeywords[j] != "good":
+                    from BasicResponses import greetingReply
+                    Replies.append(greetingReply(msgList))
+                    break
+                else:
+                    if len(msgList) != 1:
+                        if msgList[i+1].lower() == "morning" or msgList[i+1].lower() == "evening" or msgList[i+1].lower() == "afternoon":
+                            from BasicResponses import greetingReply
+                            Replies.append(greetingReply(msgList))
+                            break
 
         for j in range(len(appreciationKeywords)):
             if msgList[i].lower() == appreciationKeywords[j]:
@@ -99,19 +104,19 @@ def generateReplies(msgList):
                 break
         
         for j in range(len(filmKeywords)):
-            if msgList[i].lower() == filmKeywords[j]:
+            if msgList[i].lower() == filmKeywords[j] or msgList[i].lower() == (filmKeywords[j]+"s"):
                 # Call for film function inside of the placeholder
                 Replies.append("Placeholder Film Info")
                 break
         
         for j in range(len(newsKeywords)):
-            if msgList[i].lower() == newsKeywords[j]:
+            if msgList[i].lower() == newsKeywords[j] or msgList[i].lower() == (newsKeywords[j]+"s"):
                 # Call for news function inside of the placeholder
                 Replies.append("Placeholder News Info")
                 break
 
         for j in range(len(bookKeywords)):
-            if msgList[i].lower() == bookKeywords[j]:
+            if msgList[i].lower() == bookKeywords[j] or msgList[i].lower() == (bookKeywords[j]+"s"):
                 # Call for book function inside of the placeholder
                 Replies.append("Placeholder Book Info")
                 break
