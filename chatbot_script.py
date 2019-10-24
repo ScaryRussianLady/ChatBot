@@ -148,4 +148,4 @@ def generateReplies(msgList):
     return Replies
 
 # [CHRISTIAN] This runs the bot. Note: The token is specific to the bot
-client.run("NjMzMzQ0NTM5NDk0NzExMzM2.XaTNgA.WhYbdsxRBsY5fVqu4n3pi5lCnVg")
+client.run("NjMzMzQ0NTM5NDk0NzExMzM2.XbHYmg.Z8Giwok2ciqCVNq8kixOB2oXvyE")
