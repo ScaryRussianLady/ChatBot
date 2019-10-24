@@ -1,0 +1,25 @@
+[
+    {
+        "UserID": "Example UserID",
+        
+        "LastMessage": "Example last message",
+        
+        "FavFilmGenre": ["Example Genre", "Another Example"],
+        
+        "FavBookGenre": ["Example Genre", "Another Example"],
+        
+        "FavNewsTopic": ["Example Topic", "Another Example"]
+    },
+
+    {
+        "UserID": "Example UserID 2",
+        
+        "LastMessage": "Example last message",
+        
+        "FavFilmGenre": ["Example Genre", "Another Example"],
+        
+        "FavBookGenre": ["Example Genre", "Another Example"],
+        
+        "FavNewsTopic": ["Example Topic", "Another Example"]
+    }
+]
