@@ -4,14 +4,6 @@ import random
 from discord.ext import commands
 from googletrans import Translator
 
-# Keywords list - Add keywords here
-keywordsList = [
-    "This",
-    "is",
-    "an",
-    "example"
-]
-
 #[CHRISTIAN] Sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
 
@@ -28,35 +20,23 @@ async def bot(com, *, msg):
 
     # [CHRISTIAN] Calls the function that creates the message object | Establishes the variable which will contain the bot's reply
     msgObj = createMsgObj(msg, com.author.id)
-    print(msgObj.msg)
-    print(msgObj.list)
-    print(msgObj.lang)
-    print(msgObj.userID)
-
-    botReply = None # Currently set as None because a reply hasn't been generated yet
-    welcome = False # to determine if bot has introduced
-
-    #------------------------------------------- INSIDE THESE LINES DETERMINES THE BOT'S RESPONSE -------------------------------------------#
+    print("User's message            >>", msgObj.msg)
+    print("User's message as list    >>", msgObj.list)
+    print("User's message's language >>", msgObj.lang)
+    print("User's ID                 >>", msgObj.userID)
 
     # [CHRISTIAN] This algorthim will search for specific keywords from a list to determine what scripts will be used for replies
     botReply = generateReplies(msgObj.list) 
-
-    #------------------------------------------- INSIDE THESE LINES DETERMINES THE BOT'S RESPONSE -------------------------------------------#    
-    
+   
     # [CHRISTIAN] If the user input was not in English then this will translate botReply from English to the language the user used | then the bot will send the botReply string on discord.
-    for i in botReply:
-        Reply = translateText(i, msgObj.lang)
+    if len(botReply) != 0:
+        for i in botReply:
+            Reply = translateText(i, msgObj.lang)
+            await com.send(Reply)
+    else:
+        Reply = "A keyword was not mentioned" # This is a placeholder reply.
+        Reply = translateText(Reply, msgObj.lang)
         await com.send(Reply)
-
-
-# [CHRISTIAN] This function detects of certain word have been said
-# Deprecated
-def findKeywords(msgList, keywords):
-    saidWord = False
-    for i in msgList:
-        if i.lower() == keywords:
-            saidWord = True
-    return saidWord
 
 # [CHRISTIAN] This will translate the languages of messages
 def translateText(text, lang):
@@ -103,7 +83,7 @@ def generateReplies(msgList):
 
     for i in range(len(msgList)):
         for j in range(len(greetingKeywords)):
-            if msgList[i].lower() == greetingKeywords[j]:
+            if msgList[i].lower() == greetingKeywords[j] or msgList[i].lower() == greetingKeywords[j]+" morning":
                 # Call for greeting function inside of the placeholder
                 #Replies.append("Placeholder Greeting")
                 from BasicResponses import greetingReply
