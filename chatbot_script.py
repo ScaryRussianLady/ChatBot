@@ -18,17 +18,22 @@ async def on_ready():
 # E.G The user typing "-bot My name is Bill" will make msg = "My name is Bill"
 async def bot(com, *, msg):
 
-    # [CHRISTIAN] Calls the function that creates the message object | Establishes the variable which will contain the bot's reply
+    # [CHRISTIAN] Calls the function that creates the message object
     msgObj = createMsgObj(msg, com.author.id)
     print("User's message            >>", msgObj.msg)
     print("User's message as list    >>", msgObj.list)
     print("User's message's language >>", msgObj.lang)
     print("User's ID                 >>", msgObj.userID)
 
-    # [CHRISTIAN] This algorthim will search for specific keywords from a list to determine what scripts will be used for replies
+    # Will call a function from another script that uses the message object to store data
+    import UserDataManagement
+    
+
+    # [CHRISTIAN] Calls the function which generates replies (Scroll to see the function for more information | Returns as a list
     botReply = generateReplies(msgObj.list) 
    
-    # [CHRISTIAN] If the user input was not in English then this will translate botReply from English to the language the user used | then the bot will send the botReply string on discord.
+    # [CHRISTIAN] Send's the replies on discord in the order of the botReply list. If there are no replies, sends a different message
+    # it will also translate the message if the message sent by the user wasn't in English
     if len(botReply) != 0:
         for i in botReply:
             Reply = translateText(i, msgObj.lang)
