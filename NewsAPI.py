@@ -47,6 +47,7 @@ def IntroductionToUser():
 			print("Sorry, I don't understand what you mean. Try rephrasing! I promise I am doing my best to understand you. :)")		
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
+
 #-------------------------------------------------------------TOP HEADLINES FUNCTION-------------------------------------------------------------#
 #Function for fetching all of the top headline news from around UK. (can adjust this for different countries, which may be something to look at later)#
 #[Annija] and referenced from https://newsapi.org/docs/endpoints/top-headlines#
@@ -150,7 +151,7 @@ def OlderNews():
 
 #-------------------------------------------------------------NEWS FROM BBC SPECIFICALLY FUNCTION-------------------------------------------------------------#
 #Function for fetching the top ten headlines of today from BBC News.#
-#[Annija] and referenced from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/#
+#Referenced entirely from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/#
 def NewsFromBBC(): 
 	#This is the BBC News API with our own personal API key. 
 	main_url = " https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=72742ae51f514418a9a6da52faf58be6"
