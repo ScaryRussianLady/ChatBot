@@ -10,8 +10,9 @@ client = commands.Bot(command_prefix = "-")
 @client.event
 #[CHRISTIAN] This will print the text to the python terminal when the bot is ready on discord
 async def on_ready():
-    print("The E-Bot is online!")
-
+    print("\nThe E-Bot is online!")
+    # For terminal use only. Creates space between information on the terminal to make it easier to read.
+    print("\n--------------------------------------------------------------------------")
 
 @client.command()
 # [CHRISTIAN] This is the MAIN function for the chatbot | com = the command (bot), msg = the user input after the command is called
@@ -42,6 +43,9 @@ async def bot(com, *, msg):
         Reply = "A keyword was not mentioned" # This is a placeholder reply.
         Reply = translateText(Reply, msgObj.lang)
         await com.send(Reply)
+    
+    #For terminal use only. Creates space between information on the terminal to make it easier to read.
+    print("\n--------------------------------------------------------------------------")
 
 # [CHRISTIAN] This will translate the languages of messages
 def translateText(text, lang):
@@ -77,6 +81,11 @@ def createMsgObj(msg, authorID):
 
 # [CHRISTIAN] This algorthim will search for specific keywords from a list to determine what scripts will be used for replies
 def generateReplies(msgList):
+    
+    Replies = commonReplies(msgList)
+    return Replies
+
+def commonReplies(msgList):
     greetingKeywords = ["hi", "hello", "good", "greetings", "hey"]
     appreciationKeywords = ["thank", "thanks"]
     filmKeywords = ["movie", "film", "series"]
@@ -95,10 +104,13 @@ def generateReplies(msgList):
                     break
                 else:
                     if len(msgList) != 1:
-                        if msgList[i+1].lower() == "morning" or msgList[i+1].lower() == "evening" or msgList[i+1].lower() == "afternoon":
-                            from BasicResponses import greetingReply
-                            Replies.append(greetingReply(msgList))
-                            break
+                        try:
+                            if msgList[i+1].lower() == "morning" or msgList[i+1].lower() == "evening" or msgList[i+1].lower() == "afternoon":
+                                from BasicResponses import greetingReply
+                                Replies.append(greetingReply(msgList))
+                                break
+                        except:
+                            pass
 
         for j in range(len(appreciationKeywords)):
             if msgList[i].lower() == appreciationKeywords[j]:
@@ -134,7 +146,6 @@ def generateReplies(msgList):
                 Replies.append(farewellReply(msgList))
                 break
     
-    print(Replies)
     return Replies
 
 # [CHRISTIAN] This runs the bot. Note: The token is specific to the bot

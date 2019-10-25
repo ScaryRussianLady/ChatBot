@@ -3,6 +3,8 @@
         "UserID": "Example UserID",
         
         "LastMessage": "Example last message",
+
+        "LastBotReply": "Example reply",
         
         "FavFilmGenre": ["Example Genre", "Another Example"],
         
@@ -15,6 +17,8 @@
         "UserID": "Example UserID 2",
         
         "LastMessage": "Example last message",
+
+        "LastBotReply": "Example reply",
         
         "FavFilmGenre": ["Example Genre", "Another Example"],
         
