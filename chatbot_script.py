@@ -26,10 +26,9 @@ async def bot(com, *, msg):
     print("User's message's language >>", msgObj.lang)
     print("User's ID                 >>", msgObj.userID)
 
-    # Will call a function from another script that uses the message object to store data
+    # Saves the userID and message data to the user_datastore.json file
     import UserDataManagement
     
-
     # [CHRISTIAN] Calls the function which generates replies (Scroll to see the function for more information | Returns as a list
     botReply = generateReplies(msgObj.list) 
    
@@ -114,8 +113,6 @@ def commonReplies(msgList):
 
         for j in range(len(appreciationKeywords)):
             if msgList[i].lower() == appreciationKeywords[j]:
-                # Call for appreciation function inside of the placeholder
-                #Replies.append("Placeholder Appreciation")
                 from BasicResponses import appreciationReply
                 Replies.append(appreciationReply(msgList))
                 break
@@ -140,8 +137,6 @@ def commonReplies(msgList):
         
         for j in range(len(farewellKeywords)):
             if msgList[i].lower() == farewellKeywords[j]:
-                # Call for farewell function inside of the placeholder
-                # Replies.append("Placeholder Farewell")
                 from BasicResponses import farewellReply
                 Replies.append(farewellReply(msgList))
                 break

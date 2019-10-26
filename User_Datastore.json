@@ -4,7 +4,11 @@
         
         "LastMessage": "Example last message",
 
-        "LastBotReply": "Example reply",
+        "LastFilmReply": "Example reply",
+
+        "LastNewsReply": "Example reply",
+
+        "LastBookReply": "Example reply",
         
         "FavFilmGenre": ["Example Genre", "Another Example"],
         
@@ -18,7 +22,29 @@
         
         "LastMessage": "Example last message",
 
-        "LastBotReply": "Example reply",
+        "LastFilmReply": "Example reply",
+
+        "LastNewsReply": "Example reply",
+
+        "LastBookReply": "Example reply",
+        
+        "FavFilmGenre": ["Example Genre", "Another Example"],
+        
+        "FavBookGenre": ["Example Genre", "Another Example"],
+        
+        "FavNewsTopic": ["Example Topic", "Another Example"]
+    },
+
+    {
+        "UserID": "Example UserID 3",
+        
+        "LastMessage": "Example last message",
+
+        "LastFilmReply": "Example reply",
+
+        "LastNewsReply": "Example reply",
+
+        "LastBookReply": "Example reply",
         
         "FavFilmGenre": ["Example Genre", "Another Example"],
         

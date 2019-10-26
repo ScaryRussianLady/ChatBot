@@ -1,15 +1,22 @@
 # Use this script to manage the User_Datastore.json file
 
-# Create a function which takes an object as it's variable
-# This are the methods is inside of the object
-  
-#   ("User's message            >>", msgObj.msg)
-#   ("User's message as list    >>", msgObj.list)
-#   ("User's message's language >>", msgObj.lang)
-#   ("User's ID                 >>", msgObj.userID)
-
-# Use the object accordingly in order to manage the User_Datastore.json
-
 import json
 
+def SaveData(Data, UserID, Location):
+    with open("User_Datastore.json") as uds:
+        UserData = json.load(uds)
+    
+    if IsNewID(UserData, UserID):
+        pass # Create a new object in the userdata array with this userID
+    
+    # For the rest of the code, write the data to the Location.
+    # Location is the variable name that the data will be stored in.
 
+    # Here will save the data to that specific ID
+
+# [CHRISTIAN] Checks if UserID already exists in the datastore and returns false if it does and true if it doesn't
+def IsNewID(jsonfile, userID):
+    for i in range(len(jsonfile)):
+        if str(userID) == jsonfile[i]["UserID"]:
+            return False
+    return True
