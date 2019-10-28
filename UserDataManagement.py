@@ -21,3 +21,6 @@ def IsNewID(jsonfile, userID):
         if str(userID) == jsonfile[i]["UserID"]:
             return False
     return True
+
+# This tests the function in the terminal
+SaveData("pop", "003", "LastMessage")
