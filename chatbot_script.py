@@ -3,6 +3,7 @@ import discord
 import random
 from discord.ext import commands
 from googletrans import Translator
+import json
 
 #[CHRISTIAN] Sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
@@ -142,6 +143,20 @@ def commonReplies(msgList):
                 break
     
     return Replies
+
+# [CHRISTIAN] I don't even know what to call this yet
+def PathReplies(msg):
+    with open("User_Datastore.json") as uds:
+        UserData = json.load(uds)
+
+    yes = ["yes", "yea", "yeah"]
+    no = ["no", "nah"]
+
+    print(UserData)
+    print(no)
+    print(yes)
+
+
 
 # [CHRISTIAN] This runs the bot. Note: The token is specific to the bot
 client.run("NjMzMzQ0NTM5NDk0NzExMzM2.XbHZtw.CLPjwoYCqMaQDYQ0jLElxYNfIGg")

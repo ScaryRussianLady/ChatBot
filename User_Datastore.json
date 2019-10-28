@@ -1,8 +1,10 @@
 [
     {
-        "UserID": "Example UserID",
+        "UserID": "001",
+
+        "Name": "Kanye West",
         
-        "LastMessage": "Example last message",
+        "LastMessage": "I am the greatest",
 
         "LastFilmReply": "Example reply",
 
@@ -18,9 +20,11 @@
     },
 
     {
-        "UserID": "Example UserID 2",
+        "UserID": "002",
+
+        "Name": "Bob Ross",
         
-        "LastMessage": "Example last message",
+        "LastMessage": "There are no mistakes, just happy accidents",
 
         "LastFilmReply": "Example reply",
 
