@@ -58,6 +58,27 @@ def CreateNewID(UserData, UserID):
         json.dump(UserData, uds , indent= 3)
     return UserData
 
+def RemoveData(Data, UserID, Location):
+    pass
+
+
+
+
+
+def RetrieveData(UserID, Location):
+    count = 0
+
+    with open("User_Datastore.json") as uds:
+        UserData = json.load(uds)
+    
+    for entry in UserData['data']:
+        if UserID == entry['UserID']:
+            Data = UserData['data'][count][Location]
+        count += 1
+    return Data
 
 # This tests the function in the terminal
-SaveData("Romance", "001", "FavBookGenre")
+SaveData("Bowser", "001", "Name")
+
+Data = RetrieveData("001" ,"FavBookGenre" )
+print(Data)
