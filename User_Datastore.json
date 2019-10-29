@@ -99,6 +99,43 @@
             "Example Topic",
             "Another Example"
          ]
+      },
+      {
+         "UserID": "006",
+         "Name": "Placeholder",
+         "LastMessage": "Placeholder",
+         "LastFilmReply": "Example reply",
+         "LastNewsReply": "Example reply",
+         "LastBookReply": "Example reply",
+         "FavFilmGenre": [
+            "Example Genre",
+            "Another Example"
+         ],
+         "FavBookGenre": [
+            "Example Genre",
+            "Another Example",
+            "romance",
+            "romance",
+            "romance",
+            "romance",
+            "romance"
+         ],
+         "FavNewsTopic": [
+            "Example Topic",
+            "Another Example"
+         ],
+         "Previous Viewed Films": [
+            "Example Film",
+            "Another Example"
+         ],
+         "Previous Viewed Books": [
+            "Example Book",
+            "Another Example"
+         ],
+         "Previous Viewed Articles": [
+            "Example Article",
+            "Another Example"
+         ]
       }
    ]
 }

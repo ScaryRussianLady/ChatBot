@@ -6,7 +6,7 @@ import json
 def SaveData(Data, UserID, Location):
     with open("User_Datastore.json") as uds:
         UserData = json.load(uds)
-    #print(UserData)
+    catagories = ["LastMessage", "LastFilmReply" , "LastNewsReply","LastBookReply"] #List of items taht can only take a single argument
     count = 0
     if IsNewID(UserData, UserID):
         UserData = CreateNewID(UserData, UserID)
@@ -14,7 +14,11 @@ def SaveData(Data, UserID, Location):
 
     for entry in UserData['data']:  # This code check through the entrys of User Data to find the correct User ID entry
         if entry['UserID'] == UserID:
-            UserData['data'][count][Location] = Data # This replaces the entry with the updated user data
+            for Cat in catagories:
+                if Location == Cat:
+                    UserData['data'][count][Location] = Data # This replaces the entry with the updated user data
+                else:
+                    UserData['data'][count][Location].append(Data) # This adds to a list for the gneres to be saved
         count += 1
     with open("User_Datastore.json", 'w') as uds: #writes updated data to json file
         json.dump(UserData, uds , indent= 3)
@@ -44,7 +48,10 @@ def CreateNewID(UserData, UserID):
     "LastBookReply": "Example reply",
     "FavFilmGenre": ["Example Genre", "Another Example"],
     "FavBookGenre": ["Example Genre", "Another Example"],
-    "FavNewsTopic": ["Example Topic", "Another Example"]})
+    "FavNewsTopic": ["Example Topic", "Another Example"],
+    "Previous Viewed Films": ["Example Film", "Another Example"], 
+    "Previous Viewed Books": ["Example Book", "Another Example"],
+    "Previous Viewed Articles": ["Example Article", "Another Example"],})
     
     with open("User_Datastore.json", 'w') as uds:
         json.dump(UserData, uds , indent= 3)
@@ -52,4 +59,4 @@ def CreateNewID(UserData, UserID):
 
 
 # This tests the function in the terminal
-SaveData("Hi how are you", "005", "LastMessage")
+SaveData("romance", "006", "FavBookGenre")
