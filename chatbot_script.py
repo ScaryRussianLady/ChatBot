@@ -28,10 +28,10 @@ async def bot(com, *, msg):
     print("User's ID                 >>", msgObj.userID)
 
     # Saves the userID and message data to the user_datastore.json file
-    import UserDataManagement
+    #import UserDataManagement
     
     # [CHRISTIAN] Calls the function which generates replies (Scroll to see the function for more information | Returns as a list
-    botReply = generateReplies(msgObj.list) 
+    botReply = generateReplies(msgObj) 
    
     # [CHRISTIAN] Send's the replies on discord in the order of the botReply list. If there are no replies, sends a different message
     # it will also translate the message if the message sent by the user wasn't in English
@@ -80,12 +80,15 @@ def createMsgObj(msg, authorID):
     return msg_obj
 
 # [CHRISTIAN] This algorthim will search for specific keywords from a list to determine what scripts will be used for replies
-def generateReplies(msgList):
+def generateReplies(MessageObject):
     
-    Replies = commonReplies(msgList)
+    Replies = commonReplies(MessageObject)
     return Replies
 
-def commonReplies(msgList):
+def commonReplies(msgObj):
+
+    msgList = msgObj.list
+
     greetingKeywords = ["hi", "hello", "good", "greetings", "hey"]
     appreciationKeywords = ["thank", "thanks"]
     filmKeywords = ["movie", "film", "series"]
@@ -100,7 +103,7 @@ def commonReplies(msgList):
             if msgList[i].lower() == greetingKeywords[j]:
                 if greetingKeywords[j] != "good":
                     from BasicResponses import greetingReply
-                    Replies.append(greetingReply(msgList))
+                    Replies.append(greetingReply(msgObj))
                     break
                 else:
                     if len(msgList) != 1:
@@ -115,7 +118,7 @@ def commonReplies(msgList):
         for j in range(len(appreciationKeywords)):
             if msgList[i].lower() == appreciationKeywords[j]:
                 from BasicResponses import appreciationReply
-                Replies.append(appreciationReply(msgList))
+                Replies.append(appreciationReply(msgObj))
                 break
         
         for j in range(len(filmKeywords)):
@@ -139,7 +142,7 @@ def commonReplies(msgList):
         for j in range(len(farewellKeywords)):
             if msgList[i].lower() == farewellKeywords[j]:
                 from BasicResponses import farewellReply
-                Replies.append(farewellReply(msgList))
+                Replies.append(farewellReply(msgObj))
                 break
     
     return Replies
