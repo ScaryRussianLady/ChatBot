@@ -29,7 +29,10 @@ async def bot(com, *, msg):
     print("User's name               >>", msgObj.username)
 
     # Saves the userID and message data to the user_datastore.json file
-    #import UserDataManagement
+    from UserDataManagement import SaveData
+    SaveData(msgObj.userID, msgObj.userID, "UserID")
+    SaveData(str(msgObj.username), msgObj.userID, "Name")
+    SaveData(msgObj.msg, msgObj.userID, "LastMessage")
     
     # [CHRISTIAN] Calls the function which generates replies (Scroll to see the function for more information | Returns as a list
     botReply = generateReplies(msgObj) 
