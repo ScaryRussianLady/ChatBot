@@ -58,13 +58,27 @@ def CreateNewID(UserData, UserID):
         json.dump(UserData, uds , indent= 3)
     return UserData
 
-def RemoveData(Data, UserID, Location):
-    pass
+# [CALLUM] Allows Data to be removed from single dictionaries and Lists in the json File
+def RemoveData(DelWhole, ListPos, UserID, Location): 
+    count = 0
+    
+    with open("User_Datastore.json") as uds:
+        UserData = json.load(uds)
+
+        for entry in UserData['data']: 
+            if entry['UserID'] == UserID:
+                if Location == "Name" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply": #these catagories can only take a single argument
+                    UserData['data'][count][Location] = "" # This replaces the entry with the updated user data
+                else:
+                    del UserData['data'][count][Location][int(ListPos)]
+                    # UserData['data'][count][Location].remove(Item) For use if we want to remove items by name instead of position in the list
+            count += 1
+
+        with open("User_Datastore.json", 'w') as uds:
+            json.dump(UserData, uds , indent= 3)
 
 
-
-
-
+# [CALLUM] Allows other scripts to retrive data from the json file
 def RetrieveData(UserID, Location):
     count = 0
 
@@ -82,3 +96,5 @@ SaveData("Bowser", "001", "Name")
 
 Data = RetrieveData("001" ,"FavBookGenre" )
 print(Data)
+
+RemoveData(False, "0" , "001", "FavBookGenre" )
