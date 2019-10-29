@@ -3,7 +3,7 @@
       {
          "UserID": "001",
          "Name": "Kanye West",
-         "LastMessage": "I am the greatest",
+         "LastMessage": "pop",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
          "LastBookReply": "Example reply",
@@ -44,6 +44,46 @@
          "UserID": "003",
          "Name": "Placeholder",
          "LastMessage": "Placeholder",
+         "LastFilmReply": "Example reply",
+         "LastNewsReply": "Example reply",
+         "LastBookReply": "Example reply",
+         "FavFilmGenre": [
+            "Example Genre",
+            "Another Example"
+         ],
+         "FavBookGenre": [
+            "Example Genre",
+            "Another Example"
+         ],
+         "FavNewsTopic": [
+            "Example Topic",
+            "Another Example"
+         ]
+      },
+      {
+         "UserID": "004",
+         "Name": "Placeholder",
+         "LastMessage": "Hi how are you",
+         "LastFilmReply": "Example reply",
+         "LastNewsReply": "Example reply",
+         "LastBookReply": "Example reply",
+         "FavFilmGenre": [
+            "Example Genre",
+            "Another Example"
+         ],
+         "FavBookGenre": [
+            "Example Genre",
+            "Another Example"
+         ],
+         "FavNewsTopic": [
+            "Example Topic",
+            "Another Example"
+         ]
+      },
+      {
+         "UserID": "005",
+         "Name": "Placeholder",
+         "LastMessage": "Hi how are you",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
          "LastBookReply": "Example reply",

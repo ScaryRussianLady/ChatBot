@@ -2,22 +2,22 @@
 
 import json
 
-# [CALLUM] 
+# [CALLUM] This code allows the program to update the jason file with users previous responses and allows for multiple users 
 def SaveData(Data, UserID, Location):
     with open("User_Datastore.json") as uds:
         UserData = json.load(uds)
     #print(UserData)
-    
+    count = 0
     if IsNewID(UserData, UserID):
         UserData = CreateNewID(UserData, UserID)
     
 
-    for entry in UserData['data']['UserID']:
-        if entry['Location'] == Location:
-            entry['Location'].remove()
-            entry['Location'].insert(Data)
-            
-    
+    for entry in UserData['data']:  # This code check through the entrys of User Data to find the correct User ID entry
+        if entry['UserID'] == UserID:
+            UserData['data'][count][Location] = Data # This replaces the entry with the updated user data
+        count += 1
+    with open("User_Datastore.json", 'w') as uds: #writes updated data to json file
+        json.dump(UserData, uds , indent= 3)
 
     # Here will save the data to that specific ID
 
@@ -36,11 +36,20 @@ def IsNewID(jsonfile, userID):
 
 # [CALLUM] creates a new entry in the json file with that user id and then returns the updated user data to have the data saved
 def CreateNewID(UserData, UserID):
-    UserData['data'].append({ 'UserID' : UserID , "Name": "Placeholder" , "LastMessage": "Placeholder", "LastFilmReply": "Example reply", "LastNewsReply": "Example reply", "LastBookReply": "Example reply","FavFilmGenre": ["Example Genre", "Another Example"],"FavBookGenre": ["Example Genre", "Another Example"],"FavNewsTopic": ["Example Topic", "Another Example"]})
+    UserData['data'].append({ 'UserID' : UserID , 
+    "Name": "Placeholder" , 
+    "LastMessage": "Placeholder", 
+    "LastFilmReply": "Example reply", 
+    "LastNewsReply": "Example reply", 
+    "LastBookReply": "Example reply",
+    "FavFilmGenre": ["Example Genre", "Another Example"],
+    "FavBookGenre": ["Example Genre", "Another Example"],
+    "FavNewsTopic": ["Example Topic", "Another Example"]})
+    
     with open("User_Datastore.json", 'w') as uds:
         json.dump(UserData, uds , indent= 3)
     return UserData
 
 
 # This tests the function in the terminal
-SaveData("pop", "003", "LastMessage")
+SaveData("Hi how are you", "005", "LastMessage")
