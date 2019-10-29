@@ -31,11 +31,13 @@ def movie_search():
 
 
 
-#(Kesh)
+#(Jamie)
 #reference https://developers.themoviedb.org/3/genres/get-movie-list
 def genre_list():
+    genreDict = {"Action": "28", "Adventure": "12", "Animation": "16", "Comedy": "35", "Crime": "80", "Documentary": "99", "Drama": "18", "Family": "10751", "Fantasy": "14", "History": "36", "Horror": "27", "music": "10402", "Mystery": "9648", "Romance": "10749", "Science Fiction": "878", "TV Movie": "10770", "Thriller": "53", "war": "10752", "western": "37"}
+    UserChoice = input("here isd a list of genres available: 'Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', and 'Western'. please select one by typing it in: ")
     #used to request the informaion from the servers
-    url = "https://api.themoviedb.org/3/genre/movie/list?language=en-US&api_key="+api_key
+    url = "https://api.themoviedb.org/3/discover/movie?language=en-US&api_key="+api_key+"&with_genres="+str(genreDict[UserChoice])
 
     #retreives the genre data from server
     #makes it readable for user
@@ -51,7 +53,7 @@ def genre_list():
 
 
 
-#(Jamie)
+#(kesh)
 #reference https://developers.themoviedb.org/3/trending/get-trending
 def search_popular():
 
@@ -98,7 +100,7 @@ def top_rated():
 
 
 
-#(rishmie)
+#(Jamie)
 #reference https://developers.themoviedb.org/3/movies/get-upcoming
 def upcoming():
     
@@ -113,7 +115,7 @@ def upcoming():
     print(type(upcDict))
 
 
-
+#(rish)
 #prompts a user to input what they would like to do.
 print("1) Movie search")
 print("2) Genre search")
