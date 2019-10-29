@@ -34,10 +34,6 @@ def IsNewID(jsonfile, userID):
             return False
     return True
     
-     #for i in range(len(jsonfile)):
-        #if str(userID) == jsonfile[i]["UserID"]:
-            #return False
-    #return True
 
 # [CALLUM] creates a new entry in the json file with that user id and then returns the updated user data to have the data saved
 def CreateNewID(UserData, UserID):
@@ -67,8 +63,8 @@ def RemoveData(DelWhole, ListPos, UserID, Location):
 
         for entry in UserData['data']: 
             if entry['UserID'] == UserID:
-                if Location == "Name" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply": #these catagories can only take a single argument
-                    UserData['data'][count][Location] = "" # This replaces the entry with the updated user data
+                if Location == "Name" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply": 
+                    UserData['data'][count][Location] = "" 
                 else:
                     del UserData['data'][count][Location][int(ListPos)]
                     # UserData['data'][count][Location].remove(Item) For use if we want to remove items by name instead of position in the list
