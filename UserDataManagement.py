@@ -24,15 +24,15 @@ def SaveData(Data, UserID, Location):
 # [CHRISTIAN] Checks if UserID already exists in the datastore and returns false if it does and true if it doesn't
 # [CALLUM] changed the loop to incorporate new method of checking through the file, old loop commented out below if neeeded
 def IsNewID(jsonfile, userID):
-    #for entry in jsonfile["data"]:
-    #    if userID == (entry["UserID"]):
-    #        return False
-    #return True
-    
-    for i in range(len(jsonfile)):
-        if str(userID) == jsonfile["data"][i]["UserID"]:
+    for entry in jsonfile["data"]:
+        if userID == (entry["UserID"]):
             return False
     return True
+    
+     #for i in range(len(jsonfile)):
+        #if str(userID) == jsonfile[i]["UserID"]:
+            #return False
+    #return True
 
 # [CALLUM] creates a new entry in the json file with that user id and then returns the updated user data to have the data saved
 def CreateNewID(UserData, UserID):
