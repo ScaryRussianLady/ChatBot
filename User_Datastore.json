@@ -2,111 +2,11 @@
    "data": [
       {
          "UserID": "001",
-         "Name": "Kanye West",
-         "LastMessage": "pop",
-         "LastFilmReply": "Example reply",
-         "LastNewsReply": "Example reply",
-         "LastBookReply": "Example reply",
-         "FavFilmGenre": [
-            "Example Genre",
-            "Another Example"
-         ],
-         "FavBookGenre": [
-            "Example Genre",
-            "Another Example"
-         ],
-         "FavNewsTopic": [
-            "Example Topic",
-            "Another Example"
-         ]
-      },
-      {
-         "UserID": "002",
-         "Name": "Bob Ross",
-         "LastMessage": "There are no mistakes, just happy accidents",
-         "LastFilmReply": "Example reply",
-         "LastNewsReply": "Example reply",
-         "LastBookReply": "Example reply",
-         "FavFilmGenre": [
-            "Example Genre",
-            "Another Example"
-         ],
-         "FavBookGenre": [
-            "Example Genre",
-            "Another Example"
-         ],
-         "FavNewsTopic": [
-            "Example Topic",
-            "Another Example"
-         ]
-      },
-      {
-         "UserID": "003",
-         "Name": "Placeholder",
+         "Name": "Bowser",
          "LastMessage": "Placeholder",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
-         "LastBookReply": "Example reply",
-         "FavFilmGenre": [
-            "Example Genre",
-            "Another Example"
-         ],
-         "FavBookGenre": [
-            "Example Genre",
-            "Another Example"
-         ],
-         "FavNewsTopic": [
-            "Example Topic",
-            "Another Example"
-         ]
-      },
-      {
-         "UserID": "004",
-         "Name": "Placeholder",
-         "LastMessage": "Hi how are you",
-         "LastFilmReply": "Example reply",
-         "LastNewsReply": "Example reply",
-         "LastBookReply": "Example reply",
-         "FavFilmGenre": [
-            "Example Genre",
-            "Another Example"
-         ],
-         "FavBookGenre": [
-            "Example Genre",
-            "Another Example"
-         ],
-         "FavNewsTopic": [
-            "Example Topic",
-            "Another Example"
-         ]
-      },
-      {
-         "UserID": "005",
-         "Name": "Placeholder",
-         "LastMessage": "Hi how are you",
-         "LastFilmReply": "Example reply",
-         "LastNewsReply": "Example reply",
-         "LastBookReply": "Example reply",
-         "FavFilmGenre": [
-            "Example Genre",
-            "Another Example"
-         ],
-         "FavBookGenre": [
-            "Example Genre",
-            "Another Example"
-         ],
-         "FavNewsTopic": [
-            "Example Topic",
-            "Another Example"
-         ]
-      },
-      {
-         "UserID": "006",
-         "Name": "Placeholder",
-         "LastMessage": "Placeholder",
-         "LastFilmReply": "Example reply",
-         "LastNewsReply": "Example reply",
-         "LastBookReply": "Example reply",
+         "LastBookReply": "Romance",
          "FavFilmGenre": [
             "Example Genre",
             "Another Example"
@@ -114,25 +14,21 @@
          "FavBookGenre": [
             "Example Genre",
             "Another Example",
-            "romance",
-            "romance",
-            "romance",
-            "romance",
-            "romance"
+            "Romance"
          ],
          "FavNewsTopic": [
             "Example Topic",
             "Another Example"
          ],
-         "Previous Viewed Films": [
+         "PreviousViewedFilms": [
             "Example Film",
             "Another Example"
          ],
-         "Previous Viewed Books": [
+         "PreviousViewedBooks": [
             "Example Book",
             "Another Example"
          ],
-         "Previous Viewed Articles": [
+         "PreviousViewedArticles": [
             "Example Article",
             "Another Example"
          ]
