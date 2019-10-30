@@ -5,6 +5,9 @@ from discord.ext import commands
 from googletrans import Translator
 import json
 
+#[Annija] simply importing everything from my API script.
+from NewsAPI import *
+
 #[CHRISTIAN] Sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
 
@@ -29,10 +32,10 @@ async def bot(com, *, msg):
     print("User's name               >>", msgObj.username)
 
     # Saves the userID and message data to the user_datastore.json file
-    from UserDataManagement import SaveData
-    SaveData(msgObj.userID, msgObj.userID, "UserID")
-    SaveData(str(msgObj.username), msgObj.userID, "Name")
-    SaveData(msgObj.msg, msgObj.userID, "LastMessage")
+   # from UserDataManagement import SaveData
+   # SaveData(msgObj.userID, msgObj.userID, "UserID")
+   # SaveData(str(msgObj.username), msgObj.userID, "Name")
+   # SaveData(msgObj.msg, msgObj.userID, "LastMessage")
     
     # [CHRISTIAN] Calls the function which generates replies (Scroll to see the function for more information | Returns as a list
     botReply = generateReplies(msgObj) 
@@ -135,7 +138,7 @@ def commonReplies(msgObj):
         for j in range(len(newsKeywords)):
             if msgList[i].lower() == newsKeywords[j] or msgList[i].lower() == (newsKeywords[j]+"s"):
                 # Call for news function inside of the placeholder
-                Replies.append("Placeholder News Info")
+                Replies.append(IntroductionToUser())
                 break
 
         for j in range(len(bookKeywords)):

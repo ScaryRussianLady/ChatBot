@@ -11,10 +11,70 @@
             "Example Genre",
             "Another Example"
          ],
+         "FavBookGenre": [],
+         "FavNewsTopic": [
+            "Example Topic",
+            "Another Example"
+         ],
+         "PreviousViewedFilms": [
+            "Example Film",
+            "Another Example"
+         ],
+         "PreviousViewedBooks": [
+            "Example Book",
+            "Another Example"
+         ],
+         "PreviousViewedArticles": [
+            "Example Article",
+            "Another Example"
+         ]
+      },
+      {
+         "UserID": 486240496797089802,
+         "Name": "Placeholder",
+         "LastMessage": "Placeholder",
+         "LastFilmReply": "Example reply",
+         "LastNewsReply": "Example reply",
+         "LastBookReply": "Example reply",
+         "FavFilmGenre": [
+            "Example Genre",
+            "Another Example"
+         ],
          "FavBookGenre": [
-            "Romance",
-            "Romance",
-            "Romance"
+            "Example Genre",
+            "Another Example"
+         ],
+         "FavNewsTopic": [
+            "Example Topic",
+            "Another Example"
+         ],
+         "PreviousViewedFilms": [
+            "Example Film",
+            "Another Example"
+         ],
+         "PreviousViewedBooks": [
+            "Example Book",
+            "Another Example"
+         ],
+         "PreviousViewedArticles": [
+            "Example Article",
+            "Another Example"
+         ]
+      },
+      {
+         "UserID": 181396705604927498,
+         "Name": "Placeholder",
+         "LastMessage": "Placeholder",
+         "LastFilmReply": "Example reply",
+         "LastNewsReply": "Example reply",
+         "LastBookReply": "Example reply",
+         "FavFilmGenre": [
+            "Example Genre",
+            "Another Example"
+         ],
+         "FavBookGenre": [
+            "Example Genre",
+            "Another Example"
          ],
          "FavNewsTopic": [
             "Example Topic",
