@@ -6,7 +6,7 @@ from googletrans import Translator
 import json
 
 #[Annija] simply importing everything from my API script.
-from NewsAPI import *
+from NewsAPI import IntroductionToUser
 
 #[CHRISTIAN] Sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
