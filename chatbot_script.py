@@ -7,6 +7,7 @@ import json
 
 #[Annija] simply importing everything from my API script.
 from NewsAPI import IntroductionToUser
+from TMDBAPI import firstUserInt
 
 #[CHRISTIAN] Sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
@@ -141,7 +142,7 @@ def commonReplies(msgObj):
         for j in range(len(filmKeywords)):
             if msgList[i].lower() == filmKeywords[j] or msgList[i].lower() == (filmKeywords[j]+"s"):
                 # Call for film function inside of the placeholder
-                Replies.append("Placeholder Film Info")
+                Replies.append(firstUserInt())
                 break
         
         for j in range(len(newsKeywords)):
