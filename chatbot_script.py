@@ -100,7 +100,7 @@ def commonReplies(msgObj):
     greetingKeywords = ["hi", "hello", "good", "greetings", "hey"]
     appreciationKeywords = ["thank", "thanks"]
     filmKeywords = ["movie", "film", "series"]
-    newsKeywords = ["news", "article", "weather"]
+    newsKeywords = ["news", "article", "weather", "articles", "headlines", "headline"]
     bookKeywords = ["book", "story"]
     farewellKeywords = ["bye", "goodbye", "farewell"]
 

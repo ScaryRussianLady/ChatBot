@@ -6,9 +6,13 @@ from newsapi import NewsApiClient
 #Obviously, the date will be changed but only if the user wishes to do so.
 from datetime import datetime
 
+import discord
+from discord.ext import commands
+import json
+from googletrans import Translator
+
 #IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6'
 #--------------------------------------------------------------------------------------------------------------------------------------------#
-
 
 #-------------------------------------------------------------INTRODUCTION FUNCTION-------------------------------------------------------------#
 #Function for introducing the possibilities to the user, it allows for the file to know which function to bring up.#
@@ -28,20 +32,30 @@ def IntroductionToUser():
 			userChoice = "no"
 
 	userChoiceList = userChoice.split(" ")
-	
+	specificNewsKeywords = ["specific, definite, exact, individual, different"]
+	olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
+	topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category"]
+
 	for j in range(len(userChoiceList)):
+		for i in range(len(specificNewsKeywords)):
+			if userChoiceList[j].lower() == specificNewsKeywords[i]:
+				SpecificNews()
+			else:
+				print("sorry what")
+
 		#Will also change this later for different ways of saying 'specific'.
-		if userChoiceList[j] == "specific":
-			SpecificNews()
+		for i in range(len(olderNewsKeywords)):
+			if userChoiceList[j].lower() == olderNewsKeywords[i]:
+				OlderNews()
 
-		elif userChoiceList[j] == "older":
-			OlderNews()
+		#elif userChoiceList[j].lower() == olderNewsKeywords[i]:
+		#	OlderNews()
 
-		elif userChoiceList[j] == "themes":
-			EveryTopHeadline()
+		#elif userChoiceList[j].lower() == topHeadlineKeywords[i]:
+		#	EveryTopHeadline()
 
-		elif userChoiceList[j] == "no":
-			NewsFromBBC()
+		#elif userChoiceList[j].lower == "no":
+		#	NewsFromBBC()
 
 		else:
 			print("Sorry, I don't understand what you mean. Try rephrasing! I promise I am doing my best to understand you. :)")		
