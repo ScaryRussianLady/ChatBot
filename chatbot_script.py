@@ -24,7 +24,7 @@ async def on_ready():
 async def bot(com, *, msg):
 
     # [CHRISTIAN] Calls the function that creates the message object
-    msgObj = createMsgObj(msg, com.author.id, com.author)
+    msgObj = createMsgObj(msg, com.author.id, str(com.author))
     print("User's message            >>", msgObj.msg)
     print("User's message as list    >>", msgObj.list)
     print("User's message's language >>", msgObj.lang)
@@ -84,6 +84,15 @@ def createMsgObj(msg, authorID, usr):
     #    msg = translateText(msg, "en")
     msgList = msg.split()
 
+    # This part of the code is going to remove the hashtag from the username that discord uses
+    NewUsr = ""
+    for char in range(len(usr)):
+        if usr[char] == "#":
+            usr = NewUsr
+            break
+        
+        NewUsr = NewUsr+usr[char]
+
     msg_obj = messageObj(msg, msgList, msgLanguage, authorID, usr)
     return msg_obj
 
@@ -118,7 +127,7 @@ def commonReplies(msgObj):
                         try:
                             if msgList[i+1].lower() == "morning" or msgList[i+1].lower() == "evening" or msgList[i+1].lower() == "afternoon":
                                 from BasicResponses import greetingReply
-                                Replies.append(greetingReply(msgList))
+                                Replies.append(greetingReply(msgObj))
                                 break
                         except:
                             pass
