@@ -12,6 +12,8 @@ from NewsAPI import IntroductionToUser
 #[CHRISTIAN] Sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
 
+Global_Channel_Var = None
+
 @client.event
 #[CHRISTIAN] This will print the text to the python terminal when the bot is ready on discord
 async def on_ready():
@@ -32,6 +34,8 @@ async def bot(com, *, msg):
     print("User's ID                 >>", msgObj.userID)
     print("User's name               >>", msgObj.username)
     print("User's channel            >>", msgObj.channel)
+
+    SendThatShit("Turd", msgObj.channel)
 
     # Saves the userID and message data to the user_datastore.json file
    # from UserDataManagement import SaveData
@@ -181,7 +185,13 @@ def PathReplies(msg):
     print(no)
     print(yes)
 
+# Does like an input thing that sends a message and takes the input and returns it.
 
+def SendThatShit(Message, Channel):
+    async def DiscordInput(Message, Channel):
+        await Channel.send("Reports of my death have been greatly exaggerated")
+        return
+    client.loop.create_task(DiscordInput("Test", Channel))
 
 # [CHRISTIAN] This runs the bot. Note: The token is specific to the bot
 client.run("NjMzMzQ0NTM5NDk0NzExMzM2.XbHZtw.CLPjwoYCqMaQDYQ0jLElxYNfIGg")
