@@ -31,33 +31,27 @@ def IntroductionToUser():
 			print("Cool, I will just look up the top news of today from BBC! If you want to look into films or books instead, just say 'let me go back' ")
 			userChoice = "no"
 
-	userChoiceList = userChoice.split(" ")
+	#userChoiceList = userChoice.split(" ")
 	specificNewsKeywords = ["specific, definite, exact, individual, different"]
 	olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
 	topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category"]
+	#containSpecific = any(element in userChoice for element in specificNewsKeywords)
 
-	for j in range(len(userChoiceList)):
-		for i in range(len(specificNewsKeywords)):
-			if userChoiceList[j].lower() == specificNewsKeywords[i]:
-				SpecificNews()
-			else:
-				print("sorry what")
-
+	#for j in range(len(userChoice)):
 		#Will also change this later for different ways of saying 'specific'.
-		for i in range(len(olderNewsKeywords)):
-			if userChoiceList[j].lower() == olderNewsKeywords[i]:
-				OlderNews()
+	if any(element in userChoice for element in specificNewsKeywords):
+			SpecificNews()
 
-		#elif userChoiceList[j].lower() == olderNewsKeywords[i]:
-		#	OlderNews()
+	elif any(element in userChoice for element in olderNewsKeywords):
+			OlderNews()
 
-		#elif userChoiceList[j].lower() == topHeadlineKeywords[i]:
-		#	EveryTopHeadline()
+	elif any(element in userChoice for element in topHeadlineKeywords):
+			EveryTopHeadline()
 
-		#elif userChoiceList[j].lower == "no":
-		#	NewsFromBBC()
+	#elif userChoiceList[j] == "no":
+	#		NewsFromBBC()
 
-		else:
+	else:
 			print("Sorry, I don't understand what you mean. Try rephrasing! I promise I am doing my best to understand you. :)")		
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
