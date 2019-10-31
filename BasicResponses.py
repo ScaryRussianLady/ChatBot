@@ -20,33 +20,32 @@ def introduction(msgList, welcome):
 # [CHRISTIAN] Function searches keywords and provides a goodbye message if the user says a farewell keyword
 def farewellReply(msgObj):
     ReplyList = [
-    "See you soon!",
-    "Bye, user!",
-    "Until next time!"
+    "See you soon, ",
+    "Bye, ",
+    "Until next time, "
     ]
 
-    return ReplyList[randrange(len(ReplyList))]
+    return str((ReplyList[randrange(len(ReplyList))])+msgObj.username+"!")
 
 # [CHRISTIAN] Function searches keywords and provides a greeting message if the user says a farewell keyword
 def greetingReply(msgObj):
     ReplyList = [
-    "Hello there!",
-    "Hi!",
-    "Hey!",
-    "Greetings!"
+    "Hello there, ",
+    "Hi, ",
+    "Hey, ",
+    "Greetings, "
     ]
 
-    return ReplyList[randrange(len(ReplyList))]
-
+    return str((ReplyList[randrange(len(ReplyList))])+msgObj.username+"!")
 
 # [CHRISTIAN] Function searches keywords and provides a appreciation message if the user says a farewell keyword
 def appreciationReply(msgObj):
     ReplyList = [
-    "No problem!",
-    "That's what I'm here for!",
-    "No... Thank you...",
-    "You're very welcome!"
+    "No problem, ",
+    "That's what I'm here for, ",
+    "My pleasure, ",
+    "You're very welcome, "
     ]
 
-    return ReplyList[randrange(len(ReplyList))]
+    return str((ReplyList[randrange(len(ReplyList))])+msgObj.username+"!")
 
