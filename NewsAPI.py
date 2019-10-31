@@ -13,7 +13,6 @@ from googletrans import Translator
 
 #IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6'
 #--------------------------------------------------------------------------------------------------------------------------------------------#
-client = commands.Bot(command_prefix = "-")
 
 
 #-------------------------------------------------------------INTRODUCTION FUNCTION-------------------------------------------------------------#
@@ -29,7 +28,7 @@ def IntroductionToUser():
 	for i in range(len(specificFunctionList)):
 		#Will later change this to accessing a list of different ways of saying 'yes' so that it can run it and check it against that (more efficient).
 		if specificFunctionList[i] == "yes":
-			userChoice = input("Okay, what would you like to look into? There's like, specific topics, older news, or even specific themes (stuff like sports). ")
+			userChoice = input("Okay, what would you like to look into? There's stuff like, specific topics, older news, or even different categories (stuff like sports). ")
 		else:
 			print("Cool, I will just look up the top news of today from BBC! If you want to look into films or books instead, just say 'let me go back' ")
 			userChoice = "no"
@@ -53,7 +52,7 @@ def IntroductionToUser():
 
 	elif any(element in userChoice for element in noKeywords):
 			NewsFromBBC()
-			
+
 	else:
 			print("Sorry, I don't understand what you mean. Try rephrasing! I promise I am doing my best to understand you. :)")		
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
