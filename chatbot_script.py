@@ -25,12 +25,13 @@ async def on_ready():
 async def bot(com, *, msg):
 
     # [CHRISTIAN] Calls the function that creates the message object
-    msgObj = createMsgObj(msg, com.author.id, str(com.author))
+    msgObj = createMsgObj(msg, com.author.id, str(com.author), com.channel)
     print("User's message            >>", msgObj.msg)
     print("User's message as list    >>", msgObj.list)
     print("User's message's language >>", msgObj.lang)
     print("User's ID                 >>", msgObj.userID)
     print("User's name               >>", msgObj.username)
+    print("User's channel            >>", msgObj.channel)
 
     # Saves the userID and message data to the user_datastore.json file
    # from UserDataManagement import SaveData
@@ -71,15 +72,16 @@ def detectLanguage(text):
 # [CHRISTIAN] This creates an object to store the message properties AND a function to create the object and give it the properties it needs
 class messageObj():
     msgCount = 0
-    def __init__(self, msg, msgList, msgLang, msgUserID, msgUsr):
+    def __init__(self, msg, msgList, msgLang, msgUserID, msgUsr, msgChannel):
         self.msg = msg
         self.list = msgList
         self.lang = msgLang
         self.userID = msgUserID
         self.username = msgUsr
+        self.channel = msgChannel
         messageObj.msgCount += 1
 
-def createMsgObj(msg, authorID, usr):
+def createMsgObj(msg, authorID, usr, channel):
     msgLanguage = detectLanguage(msg)
     #if msgLanguage != 'en':
     #    msg = translateText(msg, "en")
@@ -94,7 +96,7 @@ def createMsgObj(msg, authorID, usr):
         
         NewUsr = NewUsr+usr[char]
 
-    msg_obj = messageObj(msg, msgList, msgLanguage, authorID, usr)
+    msg_obj = messageObj(msg, msgList, msgLanguage, authorID, usr, channel)
     return msg_obj
 
 # [CHRISTIAN] This algorthim will search for specific keywords from a list to determine what scripts will be used for replies
