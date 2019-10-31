@@ -38,6 +38,7 @@ def IntroductionToUser():
 	specificNewsKeywords = ["specific, definite, exact, individual, different"]
 	olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
 	topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category"]
+	noKeywords = ["no", "nah", "nope"]
 
 	#for j in range(len(userChoice)):
 		#Will also change this later for different ways of saying 'specific'.
@@ -50,9 +51,9 @@ def IntroductionToUser():
 	elif any(element in userChoice for element in topHeadlineKeywords):
 			EveryTopHeadline()
 
-	#elif userChoiceList[j] == "no":
-	#		NewsFromBBC()
-
+	elif any(element in userChoice for element in noKeywords):
+			NewsFromBBC()
+			
 	else:
 			print("Sorry, I don't understand what you mean. Try rephrasing! I promise I am doing my best to understand you. :)")		
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
