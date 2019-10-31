@@ -35,7 +35,9 @@ async def bot(com, *, msg):
     print("User's name               >>", msgObj.username)
     print("User's channel            >>", msgObj.channel)
 
-    SendThatShit("Turd", msgObj.channel)
+    #SendText(msgObj.msg, msgObj.channel)
+    from input_test import TestFunc
+    #TestFunc(msgObj)
 
     # Saves the userID and message data to the user_datastore.json file
    # from UserDataManagement import SaveData
@@ -187,11 +189,14 @@ def PathReplies(msg):
 
 # Does like an input thing that sends a message and takes the input and returns it.
 
-def SendThatShit(Message, Channel):
+def SendText(Message, Channel):
     async def DiscordInput(Message, Channel):
-        await Channel.send("Reports of my death have been greatly exaggerated")
+        await Channel.send(Message)
         return
-    client.loop.create_task(DiscordInput("Test", Channel))
+    client.loop.create_task(DiscordInput(Message, Channel))
+
+def RunSend(Msg, Chan):
+    SendText(Msg, Chan)
 
 # [CHRISTIAN] This runs the bot. Note: The token is specific to the bot
 client.run("NjMzMzQ0NTM5NDk0NzExMzM2.XbHZtw.CLPjwoYCqMaQDYQ0jLElxYNfIGg")
