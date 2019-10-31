@@ -149,7 +149,8 @@ def commonReplies(msgObj):
         for j in range(len(newsKeywords)):
             if msgList[i].lower() == newsKeywords[j] or msgList[i].lower() == (newsKeywords[j]+"s"):
                 # Call for news function inside of the placeholder
-                Replies.append(IntroductionToUser())
+                Replies.append("Cool! Let's go look at some news!")
+                IntroductionToUser()
                 break
 
         for j in range(len(bookKeywords)):

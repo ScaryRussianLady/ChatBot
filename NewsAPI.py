@@ -13,11 +13,14 @@ from googletrans import Translator
 
 #IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6'
 #--------------------------------------------------------------------------------------------------------------------------------------------#
+client = commands.Bot(command_prefix = "-")
+
 
 #-------------------------------------------------------------INTRODUCTION FUNCTION-------------------------------------------------------------#
 #Function for introducing the possibilities to the user, it allows for the file to know which function to bring up.#
 #[Annija]#
 def IntroductionToUser():
+
 	print("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.")
 	specificFunction = input("Is there anything specific you want to look at, for example, specific topics? ")
 	specificFunctionList = specificFunction.split(" ")
@@ -35,7 +38,6 @@ def IntroductionToUser():
 	specificNewsKeywords = ["specific, definite, exact, individual, different"]
 	olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
 	topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category"]
-	#containSpecific = any(element in userChoice for element in specificNewsKeywords)
 
 	#for j in range(len(userChoice)):
 		#Will also change this later for different ways of saying 'specific'.
