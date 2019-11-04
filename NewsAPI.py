@@ -6,6 +6,11 @@ from newsapi import NewsApiClient
 #Obviously, the date will be changed but only if the user wishes to do so.
 from datetime import datetime
 
+import discord
+from discord.ext import commands
+import json
+from googletrans import Translator
+
 #IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6'
 #--------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -14,6 +19,7 @@ from datetime import datetime
 #Function for introducing the possibilities to the user, it allows for the file to know which function to bring up.#
 #[Annija]#
 def IntroductionToUser():
+
 	print("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.")
 	specificFunction = input("Is there anything specific you want to look at, for example, specific topics? ")
 	specificFunctionList = specificFunction.split(" ")
@@ -22,30 +28,35 @@ def IntroductionToUser():
 	for i in range(len(specificFunctionList)):
 		#Will later change this to accessing a list of different ways of saying 'yes' so that it can run it and check it against that (more efficient).
 		if specificFunctionList[i] == "yes":
-			userChoice = input("Okay, what would you like to look into? There's like, specific topics, older news, or even specific themes (stuff like sports). ")
+			userChoice = input("Okay, what would you like to look into? There's stuff like, specific topics, older news, or even different categories (stuff like sports). ")
 		else:
 			print("Cool, I will just look up the top news of today from BBC! If you want to look into films or books instead, just say 'let me go back' ")
 			userChoice = "no"
 
-	userChoiceList = userChoice.split(" ")
-	
-	for j in range(len(userChoiceList)):
+	#userChoiceList = userChoice.split(" ")
+	specificNewsKeywords = ["specific, definite, exact, individual, different"]
+	olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
+	topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category"]
+	noKeywords = ["no", "nah", "nope"]
+
+	#for j in range(len(userChoice)):
 		#Will also change this later for different ways of saying 'specific'.
-		if userChoiceList[j] == "specific":
+	if any(element in userChoice for element in specificNewsKeywords):
 			SpecificNews()
 
-		elif userChoiceList[j] == "older":
+	elif any(element in userChoice for element in olderNewsKeywords):
 			OlderNews()
 
-		elif userChoiceList[j] == "themes":
+	elif any(element in userChoice for element in topHeadlineKeywords):
 			EveryTopHeadline()
 
-		elif userChoiceList[j] == "no":
+	elif any(element in userChoice for element in noKeywords):
 			NewsFromBBC()
 
-		else:
+	else:
 			print("Sorry, I don't understand what you mean. Try rephrasing! I promise I am doing my best to understand you. :)")		
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
+
 
 #-------------------------------------------------------------TOP HEADLINES FUNCTION-------------------------------------------------------------#
 #Function for fetching all of the top headline news from around UK. (can adjust this for different countries, which may be something to look at later)#
@@ -150,7 +161,7 @@ def OlderNews():
 
 #-------------------------------------------------------------NEWS FROM BBC SPECIFICALLY FUNCTION-------------------------------------------------------------#
 #Function for fetching the top ten headlines of today from BBC News.#
-#[Annija] and referenced from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/#
+#Referenced entirely from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/#
 def NewsFromBBC(): 
 	#This is the BBC News API with our own personal API key. 
 	main_url = " https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=72742ae51f514418a9a6da52faf58be6"

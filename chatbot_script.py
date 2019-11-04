@@ -3,60 +3,64 @@ import discord
 import random
 from discord.ext import commands
 from googletrans import Translator
+import json
 
-# Keywords list - Add keywords here
-keywordsList = [
-    "This",
-    "is",
-    "an",
-    "example"
-]
+#[Annija] simply importing everything from my API script.
+from NewsAPI import IntroductionToUser
+
 
 #[CHRISTIAN] Sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
 
+Global_Channel_Var = None
+
 @client.event
 #[CHRISTIAN] This will print the text to the python terminal when the bot is ready on discord
 async def on_ready():
-    print("The E-Bot is online!")
-
+    print("\nThe E-Bot is online!")
+    # For terminal use only. Creates space between information on the terminal to make it easier to read.
+    print("\n--------------------------------------------------------------------------")
 
 @client.command()
 # [CHRISTIAN] This is the MAIN function for the chatbot | com = the command (bot), msg = the user input after the command is called
 # E.G The user typing "-bot My name is Bill" will make msg = "My name is Bill"
 async def bot(com, *, msg):
 
-    # [CHRISTIAN] Calls the function that creates the message object | Establishes the variable which will contain the bot's reply
-    msgObj = createMsgObj(msg, com.author.id)
-    print(msgObj.msg)
-    print(msgObj.list)
-    print(msgObj.lang)
-    print(msgObj.userID)
+    # [CHRISTIAN] Calls the function that creates the message object
+    msgObj = createMsgObj(msg, com.author.id, str(com.author), com.channel)
+    print("User's message            >>", msgObj.msg)
+    print("User's message as list    >>", msgObj.list)
+    print("User's message's language >>", msgObj.lang)
+    print("User's ID                 >>", msgObj.userID)
+    print("User's name               >>", msgObj.username)
+    print("User's channel            >>", msgObj.channel)
 
-    botReply = None # Currently set as None because a reply hasn't been generated yet
-    welcome = False # to determine if bot has introduced
+    #SendText(msgObj.msg, msgObj.channel)
+    from input_test import TestFunc
+    #TestFunc(msgObj)
 
-    #------------------------------------------- INSIDE THESE LINES DETERMINES THE BOT'S RESPONSE -------------------------------------------#
-
-    # [CHRISTIAN] This algorthim will search for specific keywords from a list to determine what scripts will be used for replies
-    botReply = generateReplies(msgObj.list) 
-
-    #------------------------------------------- INSIDE THESE LINES DETERMINES THE BOT'S RESPONSE -------------------------------------------#    
+    # Saves the userID and message data to the user_datastore.json file
+   # from UserDataManagement import SaveData
+   # SaveData(msgObj.userID, msgObj.userID, "UserID")
+   # SaveData(str(msgObj.username), msgObj.userID, "Name")
+   # SaveData(msgObj.msg, msgObj.userID, "LastMessage")
     
-    # [CHRISTIAN] If the user input was not in English then this will translate botReply from English to the language the user used | then the bot will send the botReply string on discord.
-    for i in botReply:
-        Reply = translateText(i, msgObj.lang)
+    # [CHRISTIAN] Calls the function which generates replies (Scroll to see the function for more information | Returns as a list
+    botReply = generateReplies(msgObj) 
+   
+    # [CHRISTIAN] Send's the replies on discord in the order of the botReply list. If there are no replies, sends a different message
+    # it will also translate the message if the message sent by the user wasn't in English
+    if len(botReply) != 0:
+        for i in botReply:
+            Reply = translateText(i, msgObj.lang)
+            await com.send(Reply)
+    else:
+        Reply = "A keyword was not mentioned" # This is a placeholder reply.
+        Reply = translateText(Reply, msgObj.lang)
         await com.send(Reply)
-
-
-# [CHRISTIAN] This function detects of certain word have been said
-# Deprecated
-def findKeywords(msgList, keywords):
-    saidWord = False
-    for i in msgList:
-        if i.lower() == keywords:
-            saidWord = True
-    return saidWord
+    
+    #For terminal use only. Creates space between information on the terminal to make it easier to read.
+    print("\n--------------------------------------------------------------------------")
 
 # [CHRISTIAN] This will translate the languages of messages
 def translateText(text, lang):
@@ -74,28 +78,47 @@ def detectLanguage(text):
 # [CHRISTIAN] This creates an object to store the message properties AND a function to create the object and give it the properties it needs
 class messageObj():
     msgCount = 0
-    def __init__(self, msg, msgList, msgLang, msgUserID):
+    def __init__(self, msg, msgList, msgLang, msgUserID, msgUsr, msgChannel):
         self.msg = msg
         self.list = msgList
         self.lang = msgLang
         self.userID = msgUserID
+        self.username = msgUsr
+        self.channel = msgChannel
         messageObj.msgCount += 1
 
-def createMsgObj(msg, authorID):
+def createMsgObj(msg, authorID, usr, channel):
     msgLanguage = detectLanguage(msg)
     #if msgLanguage != 'en':
     #    msg = translateText(msg, "en")
     msgList = msg.split()
 
-    msg_obj = messageObj(msg, msgList, msgLanguage, authorID)
+    # This part of the code is going to remove the hashtag from the username that discord uses
+    NewUsr = ""
+    for char in range(len(usr)):
+        if usr[char] == "#":
+            usr = NewUsr
+            break
+        
+        NewUsr = NewUsr+usr[char]
+
+    msg_obj = messageObj(msg, msgList, msgLanguage, authorID, usr, channel)
     return msg_obj
 
 # [CHRISTIAN] This algorthim will search for specific keywords from a list to determine what scripts will be used for replies
-def generateReplies(msgList):
+def generateReplies(MessageObject):
+    
+    Replies = commonReplies(MessageObject)
+    return Replies
+
+def commonReplies(msgObj):
+
+    msgList = msgObj.list
+
     greetingKeywords = ["hi", "hello", "good", "greetings", "hey"]
     appreciationKeywords = ["thank", "thanks"]
     filmKeywords = ["movie", "film", "series"]
-    newsKeywords = ["news", "article", "weather"]
+    newsKeywords = ["news", "article", "weather", "articles", "headlines", "headline"]
     bookKeywords = ["book", "story"]
     farewellKeywords = ["bye", "goodbye", "farewell"]
 
@@ -104,48 +127,76 @@ def generateReplies(msgList):
     for i in range(len(msgList)):
         for j in range(len(greetingKeywords)):
             if msgList[i].lower() == greetingKeywords[j]:
-                # Call for greeting function inside of the placeholder
-                #Replies.append("Placeholder Greeting")
-                from BasicResponses import greetingReply
-                Replies.append(greetingReply(msgList))
-                break
+                if greetingKeywords[j] != "good":
+                    from BasicResponses import greetingReply
+                    Replies.append(greetingReply(msgObj))
+                    break
+                else:
+                    if len(msgList) != 1:
+                        try:
+                            if msgList[i+1].lower() == "morning" or msgList[i+1].lower() == "evening" or msgList[i+1].lower() == "afternoon":
+                                from BasicResponses import greetingReply
+                                Replies.append(greetingReply(msgObj))
+                                break
+                        except:
+                            pass
 
         for j in range(len(appreciationKeywords)):
             if msgList[i].lower() == appreciationKeywords[j]:
-                # Call for appreciation function inside of the placeholder
-                #Replies.append("Placeholder Appreciation")
                 from BasicResponses import appreciationReply
-                Replies.append(appreciationReply(msgList))
+                Replies.append(appreciationReply(msgObj))
                 break
         
         for j in range(len(filmKeywords)):
-            if msgList[i].lower() == filmKeywords[j]:
+            if msgList[i].lower() == filmKeywords[j] or msgList[i].lower() == (filmKeywords[j]+"s"):
                 # Call for film function inside of the placeholder
-                Replies.append("Placeholder Film Info")
+                from TMDBAPI import firstUserInt
+                #Replies.append("Placeholder Film Info")
                 break
         
         for j in range(len(newsKeywords)):
-            if msgList[i].lower() == newsKeywords[j]:
+            if msgList[i].lower() == newsKeywords[j] or msgList[i].lower() == (newsKeywords[j]+"s"):
                 # Call for news function inside of the placeholder
-                Replies.append("Placeholder News Info")
+                Replies.append("Cool! Let's go look at some news!")
+                IntroductionToUser()
                 break
 
         for j in range(len(bookKeywords)):
-            if msgList[i].lower() == bookKeywords[j]:
+            if msgList[i].lower() == bookKeywords[j] or msgList[i].lower() == (bookKeywords[j]+"s"):
                 # Call for book function inside of the placeholder
                 Replies.append("Placeholder Book Info")
                 break
         
         for j in range(len(farewellKeywords)):
             if msgList[i].lower() == farewellKeywords[j]:
-                # Call for farewell function inside of the placeholder
-                # Replies.append("Placeholder Farewell")
                 from BasicResponses import farewellReply
-                Replies.append(farewellReply(msgList))
+                Replies.append(farewellReply(msgObj))
                 break
     
-    print(Replies)
     return Replies
 
+# [CHRISTIAN] I don't even know what to call this yet
+def PathReplies(msg):
+    with open("User_Datastore.json") as uds:
+        UserData = json.load(uds)
+
+    yes = ["yes", "yea", "yeah"]
+    no = ["no", "nah"]
+
+    print(UserData)
+    print(no)
+    print(yes)
+
+# Does like an input thing that sends a message and takes the input and returns it.
+
+def SendText(Message, Channel):
+    async def DiscordInput(Message, Channel):
+        await Channel.send(Message)
+        return
+    client.loop.create_task(DiscordInput(Message, Channel))
+
+def RunSend(Msg, Chan):
+    SendText(Msg, Chan)
+
 # [CHRISTIAN] This runs the bot. Note: The token is specific to the bot
-client.run("NjMzMzQ0NTM5NDk0NzExMzM2.XaTNgA.WhYbdsxRBsY5fVqu4n3pi5lCnVg")
+client.run("NjMzMzQ0NTM5NDk0NzExMzM2.XbHZtw.CLPjwoYCqMaQDYQ0jLElxYNfIGg")
