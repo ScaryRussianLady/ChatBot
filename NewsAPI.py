@@ -1,23 +1,36 @@
-#-------------------------------------------------------------IMPORT OF MODULES-------------------------------------------------------------#
+#-------------------------------------------------------------BEGINNING OF IMPORT OF MODULES-------------------------------------------------------------#
+#Beginning of code by [Annija Balode ID No: 9102828]
+
 #This imports the requests package which allows for HTTP requests.
-import requests	 
+import requests	
+
+#The following imports the News API client specifically rather than everything from the News API that is being used in this script.
 from newsapi import NewsApiClient
+
 #This will be used to ensure that no matter when the user accesses the API, the articles that are being pulled down are from the current date.
 #Obviously, the date will be changed but only if the user wishes to do so.
 from datetime import datetime
 
+#
 import discord
 from discord.ext import commands
+
+#
 import json
+
+#Imports the translator element from the Google Translate module which will allow for the user's text to be translated between their language
+#and English if it is non-English.
 from googletrans import Translator
 
 #IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6'
-#--------------------------------------------------------------------------------------------------------------------------------------------#
+
+#End of code by [Annija Balode ID No: 9102828]
+#---------------------------------------------------------------END OF IMPORT OF MODULES-------------------------------------------------------------------#
 
 
-#-------------------------------------------------------------INTRODUCTION FUNCTION-------------------------------------------------------------#
+#-------------------------------------------------------------BEGINNING OF INTRODUCTION FUNCTION-------------------------------------------------------------#
 #Function for introducing the possibilities to the user, it allows for the file to know which function to bring up.#
-#[Annija]#
+#Beginning of code by [Annija Balode ID No: 9102828]
 def IntroductionToUser():
 
 	print("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.")
@@ -54,13 +67,14 @@ def IntroductionToUser():
 			NewsFromBBC()
 
 	else:
-			print("Sorry, I don't understand what you mean. Try rephrasing! I promise I am doing my best to understand you. :)")		
+			print("Sorry, I don't understand what you mean. Try rephrasing! I promise I am doing my best to understand you. :)")
+
+#End of code by [Annija Balode ID No: 9102828]		
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 
 #-------------------------------------------------------------TOP HEADLINES FUNCTION-------------------------------------------------------------#
-#Function for fetching all of the top headline news from around UK. (can adjust this for different countries, which may be something to look at later)#
-#[Annija] and referenced from https://newsapi.org/docs/endpoints/top-headlines#
+#Beginning of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/top-headlines
 def EveryTopHeadline():
 
 	specificCategoryQuestion = input("Is there a specific category you would like to look at? ")
@@ -90,13 +104,16 @@ def EveryTopHeadline():
 	#Fetches the data in JSON format.
 	theURL = response.json()
 	print(theURL)
+
+#End of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/top-headlines
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 
 #-------------------------------------------------------------SPECIFIC NEWS FUNCTION-------------------------------------------------------------#
 #A function for finding news around the world depending on specific words/key terms.
 #However, this search does not allow for country-specific searches.#
-#[Annija] and referenced from https://newsapi.org/docs/endpoints/everything#
+
+#Beginning of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
 def SpecificNews():
 #IMPORTANT NOTICE: This is only a rough 'sketch' of how the API will be laid out, as there will be no input statements like this, the bot will handle this differently.#
 
@@ -133,13 +150,16 @@ def SpecificNews():
 			SpecificNews()
 		else:
 			print("Cool. See you soon!")
+
+#End of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
 #------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
 #-------------------------------------------------------------OLDER ARTICLES FUNCTION-------------------------------------------------------------#
 #Function which allows the user to look at certain articles from within the past month, does not allow for a wider space of time as need to upgrade
 #to a paid plan for that.#
-#[Annija] and referenced from https://newsapi.org/docs/endpoints/everything#
+
+#Beginning of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
 def OlderNews():
 
 	howOldQuestion = input("Please make sure to write in the format YYYY-MM-DD including the dashes (I know, it's a strange format!)" + '\n' + "From what date within the last month would you like to view news? ")
@@ -156,12 +176,15 @@ def OlderNews():
 	theURL = response.json()
 
 	print(theURL)
+
+#End of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
 #-------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
 #-------------------------------------------------------------NEWS FROM BBC SPECIFICALLY FUNCTION-------------------------------------------------------------#
 #Function for fetching the top ten headlines of today from BBC News.#
-#Referenced entirely from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/#
+
+#Beginning of reference entirely from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
 def NewsFromBBC(): 
 	#This is the BBC News API with our own personal API key. 
 	main_url = " https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=72742ae51f514418a9a6da52faf58be6"
@@ -182,6 +205,8 @@ def NewsFromBBC():
 	for i in range(len(results)): 
 		#Simply prints all the trending news right now (top ten).
 		print(i + 1, results[i])
+
+#End of reference entirely from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
