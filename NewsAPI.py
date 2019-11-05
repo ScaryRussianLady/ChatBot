@@ -22,6 +22,9 @@ import json
 #and English if it is non-English.
 from googletrans import Translator
 
+#The following module helps to process trees in this application
+import ast 
+
 #IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6'
 
 #End of code by [Annija Balode ID No: 9102828]
@@ -135,12 +138,27 @@ def SpecificNews():
        'sortBy=popularity&'
        'apiKey=72742ae51f514418a9a6da52faf58be6')
 
-	response = requests.get(url)
-
 	#Fetches the data in JSON format.
-	theURL = response.json()
+	response = requests.get(url).json()
+	articleTitle = response["articles"]
+	#articleEverything = response["everything"]
+	#articleURL = response["url"]
 
-	print(theURL)
+	theAcceptedResponse = []
+
+	for title in articleTitle:
+		theAcceptedResponse.append(title["title"])
+		#for author in articleAuthor:
+			#theAcceptedResponse.append(author["Author"])
+
+	#for everything in articleEverything:
+		#theAcceptedResponse.append(everything["everything"])
+	
+	for i in range(len(theAcceptedResponse)):
+		print(i+1, theAcceptedResponse[i])
+	#Fetches the data in JSON format.
+	#theURL = response.json()
+	#print(theURL)
 	
 	#Loops back to the beginning of the function if they wish to search another topic. Further improvements will be made.
 	findAnotherTopic = input("Here is what I found. Hope these are okay for you!" + '\n' + "Are there any other topics you would like to look at? ")
@@ -216,7 +234,7 @@ if __name__ == '__main__':
 	#be used to import from chatbot_script.py later on.
 		#NewsFromBBC()
 		#EveryTopHeadline() 
-		#SpecificNews()
+		SpecificNews()
 		#OlderNews()
-		IntroductionToUser()
+		#IntroductionToUser()
 #----------------------------------------------------------------------------------------------------------------------------------------------#
