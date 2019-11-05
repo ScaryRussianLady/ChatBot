@@ -6,7 +6,8 @@ from googletrans import Translator
 import json
 
 #[Annija] simply importing everything from my API script.
-from NewsAPI import IntroductionToUser
+import NewsAPI
+
 
 
 #[CHRISTIAN] Sets the command's prefix to "-"
@@ -157,8 +158,9 @@ def commonReplies(msgObj):
         for j in range(len(newsKeywords)):
             if msgList[i].lower() == newsKeywords[j] or msgList[i].lower() == (newsKeywords[j]+"s"):
                 # Call for news function inside of the placeholder
-                Replies.append("Cool! Let's go look at some news!")
-                IntroductionToUser()
+                #Replies.append("Cool! Let's go look at some news!")
+                NewsAPI.IntroductionToUser()
+                Replies.append("Let's look at news")
                 break
 
         for j in range(len(bookKeywords)):

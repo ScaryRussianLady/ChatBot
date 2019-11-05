@@ -16,6 +16,10 @@ import discord
 from discord.ext import commands
 
 #
+#from chatbot_script import *
+#import chatbot_script
+
+#
 import json
 
 #Imports the translator element from the Google Translate module which will allow for the user's text to be translated between their language
@@ -31,8 +35,9 @@ from googletrans import Translator
 #-------------------------------------------------------------BEGINNING OF INTRODUCTION FUNCTION-------------------------------------------------------------#
 #Function for introducing the possibilities to the user, it allows for the file to know which function to bring up.#
 #Beginning of code by [Annija Balode ID No: 9102828]
-def IntroductionToUser():
 
+def IntroductionToUser():
+	#await self.bot.say("News woo!")
 	print("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.")
 	specificFunction = input("Is there anything specific you want to look at, for example, specific topics? ")
 	#specificFunctionList = specificFunction.split(" ")
