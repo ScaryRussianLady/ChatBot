@@ -1,5 +1,5 @@
 import requests as req
-
+import ast
 
 
 #api_key: used to get access to information on TMDB
@@ -14,22 +14,29 @@ def firstUserInt():
     print("well... Umm there's plenty to choose from.\nlet's see. Ahh yes we can sort through genres, search for movies, display upcoming, you could also view top rated or even see what is popular/trending at the moment")
     FnctnFinder = input("please tell me what you would like to see so i can give it to you. ")
     FnctnFinderWords = FnctnFinder.split(" ")
+
+    genList = ["genre", "genres"]
+    searchList = ["search", "movie", "movies", "title"]
+    upCList = ["upcoming", "future", "releases"]
+    popList = ["trending", "popular"]
+    topList = ["top", "rated"]
+
     #cycles through the user input and if statement makes decision on what function should be called based on the words input by the user
     for x in range(len(FnctnFinderWords)):
         
-        if FnctnFinderWords[x].lower() == "genre" or FnctnFinderWords[x].lower() == "genres":
+        if FnctnFinderWords[x].lower() in genList:
             genre_list()
             break
-        elif FnctnFinderWords[x].lower() == "search" or FnctnFinderWords[x].lower() == "movie" or FnctnFinderWords[x].lower() == "movies":
+        elif FnctnFinderWords[x].lower() in searchList:
             movie_search()
             break
-        elif FnctnFinderWords[x].lower() == "upcoming":
+        elif FnctnFinderWords[x].lower() in upCList:
             upcoming()
             break
-        elif FnctnFinderWords[x].lower() == "trending" or FnctnFinderWords[x].lower() == "popular":
+        elif FnctnFinderWords[x].lower() in popList:
             search_popular()
             break
-        elif FnctnFinderWords[x].lower() == "top" or FnctnFinderWords[x].lower() == "rated":
+        elif FnctnFinderWords[x].lower() in topList:
             top_rated()
             break
 
@@ -54,10 +61,13 @@ def movie_search():
     #retreives information from the search and prints to the screen as somewhat readable text    
     response = req.get(url)
     movDict = response.json()
-    #print(list(movDict["results"]))
-    #print(type(movDict))
-    print(movDict)
-
+    #adapted code from stack overflow https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
+    strppdResults = str(movDict['results'])
+    resultsDict = ast.literal_eval(strppdResults.strip('[]'))
+    #end of adapted code fomr stack overflow
+    print('Title: '+ resultsDict['title'])
+    print(resultsDict['overview'])
+    print('With a release date of '+str(resultsDict['release_date'])+', this movie has mustered up a rating of '+ str(resultsDict['vote_average'])+'/10')
 
 #--------------------------------------------------------GENRE LIST SEARCH FUNCTION--------------------------------------------------------#
 
