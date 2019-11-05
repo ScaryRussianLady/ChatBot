@@ -140,22 +140,30 @@ def SpecificNews():
 
 	#Fetches the data in JSON format.
 	response = requests.get(url).json()
-	articleTitle = response["articles"]
+	specificArticle = response["articles"]
 	#articleEverything = response["everything"]
 	#articleURL = response["url"]
 
-	theAcceptedResponse = []
+	theAcceptedResponseTitle = []
+	theAcceptedResponseAuthor = []
+	theAcceptedResponseURL = []
 
-	for title in articleTitle:
-		theAcceptedResponse.append(title["title"])
+	for title in specificArticle:
+		theAcceptedResponseTitle.append(title["title"])
+	
+	for author in specificArticle:
+		theAcceptedResponseAuthor.append(author["author"])
+
+	for url in specificArticle:
+		theAcceptedResponseURL.append(url["url"])
 		#for author in articleAuthor:
 			#theAcceptedResponse.append(author["Author"])
 
 	#for everything in articleEverything:
 		#theAcceptedResponse.append(everything["everything"])
 	
-	for i in range(len(theAcceptedResponse)):
-		print(i+1, theAcceptedResponse[i])
+	for i in range(len(theAcceptedResponseTitle)):
+		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + " " + theAcceptedResponseURL[i])
 	#Fetches the data in JSON format.
 	#theURL = response.json()
 	#print(theURL)
