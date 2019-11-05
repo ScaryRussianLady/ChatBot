@@ -22,10 +22,7 @@ import json
 #and English if it is non-English.
 from googletrans import Translator
 
-#The following module helps to process trees in this application
-import ast 
-
-#IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6'
+#IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6
 
 #End of code by [Annija Balode ID No: 9102828]
 #---------------------------------------------------------------END OF IMPORT OF MODULES-------------------------------------------------------------------#
@@ -38,16 +35,19 @@ def IntroductionToUser():
 
 	print("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.")
 	specificFunction = input("Is there anything specific you want to look at, for example, specific topics? ")
-	specificFunctionList = specificFunction.split(" ")
+	#specificFunctionList = specificFunction.split(" ")
+	specificFunctionKeywords = ["yes", "ye", "yeah", "yep", "sure", "yeh"]
 
 
-	for i in range(len(specificFunctionList)):
+	#for i in range(len(specificFunctionList)):
 		#Will later change this to accessing a list of different ways of saying 'yes' so that it can run it and check it against that (more efficient).
-		if specificFunctionList[i] == "yes":
-			userChoice = input("Okay, what would you like to look into? There's stuff like, specific topics, older news, or even different categories (stuff like sports). ")
-		else:
-			print("Cool, I will just look up the top news of today from BBC! If you want to look into films or books instead, just say 'let me go back' ")
-			userChoice = "no"
+	if any(element in specificFunction for element in specificFunctionKeywords):
+		#if specificFunctionList[i] == "yes":
+		userChoice = input("Okay, what would you like to look into? There's stuff like, specific topics, older news, or even different categories (stuff like sports). ")
+	else:
+		print("Cool, I will just look up the top news of today from BBC! If you want to look into films or books instead, just say 'let me go back' ")
+		userChoice = "no"
+
 
 	#userChoiceList = userChoice.split(" ")
 	specificNewsKeywords = ["specific, definite, exact, individual, different"]
@@ -80,7 +80,7 @@ def IntroductionToUser():
 #Beginning of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/top-headlines
 def EveryTopHeadline():
 
-	specificCategoryQuestion = input("Is there a specific category you would like to look at? ")
+	specificCategoryQuestion = input("Would you like to choose a specific category you would like to look at? ")
 	specificCategoryQuestionList = specificCategoryQuestion.split(" ")
 
 	#Allows the user to choose a specific category from the top headlines, if they can't think of one, then the choice is set to general as default.
@@ -91,6 +91,7 @@ def EveryTopHeadline():
 		else:
 			print("That's okay. I will just output the general top headline from today! :)")
 			categoryChoices = "general"
+			amountOfArticles = str(1)
 
 	#Gets the top headlines from the UK, 'country=gb' can be changed depending on what country you want to look at.
 	url = ('https://newsapi.org/v2/top-headlines?'
