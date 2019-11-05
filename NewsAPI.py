@@ -55,8 +55,7 @@ def IntroductionToUser():
 	topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category"]
 	noKeywords = ["no", "nah", "nope"]
 
-	#for j in range(len(userChoice)):
-		#Will also change this later for different ways of saying 'specific'.
+
 	if any(element in userChoice for element in specificNewsKeywords):
 			SpecificNews()
 
@@ -71,6 +70,7 @@ def IntroductionToUser():
 
 	else:
 			print("Sorry, I don't understand what you mean. Try rephrasing! I promise I am doing my best to understand you. :)")
+			IntroductionToUser()
 
 #End of code by [Annija Balode ID No: 9102828]		
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
@@ -102,11 +102,33 @@ def EveryTopHeadline():
 	   #above 10 realistically, or however many the user will request for.
 		'pageSize='+amountOfArticles+'&'
        'apiKey=72742ae51f514418a9a6da52faf58be6')
-	response = requests.get(url)
+
+	response = requests.get(url).json()
+
+	specificArticle = response["articles"]
+
+	theAcceptedResponseTitle = []
+	theAcceptedResponseAuthor = []
+	theAcceptedResponseURL = []
+
+	for title in specificArticle:
+		theAcceptedResponseTitle.append(title["title"])
+	
+	for author in specificArticle:
+		theAcceptedResponseAuthor.append(author["author"])
+
+	for url in specificArticle:
+		theAcceptedResponseURL.append(url["url"])
+
+	
+	for i in range(len(theAcceptedResponseTitle)):
+		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
+
+	
 	
 	#Fetches the data in JSON format.
-	theURL = response.json()
-	print(theURL)
+	#theURL = response.json()
+	#print(theURL)
 
 #End of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/top-headlines
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
@@ -141,8 +163,6 @@ def SpecificNews():
 	#Fetches the data in JSON format.
 	response = requests.get(url).json()
 	specificArticle = response["articles"]
-	#articleEverything = response["everything"]
-	#articleURL = response["url"]
 
 	theAcceptedResponseTitle = []
 	theAcceptedResponseAuthor = []
@@ -156,18 +176,10 @@ def SpecificNews():
 
 	for url in specificArticle:
 		theAcceptedResponseURL.append(url["url"])
-		#for author in articleAuthor:
-			#theAcceptedResponse.append(author["Author"])
 
-	#for everything in articleEverything:
-		#theAcceptedResponse.append(everything["everything"])
-	
 	for i in range(len(theAcceptedResponseTitle)):
-		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + " " + theAcceptedResponseURL[i])
-	#Fetches the data in JSON format.
-	#theURL = response.json()
-	#print(theURL)
-	
+		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
+
 	#Loops back to the beginning of the function if they wish to search another topic. Further improvements will be made.
 	findAnotherTopic = input("Here is what I found. Hope these are okay for you!" + '\n' + "Are there any other topics you would like to look at? ")
 	findAnotherTopicList = findAnotherTopic.split(" ")
@@ -197,11 +209,26 @@ def OlderNews():
        'sortBy=popularity&'
        'apiKey=72742ae51f514418a9a6da52faf58be6')
 	
-	response = requests.get(url)
+	response = requests.get(url).json()
 
-	theURL = response.json()
+	specificArticle = response["articles"]
 
-	print(theURL)
+	theAcceptedResponseTitle = []
+	theAcceptedResponseAuthor = []
+	theAcceptedResponseURL = []
+
+	for title in specificArticle:
+		theAcceptedResponseTitle.append(title["title"])
+	
+	for author in specificArticle:
+		theAcceptedResponseAuthor.append(author["author"])
+
+	for url in specificArticle:
+		theAcceptedResponseURL.append(url["url"])
+
+	
+	for i in range(len(theAcceptedResponseTitle)):
+		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
 
 #End of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
 #-------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -210,29 +237,34 @@ def OlderNews():
 #-------------------------------------------------------------NEWS FROM BBC SPECIFICALLY FUNCTION-------------------------------------------------------------#
 #Function for fetching the top ten headlines of today from BBC News.#
 
-#Beginning of reference entirely from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
+#Beginning of code by [Annija Balode ID No: 9102828] and reference  from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
 def NewsFromBBC(): 
 	#This is the BBC News API with our own personal API key. 
-	main_url = " https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=72742ae51f514418a9a6da52faf58be6"
+	url = " https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=72742ae51f514418a9a6da52faf58be6"
 
 	#Fetches the data in JSON format. 
-	open_bbc_page = requests.get(main_url).json() 
+	response = requests.get(url).json()
 
-	# getting all articles in a string article 
-	article = open_bbc_page["articles"] 
+	specificArticle = response["articles"]
 
-	#This is an empty list which will contain all of the results (the articles).
-	results = [] 
+	theAcceptedResponseTitle = []
+	theAcceptedResponseAuthor = []
+	theAcceptedResponseURL = []
+
+	for title in specificArticle:
+		theAcceptedResponseTitle.append(title["title"])
 	
-	#Adds the title of the article to the results list.
-	for ar in article: 
-		results.append(ar["title"]) 
-	
-	for i in range(len(results)): 
-		#Simply prints all the trending news right now (top ten).
-		print(i + 1, results[i])
+	for author in specificArticle:
+		theAcceptedResponseAuthor.append(author["author"])
 
-#End of reference entirely from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
+	for url in specificArticle:
+		theAcceptedResponseURL.append(url["url"])
+
+	
+	for i in range(len(theAcceptedResponseTitle)):
+		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
+
+#End of code by [Annija Balode ID No: 9102828] reference from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
@@ -242,7 +274,7 @@ if __name__ == '__main__':
 	#be used to import from chatbot_script.py later on.
 		#NewsFromBBC()
 		#EveryTopHeadline() 
-		SpecificNews()
+		#SpecificNews()
 		#OlderNews()
-		#IntroductionToUser()
+		IntroductionToUser()
 #----------------------------------------------------------------------------------------------------------------------------------------------#
