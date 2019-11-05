@@ -50,7 +50,7 @@ def IntroductionToUser():
 
 
 	#userChoiceList = userChoice.split(" ")
-	specificNewsKeywords = ["specific, definite, exact, individual, different"]
+	specificNewsKeywords = ["specific", "definite", "exact", "individual", "different"]
 	olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
 	topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category"]
 	noKeywords = ["no", "nah", "nope"]
@@ -91,7 +91,7 @@ def EveryTopHeadline():
 		else:
 			print("That's okay. I will just output the general top headline from today! :)")
 			categoryChoices = "general"
-			amountOfArticles = str(1)
+			amountOfArticles = "1"
 
 	#Gets the top headlines from the UK, 'country=gb' can be changed depending on what country you want to look at.
 	url = ('https://newsapi.org/v2/top-headlines?'
@@ -123,7 +123,7 @@ def EveryTopHeadline():
 
 	
 	for i in range(len(theAcceptedResponseTitle)):
-		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
+		print(i+1, str(theAcceptedResponseTitle[i]) + " by " + str(theAcceptedResponseAuthor[i]) + ": " + str(theAcceptedResponseURL[i]))
 
 	
 	
