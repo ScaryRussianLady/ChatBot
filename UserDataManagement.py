@@ -14,7 +14,7 @@ def SaveData(Data, UserID, Location):
         UserData = CreateNewID(UserData, UserID)
     
     for entry in UserData['data']:  # This code check through the entrys of User Data to find the correct User ID entry
-        if entry['UserID'] == UserID:
+        if entry['UserID'] == int(UserID):
             if Location == "Name" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply": #these catagories can only take a single argument
                 UserData['data'][count][Location] = Data # This replaces the entry with the updated user data
             else:
@@ -62,7 +62,7 @@ def RemoveData(DelWhole, ListPos, UserID, Location):
         UserData = json.load(uds)
 
         for entry in UserData['data']: 
-            if entry['UserID'] == UserID:
+            if entry['UserID'] == int(UserID):
                 if Location == "Name" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply": 
                     UserData['data'][count][Location] = "" 
                 else:
