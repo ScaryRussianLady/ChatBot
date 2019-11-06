@@ -5,10 +5,12 @@ from discord.ext import commands
 from googletrans import Translator
 import json
 
+
 #[Annija] simply importing everything from my API script.
-import NewsAPI
+#import NewsAPI
 
-
+#This specifies what extensions will be added, add the name of the script you want to access.
+startup_extensions = ['cogs.NewsAPI']
 
 #[CHRISTIAN] Sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
@@ -159,8 +161,11 @@ def commonReplies(msgObj):
             if msgList[i].lower() == newsKeywords[j] or msgList[i].lower() == (newsKeywords[j]+"s"):
                 # Call for news function inside of the placeholder
                 #Replies.append("Cool! Let's go look at some news!")
-                NewsAPI.IntroductionToUser()
-                Replies.append("Let's look at news")
+                #NewsAPI.IntroductionToUser()
+                #load() 
+                #[Annija Balode ID No: 9102828]
+                for extension in startup_extensions:
+                    bot.load_extension(extension)
                 break
 
         for j in range(len(bookKeywords)):
@@ -199,6 +204,7 @@ def SendText(Message, Channel):
 
 def RunSend(Msg, Chan):
     SendText(Msg, Chan)
+    
 
 # [CHRISTIAN] This runs the bot. Note: The token is specific to the bot
 client.run("NjMzMzQ0NTM5NDk0NzExMzM2.XbHZtw.CLPjwoYCqMaQDYQ0jLElxYNfIGg")
