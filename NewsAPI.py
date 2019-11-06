@@ -158,7 +158,7 @@ def SpecificNews():
 
 	url = ('https://newsapi.org/v2/everything?'
 	#This is the key word that should bring up the relevant article.
-       'q='+chosenTopic+'&'
+       'qInTitle='+chosenTopic+'&'
 	   'pageSize='+amountOfArticles+'&'
 	   #From what date it should get searched (depending how old you want the article to be)
 	   'from=2019-10-20&'
