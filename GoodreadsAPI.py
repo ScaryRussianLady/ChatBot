@@ -2,7 +2,7 @@
 import requests
 from bs4 import BeautifulSoup
 import urllib.request
-
+import time
 #--------------------------------------------------------------------------------------------------------------------------------------------#
 
 
@@ -17,51 +17,40 @@ import urllib.request
   #  'x-rapidapi-key': "81920e6a13msh6e78958b0ee4e66p1089ccjsn2155f80b3790",
   #  'content-type': "application/x-www-form-urlencoded"
   #  }
-
 #response = requests.request("POST", url, data=payload, headers=headers)
-
-
-#you get an error but i'm sure you can work through it Kaz and Bohan
 #Link to documentation: https://rapidapi.com/raygorodskij/api/Goodreads?endpoint=apiendpoint_22bb56e0-f967-11e7-8a9f-ddc04c05c7d2getAuthorBooks
 
 #[kofi]
 #The Key:NxRD7Y051igsxA6xbjQRpQ
 #The secret: u65168BEZcYv39AJsYrc8hSjkLzA4boifPdsSEYbIw
 
-#API can retrieve specific titles of books that the user requests.
-#api can output description of a book
-import requests
-from bs4 import BeautifulSoup
-import urllib.request
 
 
 #API can retrieve specific titles of books that the user requests.
 #[kofi]
 def booksearch():
-    #prompts user to search for book
     booktitle=input("Please type in the name of the book you would like to search")
     url = ('https://www.goodreads.com/search.xml?key=NxRD7Y051igsxA6xbjQRpQ&q=' +booktitle)
     response = requests.get(url).text
     xml = BeautifulSoup(response, 'xml')
-    #reads the link and gets xml data based on users input
-    print ("Displaying results for  " +str(booktitle) + "...")
-    #outputs the book title from search results.
+    print ("Displaying results for  " +str(booktitle) + "... \n")
+    time.sleep(2)
     for item in xml.findAll('title'):
         print (item.text)
 
 
 #API can reviews of books that the user request by isbn.
 #"https://www.goodreads.com/book/isbn/"+isbn+"?key=NxRD7Y051igsxA6xbjQRpQ"
- 
-#[kofi]       
+
+#[kofi]        
 def bookreview():
     isbn =input("Please type in the isbn of a book you would like to see the ratings of")
     url = ("https://www.goodreads.com/book/isbn/" +isbn+ "?key=NxRD7Y051igsxA6xbjQRpQ")
     response = requests.get(url).text
-    
     xml = BeautifulSoup(response, 'xml')
 
     print ("Book reviews for isbn:" +str(isbn))
+
     print ("Book title:")
     for item in xml.findAll('title')[0:1]:
         print (item.text)
@@ -90,19 +79,49 @@ def releasedate():
            
     for item in xml.findAll('original_publication_month')[0:1]:
         print (item.text)
+#[kofi]
+def authorMostpopular():
+    author=input("Please type in the name of the author you would like to search to see their most popular books")
+    url = ('https://www.goodreads.com/search.xml?key=NxRD7Y051igsxA6xbjQRpQ&q=' +author)
+    response = requests.get(url).text
+    
+    print ("Displaying " +str(author) + " most popular books... \n")
+    time.sleep(2)
 
-#[bohan]
-def mostPopular():
-pass
-choice = int(input("What would you like to do ? \n 1. Search for a specific book you're interested in and see results \n 2. See reviews for a book you're interested in. \n 3. Retrieve release date of a book \n 4. View Most Popular Books"))
+    xml = BeautifulSoup(response, 'xml')
 
-if choice == 1:
-    booksearch()
-elif choice ==2:
-    bookreview()
-elif choice ==3:
-    releasedate()
-elif choice ==4:
-    mostPopular()
- 
+    print ("Author name:")
+    
+    for item in xml.findAll('name')[0:1]:
+        print (item.text)
+    print ("Book titles:")
+    
+    for item in xml.findAll('title'):
+        print (item.text)
+
+#[kofi]
+def UserIntro():
+    print ("Hello, Welcome to the Book directory. \n I have the ability to provide you with book searches, book reviews/ratings and the release dates of any current or upcoming books and most popular books that an author has.")
+    UserOption  = input("What would you like to see?")
+    UserOptionWords = UserOption.split(" ")
+    
+    searchList = ["book","books","title",]
+    releasedList = ["release", "releases", "date", "upcoming"]
+    reviewList = ["rating", "rated","reviews","review"]
+    PopList = ["popular", "most popular",]
+    for x in range(len(UserOptionWords)):
+        if UserOptionWords[x].lower() in searchList:
+            booksearch()
+            break
+        elif UserOptionWords[x].lower() in releasedList:
+            releasedate()
+            break
+        elif UserOptionWords[x].lower() in reviewList:
+            bookreview()
+            break
+        elif UserOptionWords[x].lower() in PopList:
+            authorMostpopular()
+            break
+UserIntro()
+
 

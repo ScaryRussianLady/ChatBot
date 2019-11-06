@@ -171,7 +171,8 @@ def commonReplies(msgObj):
         for j in range(len(bookKeywords)):
             if msgList[i].lower() == bookKeywords[j] or msgList[i].lower() == (bookKeywords[j]+"s"):
                 # Call for book function inside of the placeholder
-                Replies.append("Placeholder Book Info")
+                from GoodreadsAPI import UserIntro
+                #Replies.append("Placeholder Book Info")
                 break
         
         for j in range(len(farewellKeywords)):
