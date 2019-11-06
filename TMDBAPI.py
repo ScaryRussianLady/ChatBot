@@ -58,7 +58,7 @@ def movie_search():
     sQuery = query.replace(" ", "%20")
 
     #this implements the api key and sQuery so we do not have to constantly type it out
-    url = "https://api.themoviedb.org/3/search/movie/?api_key="+api_key+"&language=en-US&query="+sQuery+"&page=1&include_adult=false"
+    url = "https://api.themoviedb.org/3/search/movie?sort_by=vote_average.lte=8&api_key="+api_key+"&language=en-US&query="+sQuery+"&page=1&include_adult=false"
 
     #retreives information from the search and prints to the screen as somewhat readable text    
     response = req.get(url)
@@ -67,11 +67,12 @@ def movie_search():
     #adapted code from stack overflow https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
     for title in movDict['results']:
         titleDict = ast.literal_eval(str(title))
+        print('====================================')
         print('Title: '+ titleDict['title'])
         print('Released on: '+ titleDict['release_date'])
         print('Rated '+ str(titleDict['vote_average'])+'/10')
         print('Overview: '+titleDict['overview'])
-        print('====================================')
+        print('BackDrop: https://image.tmdb.org/t/p/original'+titleDict['poster_path'])
     #end of adapted code from stack overflow
 
         #second attempt at getting code to work. introduced for loop(still only worked for one result)
@@ -107,12 +108,13 @@ def genre_list():
 
     #adapted code from stack overflow https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
     for title in genDict['results']:
+        print('====================================')
         titleDict = ast.literal_eval(str(title))
         print('Title: '+ titleDict['title'])
         print('Released on: '+ titleDict['release_date'])
         print('Rated '+ str(titleDict['vote_average'])+'/10')
         print('Overview: '+titleDict['overview'])
-        print('====================================')
+        print('BackDrop: https://image.tmdb.org/t/p/original'+titleDict['poster_path'])
     #end of adapted code
 
     
