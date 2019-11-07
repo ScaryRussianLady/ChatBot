@@ -41,8 +41,8 @@ from io import BytesIO
 
 ############################################################################
 class MembersCog(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, client):
+        self.client = client
 
     @commands.command()
     @commands.guild_only()
@@ -89,8 +89,8 @@ class MembersCog(commands.Cog):
 
 # The setup fucntion below is neccesarry. Remember we give bot.add_cog() the name of the class in this case MembersCog.
 # When we load the cog, we use the name of the file.
-def setup(bot):
-    bot.add_cog(MembersCog(bot))
+def setup(client):
+    client.add_cog(MembersCog(client))
 
 ##############################################################################
 
