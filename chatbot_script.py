@@ -55,7 +55,7 @@ async def bot(com, *, msg):
             Reply = translateText(i, msgObj.lang)
             await com.send(Reply)
     else:
-        Reply = "A keyword was not mentioned" # This is a placeholder reply.
+        Reply = "Could you try rephrasing what you said? I promise I am doing my best to understand you!" # This is a placeholder reply.
         Reply = translateText(Reply, msgObj.lang)
         await com.send(Reply)
     

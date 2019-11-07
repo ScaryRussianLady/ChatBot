@@ -80,7 +80,7 @@ def greetingReply(msgObj):
 
         Topic = DataList[randrange(len(DataList))]
 
-        PhraseList_1 = [" Could I interesting you with any ", " Are you here to find any ", " Would you like to see any "]
+        PhraseList_1 = [" Could I interest you with any ", " Are you here to find any ", " Would you like to see any "]
         PhraseList_2 = ["? You seem to like it very much.", "? You appear to be enjoying them", "? I sense that you might."]
 
         SuggestiveGreeting = (PhraseList_1[randrange(len(PhraseList_1))])+Topic+" "+EntRNG+(PhraseList_2[randrange(len(PhraseList_2))])
@@ -102,7 +102,7 @@ def greetingReply(msgObj):
 
         Topic = DataList[randrange(len(DataList))]
 
-        PhraseList_1 = [" I really hope you enjoyed ", " By the why, I hope you enjoyed ", " Back for more? You must have enjoyed "]
+        PhraseList_1 = [" I really hope you enjoyed ", " By the way, I hope you enjoyed ", " Back for more? You must have enjoyed "]
 
         SuggestiveGreeting = (PhraseList_1[randrange(len(PhraseList_1))])+EntRNG+" "+Topic
 
