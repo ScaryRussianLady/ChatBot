@@ -10,9 +10,10 @@ import json
 #import NewsAPI
 
 #This specifies what extensions will be added, add the name of the script you want to access.
-startup_extensions = ['cogs.NewsAPI']
+initial_extensions = ['cogs.NewsAPI']
 
 #[CHRISTIAN] Sets the command's prefix to "-"
+
 client = commands.Bot(command_prefix = "-")
 
 Global_Channel_Var = None
@@ -23,6 +24,7 @@ async def on_ready():
     print("\nThe E-Bot is online!")
     # For terminal use only. Creates space between information on the terminal to make it easier to read.
     print("\n--------------------------------------------------------------------------")
+  
 
 @client.command()
 # [CHRISTIAN] This is the MAIN function for the chatbot | com = the command (bot), msg = the user input after the command is called
@@ -164,9 +166,11 @@ def commonReplies(msgObj):
                 #NewsAPI.IntroductionToUser()
                 #load() 
                 #[Annija Balode ID No: 9102828]
-                for extension in startup_extensions:
-                    bot.load_extension(extension)
-                break
+                #for extension in initial_extensions:
+                 #   bot.load_extension(extension)
+                for extension in initial_extensions:
+                    client.load_extension(extension)
+                return
 
         for j in range(len(bookKeywords)):
             if msgList[i].lower() == bookKeywords[j] or msgList[i].lower() == (bookKeywords[j]+"s"):
