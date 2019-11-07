@@ -63,34 +63,34 @@
       },
       {
          "UserID": 181396705604927498,
-         "Name": "Placeholder",
+         "Name": "Big Boss",
          "LastMessage": "Placeholder",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
          "LastBookReply": "Example reply",
          "FavFilmGenre": [
-            "Example Genre",
-            "Another Example"
+            "comedy",
+            "action"
          ],
          "FavBookGenre": [
-            "Example Genre",
-            "Another Example"
+            "sci-fi",
+            "fantasy"
          ],
          "FavNewsTopic": [
-            "Example Topic",
-            "Another Example"
+            "politics",
+            "business"
          ],
          "PreviousViewedFilms": [
-            "Example Film",
-            "Another Example"
+            "Joker 2019",
+            "John Wick 3"
          ],
          "PreviousViewedBooks": [
-            "Example Book",
-            "Another Example"
+            "Trump: The Art of the Deal",
+            "A Song Of Ice And Fire"
          ],
          "PreviousViewedArticles": [
-            "Example Article",
-            "Another Example"
+            "Toddler, aged 3, dropkicked out of a window",
+            "Headteacher fired over facilitating A-Level cheating"
          ]
       }
    ]

@@ -4,6 +4,7 @@ import random
 from discord.ext import commands
 from googletrans import Translator
 import json
+import asyncio
 
 
 #[Annija] simply importing everything from my API script.
@@ -14,8 +15,6 @@ startup_extensions = ['cogs.NewsAPI']
 
 #[CHRISTIAN] Sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
-
-Global_Channel_Var = None
 
 @client.event
 #[CHRISTIAN] This will print the text to the python terminal when the bot is ready on discord
@@ -38,15 +37,11 @@ async def bot(com, *, msg):
     print("User's name               >>", msgObj.username)
     print("User's channel            >>", msgObj.channel)
 
-    #SendText(msgObj.msg, msgObj.channel)
-    from input_test import TestFunc
-    #TestFunc(msgObj)
-
     # Saves the userID and message data to the user_datastore.json file
-   # from UserDataManagement import SaveData
-   # SaveData(msgObj.userID, msgObj.userID, "UserID")
-   # SaveData(str(msgObj.username), msgObj.userID, "Name")
-   # SaveData(msgObj.msg, msgObj.userID, "LastMessage")
+    from UserDataManagement import SaveData
+    #SaveData(msgObj.userID, msgObj.userID, "UserID")
+    #SaveData(str(msgObj.username), msgObj.userID, "Name")
+    #SaveData(msgObj.msg, msgObj.userID, "LastMessage")
     
     # [CHRISTIAN] Calls the function which generates replies (Scroll to see the function for more information | Returns as a list
     botReply = generateReplies(msgObj) 
@@ -62,6 +57,26 @@ async def bot(com, *, msg):
         Reply = translateText(Reply, msgObj.lang)
         await com.send(Reply)
     
+    #For terminal use only. Creates space between information on the terminal to make it easier to read.
+    print("\n--------------------------------------------------------------------------")
+
+# [CHRISTIAN] This async function will handle all of the replies (fingers crossed). I want to make it as convienant as possible.
+# In layman terms, replies are going to be done without the -bot prefix. and instead with the -r
+@client.command()
+async def r(com, *, reply):
+
+    msgObj = createMsgObj(reply, com.author.id, str(com.author), com.channel)
+    print("User's reply            >>", msgObj.msg)
+    print("User's reply as list    >>", msgObj.list)
+    print("User's reply's language >>", msgObj.lang)
+    print("User's ID               >>", msgObj.userID)
+    print("User's name             >>", msgObj.username)
+    print("User's channel          >>", msgObj.channel)
+
+    # Next part is going to retrieve and check the "replyID" and go to the required script & function
+
+    await com.send("Reply function us under construction (replyID)")
+
     #For terminal use only. Creates space between information on the terminal to make it easier to read.
     print("\n--------------------------------------------------------------------------")
 
@@ -195,17 +210,17 @@ def PathReplies(msg):
     print(no)
     print(yes)
 
-# Does like an input thing that sends a message and takes the input and returns it.
+# [CHRISTIAN] Does like an input thing that sends a message and takes the input and returns it.
+# These are some test function and... the test failed. So, replies are gonna have to be done a different way.
+async def SendMessage(Message, Channel):
+    await client.wait_until_ready()
+    asyncio.sleep(5)
+    #print("It's alive?")
+    await Channel.send(Message)
+    return
 
-def SendText(Message, Channel):
-    async def DiscordInput(Message, Channel):
-        await Channel.send(Message)
-        return
-    client.loop.create_task(DiscordInput(Message, Channel))
-
-def RunSend(Msg, Chan):
-    SendText(Msg, Chan)
-    
+def DiscordInput(Message, Channel):
+    client.loop.create_task(SendMessage(Message, Channel))
 
 # [CHRISTIAN] This runs the bot. Note: The token is specific to the bot
 client.run("NjMzMzQ0NTM5NDk0NzExMzM2.XbHZtw.CLPjwoYCqMaQDYQ0jLElxYNfIGg")
