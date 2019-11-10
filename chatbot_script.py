@@ -1,4 +1,4 @@
-# List of modules
+#-------------------------------------------------------------IMPORTING MODULES-------------------------------------------------------------#
 import discord
 import random
 from discord.ext import commands
@@ -14,24 +14,33 @@ import asyncio
 #This specifies what extensions will be added, add the name of the script you want to access.
 initial_extensions = ['cogs.NewsAPI']
 
-#[CHRISTIAN] Sets the command's prefix to "-"
+#-------------------------------------------------------------ESTABLISHING THE BOT-------------------------------------------------------------#
 
+#[Start of Code by Christian Shaw | ID No. 9262834]
+
+# Assigns the variable client to the bot and sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
 
+# When the bot has connected to discord a message will be printed to the terminal
 @client.event
-#[CHRISTIAN] This will print the text to the python terminal when the bot is ready on discord
 async def on_ready():
     print("\nThe E-Bot is online!")
     # For terminal use only. Creates space between information on the terminal to make it easier to read.
     print("\n--------------------------------------------------------------------------")
-  
 
-@client.command()
-# [CHRISTIAN] This is the MAIN function for the chatbot | com = the command (bot), msg = the user input after the command is called
+#[End of Code by Christian Shaw | ID No. 9262834]
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------#
+
+#-------------------------------------------------------------BOT COMMAND ASYNC FUNCTION--------------------------------------------------------#
+#[Start of Code by Christian Shaw | ID No. 9262834]
+
+# This is the MAIN function for the chatbot | com = the command (bot), msg = the user input after the command is called
 # E.G The user typing "-bot My name is Bill" will make msg = "My name is Bill"
+@client.command()
 async def bot(com, *, msg):
 
-    # [CHRISTIAN] Calls the function that creates the message object
+    # [Start of Code by Christian Shaw | ID No. 9262834] Calls the function that creates the message object
     msgObj = createMsgObj(msg, com.author.id, str(com.author), com.channel)
     print("User's message            >>", msgObj.msg)
     print("User's message as list    >>", msgObj.list)
@@ -46,25 +55,35 @@ async def bot(com, *, msg):
     #SaveData(str(msgObj.username), msgObj.userID, "Name")
     #SaveData(msgObj.msg, msgObj.userID, "LastMessage")
     
-    # [CHRISTIAN] Calls the function which generates replies (Scroll to see the function for more information | Returns as a list
+    # Calls the function which calls for other scripts to generate replies and returns it as a list
     botReply = generateReplies(msgObj) 
    
-    # [CHRISTIAN] Send's the replies on discord in the order of the botReply list. If there are no replies, sends a different message
-    # it will also translate the message if the message sent by the user wasn't in English
+    # Send's the replies on discord in the order of the botReply list.
     if len(botReply) != 0:
         for i in botReply:
+            # Uses the translateText function I created to translate the bot's reply back into the user's language
             Reply = translateText(i, msgObj.lang)
             await com.send(Reply)
     else:
-        Reply = "Could you try rephrasing what you said? I promise I am doing my best to understand you!" # This is a placeholder reply.
+        # If there weren't any replies found to send, it will reply with this:
+        Reply = "Could you try rephrasing what you said? I promise I am doing my best to understand you!"
+        # Uses the translateText function I created to translate the bot's reply back into the user's language
         Reply = translateText(Reply, msgObj.lang)
         await com.send(Reply)
     
     #For terminal use only. Creates space between information on the terminal to make it easier to read.
     print("\n--------------------------------------------------------------------------")
 
-# [CHRISTIAN] This async function will handle all of the replies (fingers crossed). I want to make it as convienant as possible.
-# In layman terms, replies are going to be done without the -bot prefix. and instead with the -r
+#[End of Code by Christian Shaw | ID No. 9262834]
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------#
+
+#-------------------------------------------------------------BOT REPLY COMMAND ASYNC FUNCTION--------------------------------------------------#
+
+# [Start of Code by Christian Shaw | ID No. 9262834] 
+
+# This async function will handle all of the replies
+# Instead of the command -bot, for replies the user most type -r
 @client.command()
 async def r(com, *, reply):
 
@@ -78,25 +97,42 @@ async def r(com, *, reply):
 
     # Next part is going to retrieve and check the "replyID" and go to the required script & function
 
-    await com.send("Reply function us under construction (replyID)")
+    await com.send("Reply function us under construction needs (replyID)")
 
     #For terminal use only. Creates space between information on the terminal to make it easier to read.
     print("\n--------------------------------------------------------------------------")
 
-# [CHRISTIAN] This will translate the languages of messages
+# [End of Code by Christian Shaw | ID No. 9262834] 
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------#
+
+#-------------------------------------------------------------BOT TRANSLATION FUNCTIONS---------------------------------------------------------#
+
+# [Start of Code by Christian Shaw | ID No. 9262834] 
+
+# This will translate the languages of strings using the googletrans API and returns it
+# The parameters: text = the string to be translated, lang = the language the string will be translated to
 def translateText(text, lang):
     translator = Translator()
     translatedMessage = translator.translate(text, dest=lang)
-    #print("Message Translated >> ", translatedMessage.text)
     return translatedMessage.text
 
-# [CHRISTIAN] This will find the language a string is in
+# This will find (detect) the language a string is in usings the googletrans API and returns the language
+# The parameter: text = the string that we want to detect the language of
 def detectLanguage(text):
     translator = Translator()
     language = translator.detect(text)
     return language.lang
 
-# [CHRISTIAN] This creates an object to store the message properties AND a function to create the object and give it the properties it needs
+# [End of Code by Christian Shaw | ID No. 9262834] 
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------#
+
+#-------------------------------------------------------------MESSAGE OBJECTS AND FUNCTIONS-----------------------------------------------------#
+
+# [Start of Code by Christian Shaw | ID No. 9262834] 
+
+# This creates an object to store the message properties AND a function to create the object and give it the properties it needs
 class messageObj():
     msgCount = 0
     def __init__(self, msg, msgList, msgLang, msgUserID, msgUsr, msgChannel):
@@ -108,13 +144,18 @@ class messageObj():
         self.channel = msgChannel
         messageObj.msgCount += 1
 
+# This is a function that will convert the raw data input into something we want the object to take
 def createMsgObj(msg, authorID, usr, channel):
+    
+    # This part of the script translates the raw user input into English so that the bot can interpret it better
+    # Also, languages such as Korean, Japanese and Chinese don't have spaces between their characters, so finding individual words wouldn't work
     msgLanguage = detectLanguage(msg)
-    #if msgLanguage != 'en':
-    #    msg = translateText(msg, "en")
+    if msgLanguage != 'en':
+        msg = translateText(msg, "en")
     msgList = msg.split()
 
-    # This part of the code is going to remove the hashtag from the username that discord uses
+    # This part of the code is going to remove the hashtags and ID from the username that discord uses to identify users
+    # Monster#1334 will become Monster. The hashtags makes the bot seem more robotic and we don't want that
     NewUsr = ""
     for char in range(len(usr)):
         if usr[char] == "#":
@@ -126,16 +167,22 @@ def createMsgObj(msg, authorID, usr, channel):
     msg_obj = messageObj(msg, msgList, msgLanguage, authorID, usr, channel)
     return msg_obj
 
-# [CHRISTIAN] This algorthim will search for specific keywords from a list to determine what scripts will be used for replies
-def generateReplies(MessageObject):
-    
-    Replies = commonReplies(MessageObject)
-    return Replies
+# [End of Code by Christian Shaw | ID No. 9262834] 
 
-def commonReplies(msgObj):
+#-----------------------------------------------------------------------------------------------------------------------------------------------#
 
+#-------------------------------------------------------------REPLY GENERATION ALGORITHM--------------------------------------------------------#
+
+# [Start of Code by Christian Shaw | ID No. 9262834] 
+# Please note: The scripts imported in the algorithm when a keyword is identified may not be ones that I have written
+
+# This algorthim will search for specific keywords from a list to determine what scripts will be used for replies
+def generateReplies(msgObj):
+
+    # Takes the list of words from the user input and assigns it to msgList
     msgList = msgObj.list
 
+    # A list of keywords that will trigger a response for the bot
     greetingKeywords = ["hi", "hello", "good", "greetings", "hey"]
     appreciationKeywords = ["thank", "thanks"]
     filmKeywords = ["movie", "film", "series"]
@@ -143,16 +190,25 @@ def commonReplies(msgObj):
     bookKeywords = ["book", "story"]
     farewellKeywords = ["bye", "goodbye", "farewell"]
 
+    # An empty list which will have the bot's replies be appended into it as the relevant scripts as executed
+    # This is so that when the bot sends these messages back, it's in order and appears more fluid
     Replies = []
 
+    # This for loop will scan the entire list of words and identify any keywords
     for i in range(len(msgList)):
+
+        # This will identify greeting words in the list
         for j in range(len(greetingKeywords)):
             if msgList[i].lower() == greetingKeywords[j]:
+                
                 if greetingKeywords[j] != "good":
                     from BasicResponses import greetingReply
                     Replies.append(greetingReply(msgObj))
                     break
                 else:
+
+                    # In this special case of good morning, evening and afternoon, this will only identify is as a keyword is followed
+                    # by morning, evening or afternoon
                     if len(msgList) != 1:
                         try:
                             if msgList[i+1].lower() == "morning" or msgList[i+1].lower() == "evening" or msgList[i+1].lower() == "afternoon":
@@ -161,13 +217,15 @@ def commonReplies(msgObj):
                                 break
                         except:
                             pass
-
+        
+        # This will identify appreciation words in the list
         for j in range(len(appreciationKeywords)):
             if msgList[i].lower() == appreciationKeywords[j]:
                 from BasicResponses import appreciationReply
                 Replies.append(appreciationReply(msgObj))
                 break
         
+        # This will identify film related words in the list
         for j in range(len(filmKeywords)):
             if msgList[i].lower() == filmKeywords[j] or msgList[i].lower() == (filmKeywords[j]+"s"):
                 # Call for film function inside of the placeholder
@@ -175,6 +233,7 @@ def commonReplies(msgObj):
                 #Replies.append("Placeholder Film Info")
                 break
         
+        # This will identify news related words in the list
         for j in range(len(newsKeywords)):
             if msgList[i].lower() == newsKeywords[j] or msgList[i].lower() == (newsKeywords[j]+"s"):
                 # Call for news function inside of the placeholder
@@ -188,6 +247,7 @@ def commonReplies(msgObj):
                     client.load_extension(extension)
                 return
 
+        # This will identify book related words in the list
         for j in range(len(bookKeywords)):
             if msgList[i].lower() == bookKeywords[j] or msgList[i].lower() == (bookKeywords[j]+"s"):
                 # Call for book function inside of the placeholder
@@ -195,6 +255,7 @@ def commonReplies(msgObj):
                 #Replies.append("Placeholder Book Info")
                 break
         
+        # This will identify farewell words in the list
         for j in range(len(farewellKeywords)):
             if msgList[i].lower() == farewellKeywords[j]:
                 from BasicResponses import farewellReply
@@ -203,29 +264,13 @@ def commonReplies(msgObj):
     
     return Replies
 
-# [CHRISTIAN] I don't even know what to call this yet
-def PathReplies(msg):
-    with open("User_Datastore.json") as uds:
-        UserData = json.load(uds)
+# [End of Code by Christian Shaw | ID No. 9262834] 
 
-    yes = ["yes", "yea", "yeah"]
-    no = ["no", "nah"]
+#-----------------------------------------------------------------------------------------------------------------------------------------------#
 
-    print(UserData)
-    print(no)
-    print(yes)
+#-----------------------------------------------------BOT RUN-----------------------------------------------------------------------------------#
 
-# [CHRISTIAN] Does like an input thing that sends a message and takes the input and returns it.
-# These are some test function and... the test failed. So, replies are gonna have to be done a different way.
-async def SendMessage(Message, Channel):
-    await client.wait_until_ready()
-    asyncio.sleep(5)
-    #print("It's alive?")
-    await Channel.send(Message)
-    return
-
-def DiscordInput(Message, Channel):
-    client.loop.create_task(SendMessage(Message, Channel))
-
-# [CHRISTIAN] This runs the bot. Note: The token is specific to the bot
+# This runs the bot. Note: The token is specific to the bot
 client.run("NjMzMzQ0NTM5NDk0NzExMzM2.XbHZtw.CLPjwoYCqMaQDYQ0jLElxYNfIGg")
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------#
