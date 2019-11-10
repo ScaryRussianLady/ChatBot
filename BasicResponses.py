@@ -1,7 +1,12 @@
+#-------------------------------------------------------------IMPORTING MODULES-------------------------------------------------------------#
 from random import randrange
 from UserDataManagement import RetrieveData
+#-------------------------------------------------------------------------------------------------------------------------------------------#
 
-# [CALLUM] Function searches for keywords and provides a message
+#-------------------------------------------------------------INTRODUCTION FUNCTION---------------------------------------------------------#
+
+#[Beginning of Code by Callum Jones | ID No. ?]
+
 def introduction(msgList, welcome):
     for i in range(len(msgList)):
         if msgList[i] == 'hey' or msgList[i] == 'hi' or msgList[i] == 'hello':
@@ -18,7 +23,15 @@ def introduction(msgList, welcome):
                 print("Message received.")
                 #botReply = "Well, that's a shame! If you change your mind just come and say hello to me again. Hope to see you soon! :)"
 
-# [CHRISTIAN] Function searches keywords and provides a goodbye message if the user says a farewell keyword
+#[End of Code by Callum Jones | ID No. ?]
+
+#-------------------------------------------------------------------------------------------------------------------------------------------#
+
+#-------------------------------------------------------------GENERIC RESPONSE FUNCTIONS----------------------------------------------------#
+
+#[Start of Code by Christian Shaw | ID No. 9262834]
+
+# Function searches keywords and provides a farewell message if the user says an farewell keyword
 def farewellReply(msgObj):
     ReplyList = [
     "See you soon, ",
@@ -50,7 +63,7 @@ def farewellReply(msgObj):
 
     return BasicFarewell+SuggestiveFarewell
 
-# [CHRISTIAN] Function searches keywords and provides a greeting message if the user says a farewell keyword
+# Function searches keywords and provides a greeting message if the user says an greeting keyword
 def greetingReply(msgObj):
     ReplyList = [
     "Hello there, ",
@@ -85,7 +98,6 @@ def greetingReply(msgObj):
 
         SuggestiveGreeting = (PhraseList_1[randrange(len(PhraseList_1))])+Topic+" "+EntRNG+(PhraseList_2[randrange(len(PhraseList_2))])
 
-        #print(SuggestiveGreeting)
     elif SuggestionRNG == 1:
         # Will suggest content
         EntList = ["the news article", "the film", "the book"]
@@ -109,7 +121,7 @@ def greetingReply(msgObj):
 
     return BasicGreeting+SuggestiveGreeting
 
-# [CHRISTIAN] Function searches keywords and provides a appreciation message if the user says a farewell keyword
+# Function searches keywords and provides a appreciation message if the user says an appeciation keyword
 def appreciationReply(msgObj):
     ReplyList = [
     "No problem, ",
@@ -120,3 +132,6 @@ def appreciationReply(msgObj):
 
     return str((ReplyList[randrange(len(ReplyList))])+msgObj.username+"!")
 
+#[End of Code by Christian Shaw | ID No. 9262834]
+
+#-------------------------------------------------------------------------------------------------------------------------------------------#

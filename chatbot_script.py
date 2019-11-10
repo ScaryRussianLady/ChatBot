@@ -14,6 +14,8 @@ import asyncio
 #This specifies what extensions will be added, add the name of the script you want to access.
 initial_extensions = ['cogs.NewsAPI']
 
+#-----------------------------------------------------------------------------------------------------------------------------------------------#
+
 #-------------------------------------------------------------ESTABLISHING THE BOT-------------------------------------------------------------#
 
 #[Start of Code by Christian Shaw | ID No. 9262834]
