@@ -72,7 +72,7 @@ def movie_search():
         print('Released on: '+ titleDict['release_date'])
         print('Rated '+ str(titleDict['vote_average'])+'/10')
         print('Overview: '+titleDict['overview'])
-        print('BackDrop: https://image.tmdb.org/t/p/original'+titleDict['poster_path'])
+        print('BackDrop: https://image.tmdb.org/t/p/original'+str(titleDict['poster_path']))
     #end of adapted code from stack overflow
 
         #second attempt at getting code to work. introduced for loop(still only worked for one result)
