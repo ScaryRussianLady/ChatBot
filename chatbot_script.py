@@ -227,8 +227,8 @@ def generateReplies(msgObj):
     # This is so that when the bot sends these messages back, it's in order and appears more fluid
     Replies = []
 
-    from Temp_testReply import mainDialogue
-    Replies.append(mainDialogue(msgObj))
+    #from Temp_testReply import mainDialogue
+    #Replies.append(mainDialogue(msgObj))
 
     # This for loop will scan the entire list of words and identify any keywords
     for i in range(len(msgList)):
