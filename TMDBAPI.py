@@ -8,15 +8,16 @@ api_key = "732f0435865bde3d7f9d58852db87043"
 #--------------------------------------------------------USER GREETING FUNCTION--------------------------------------------------------#
 
 #welcomes the user to the movie data base and 
-#(Jamie)
+#start of block (Jamie Warnock- ID no: 9328082)
 def firstUserInt():
     print("Hello there... and welcome to the movie directory")
     print("well... Umm there's plenty to choose from.\nlet's see. Ahh yes we can sort through genres, search for movies, display upcoming, you could also view top rated or even see what is popular/trending at the moment")
     FnctnFinder = input("please tell me what you would like to see so i can give it to you. ")
-    FnctnFinderWords = FnctnFinder.split(" ")
+
 
     #stores lists of words for possible user input
     #code adapted from NewsAPI.py(created by Annija Balode)
+    FnctnFinderWords = FnctnFinder.split(" ")
     genList = ["genre", "genres"]
     searchList = ["search", "movie", "movies", "title"]
     upCList = ["upcoming", "future", "releases"]
@@ -41,16 +42,15 @@ def firstUserInt():
         elif FnctnFinderWords[x].lower() in topList:
             top_rated()
             break
-#end of block(Jamie)
+#end of block (Jamie Warnock- ID no: 9328082)
 
 
 #--------------------------------------------------------MOVIE SEARCH FUNCTION--------------------------------------------------------#
-#(Jamie)
+#start of block(Jamie Warnock- ID no: 9328082)
 #refernce https://developers.themoviedb.org/3/search/search-movies
 def movie_search():
 
     #this inputs the keyword(s) into the search
-    #"shutte island" will only return one result; easy to read for now 
     query = input("please type in the movie title you wish to search for: ")
 
     #takes the input from query and replaces the spaces with "%20"
@@ -60,61 +60,62 @@ def movie_search():
     #this implements the api key and sQuery so we do not have to constantly type it out
     url = "https://api.themoviedb.org/3/search/movie?sort_by=vote_average.lte=8&api_key="+api_key+"&language=en-US&query="+sQuery+"&page=1&include_adult=false"
 
-    #retreives information from the search and prints to the screen as somewhat readable text    
+    #retreives information in json as a    
     response = req.get(url)
     movDict = response.json()
 
     #adapted code from stack overflow https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
     for title in movDict['results']:
-        titleDict = ast.literal_eval(str(title))
+        #titleDict = ast.literal_eval(str(title)) - i used to use this, however i found it is not necessary
         print('====================================')
-        print('Title: '+ titleDict['title'])
-        print('Released on: '+ titleDict['release_date'])
-        print('Rated '+ str(titleDict['vote_average'])+'/10')
-        print('Overview: '+titleDict['overview'])
-        print('BackDrop: https://image.tmdb.org/t/p/original'+str(titleDict['poster_path']))
+        print('Title: '+ title['title'])
+        print('Released on: '+ title['release_date'])
+        print('Rated '+ str(title['vote_average'])+'/10')
+        print('Overview: '+title['overview'])
+        print('BackDrop: https://image.tmdb.org/t/p/original'+str(title['poster_path']))
     #end of adapted code from stack overflow
 
+        #--------------------Second attempt at formal printing-------------------------
         #second attempt at getting code to work. introduced for loop(still only worked for one result)
         #strppdResults = str(movDict['results'])
         #resultsDict = ast.literal_eval(strppdResults.strip('[]'))
         #for key in resultsDict:
             #print(key+': '+ str(resultsDict[key]))
-        #print(title)
-
+        #------------------------------------------------------------------------------
+    #-----------------------First iteration of formal printing-------------------------
     #before i introduced a for loop i used this (didn't work for multiple results)
     #print('Title: '+ resultsDict['title'])
     #print(resultsDict['overview'])
     #print('With a release date of '+str(resultsDict['release_date'])+', this movie has mustered up a rating of '+ str(resultsDict['vote_average'])+'/10')
+    #----------------------------------------------------------------------------------
 
+#end of block (Jamie Warnock- ID no: 9328082) 
 #--------------------------------------------------------GENRE LIST SEARCH FUNCTION--------------------------------------------------------#
 
-#(Jamie)
+#start of block (Jamie Warnock - ID no: 9328082) 
 #reference https://developers.themoviedb.org/3/genres/get-movie-list
 def genre_list():
     print("=================================================================================================================================")
     #used a dict to store possible search queries. more efficient than using an if statement
-    genreDict = {"Action": "28", "Adventure": "12", "Animation": "16", "Comedy": "35", "Crime": "80", "Documentary": "99", "Drama": "18", "Family": "10751", "Fantasy": "14", "History": "36", "Horror": "27", "Music": "10402", "Mystery": "9648", "Romance": "10749", "Science Fiction": "878", "TV Movie": "10770", "Thriller": "53", "war": "10752", "western": "37"}
+    genreDict = {"Action": "28", "adventure": "12", "animation": "16", "comedy": "35", "crime": "80", "documentary": "99", "drama": "18", "family": "10751", "fantasy": "14", "history": "36", "horror": "27", "music": "10402", "mystery": "9648", "romance": "10749", "science fiction": "878", "tv movie": "10770", "thriller": "53", "war": "10752", "western": "37"}
     UserChoice = input("here is a list of genres available: 'Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', and 'Western'. Please select one by typing it in: ")
 
-    url = "https://api.themoviedb.org/3/discover/movie?language=en-US&api_key="+api_key+"&with_genres="+str(genreDict[UserChoice])
+    url = "https://api.themoviedb.org/3/discover/movie?language=en-US&api_key="+api_key+"&with_genres="+str(genreDict[UserChoice.lower()])
 
 
-    #retreives the genre data from server
-    #makes it readable for user
-    #the "type" shows that it prtints a <dict>
+    #retreives the genre data from server to be used later
     response = req.get(url)
     genDict = response.json()
 
     #adapted code from stack overflow https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
     for title in genDict['results']:
         print('====================================')
-        titleDict = ast.literal_eval(str(title))
-        print('Title: '+ titleDict['title'])
-        print('Released on: '+ titleDict['release_date'])
-        print('Rated '+ str(titleDict['vote_average'])+'/10')
-        print('Overview: '+titleDict['overview'])
-        print('BackDrop: https://image.tmdb.org/t/p/original'+titleDict['poster_path'])
+        #titleDict = ast.literal_eval(str(title))
+        print('Title: '+ title['title'])
+        print('Released on: '+ title['release_date'])
+        print('Rated '+ str(title['vote_average'])+'/10')
+        print('Overview: '+title['overview'])
+        print('BackDrop: https://image.tmdb.org/t/p/original'+title['poster_path'])
     #end of adapted code
 
     
