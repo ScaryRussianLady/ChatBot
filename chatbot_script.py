@@ -53,9 +53,9 @@ async def bot(com, *, msg):
 
     # Saves the userID and message data to the user_datastore.json file
     from UserDataManagement import SaveData
-    #SaveData(msgObj.userID, msgObj.userID, "UserID")
-    #SaveData(str(msgObj.username), msgObj.userID, "Name")
-    #SaveData(msgObj.msg, msgObj.userID, "LastMessage")
+    SaveData(msgObj.userID, msgObj.userID, "UserID")
+    SaveData(str(msgObj.username), msgObj.userID, "Name")
+    SaveData(msgObj.msg, msgObj.userID, "LastMessage")
     
     # Calls the function which calls for other scripts to generate replies and returns it as a list
     botReply = generateReplies(msgObj) 
@@ -97,9 +97,40 @@ async def r(com, *, reply):
     print("User's name             >>", msgObj.username)
     print("User's channel          >>", msgObj.channel)
 
-    # Next part is going to retrieve and check the "replyID" and go to the required script & function
+    from UserDataManagement import RetrieveData
+    ReplyID = RetrieveData(msgObj.userID, "ReplyID")
 
-    await com.send("Reply function us under construction needs (replyID)")
+    FrontID = ""
+    for char in range(len(ReplyID)):
+        if ReplyID[char] == "_":
+            #ReplyID = FrontID
+            break
+        FrontID = FrontID+ReplyID[char]
+
+    BackID = ""
+    check = False
+    for char in range(len(ReplyID)):
+        if check == True:
+            BackID = BackID+ReplyID[char]
+
+        if ReplyID[char] == "_":
+            #ReplyID = BackID
+            check = True
+        
+
+    BotReply = ""
+
+    if FrontID == "0001":
+        from Temp_testReply import FindID
+        BotReply = FindID(msgObj, BackID)
+
+    # Next part is going to retrieve and check the "replyID" and go to the required script & function
+    if BotReply == "":
+        BotReply = translateText("Sorry, I didn't quite understand that reply", msgObj.lang)
+        await com.send(BotReply)
+    else:
+        BotReply = translateText(BotReply, msgObj.lang)
+        await com.send(BotReply)
 
     #For terminal use only. Creates space between information on the terminal to make it easier to read.
     print("\n--------------------------------------------------------------------------")
@@ -195,6 +226,9 @@ def generateReplies(msgObj):
     # An empty list which will have the bot's replies be appended into it as the relevant scripts as executed
     # This is so that when the bot sends these messages back, it's in order and appears more fluid
     Replies = []
+
+    #from Temp_testReply import mainDialogue
+    #Replies.append(mainDialogue(msgObj))
 
     # This for loop will scan the entire list of words and identify any keywords
     for i in range(len(msgList)):
