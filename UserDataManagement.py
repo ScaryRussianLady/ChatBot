@@ -15,7 +15,7 @@ def SaveData(Data, UserID, Location):
     
     for entry in UserData['data']:  # This code check through the entrys of User Data to find the correct User ID entry
         if entry['UserID'] == int(UserID):
-            if Location == "UserID" or Location == "Name" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply": #these catagories can only take a single argument
+            if Location == "UserID" or Location == "Name" or Location == "ReplyID" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply": #these catagories can only take a single argument
                 UserData['data'][count][Location] = Data # This replaces the entry with the updated user data
             else:
                 UserData['data'][count][Location].append(Data) # This adds to a list to add to user data
@@ -40,6 +40,7 @@ def CreateNewID(UserData, UserID):
     UserData['data'].append({ 'UserID' : UserID , 
     "Name": "Placeholder" , 
     "LastMessage": "Placeholder", 
+    "ReplyID" : "XXXX_XXXX", # Addition [Christian Shaw | ID No. 9262834]
     "LastFilmReply": "Example reply", 
     "LastNewsReply": "Example reply", 
     "LastBookReply": "Example reply",
