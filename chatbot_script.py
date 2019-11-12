@@ -97,6 +97,12 @@ async def r(com, *, reply):
     print("User's name             >>", msgObj.username)
     print("User's channel          >>", msgObj.channel)
 
+    # Saves the userID and message data to the user_datastore.json file
+    from UserDataManagement import SaveData
+    SaveData(msgObj.userID, msgObj.userID, "UserID")
+    SaveData(str(msgObj.username), msgObj.userID, "Name")
+    SaveData(msgObj.msg, msgObj.userID, "LastMessage")
+
     from UserDataManagement import RetrieveData
     ReplyID = RetrieveData(msgObj.userID, "ReplyID")
 
