@@ -100,29 +100,48 @@ async def r(com, *, reply):
     from UserDataManagement import RetrieveData
     ReplyID = RetrieveData(msgObj.userID, "ReplyID")
 
-    FrontID = ""
+    Global_ID = ""
     for char in range(len(ReplyID)):
         if ReplyID[char] == "_":
-            #ReplyID = FrontID
+            #ReplyID = Global_ID
             break
-        FrontID = FrontID+ReplyID[char]
+        Global_ID = Global_ID+ReplyID[char]
 
-    BackID = ""
+    Local_ID = ""
     check = False
     for char in range(len(ReplyID)):
         if check == True:
-            BackID = BackID+ReplyID[char]
+            Local_ID = Local_ID+ReplyID[char]
 
         if ReplyID[char] == "_":
-            #ReplyID = BackID
+            #ReplyID = Local_ID
             check = True
         
-
+    # This will be the variable that the reply is stored into (must remain empty)
     BotReply = ""
+    
+    # This part of the code will use the ReplyID to find the correct scripts to use
+    TestScriptGlobal_ID = "0001"
+    NewsScriptGlobal_ID = "1423"
+    FilmScriptGlobal_ID = "6912"
+    BookScriptGlobal_ID = "2151"
 
-    if FrontID == "0001":
+    # This is for the test script
+    if Global_ID == TestScriptGlobal_ID:
         from Temp_testReply import FindID
-        BotReply = FindID(msgObj, BackID)
+        BotReply = FindID(msgObj, Local_ID)
+
+    # This is for the news script
+    if Global_ID == NewsScriptGlobal_ID:
+        pass
+
+    # This is for the film script
+    if Global_ID == FilmScriptGlobal_ID:
+        pass
+
+    # This is for the book script
+    if Global_ID == BookScriptGlobal_ID:
+        pass
 
     # Next part is going to retrieve and check the "replyID" and go to the required script & function
     if BotReply == "":
