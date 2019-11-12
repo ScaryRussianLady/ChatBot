@@ -8,7 +8,7 @@
 import requests
 
 # The following imports the News API client specifically rather than everything from the News API that is being used in this script.
-from newsapi import NewsApiClient
+#from newsapi import NewsApiClient
 
 # This will be used to ensure that no matter when the user accesses the API, the articles that are being pulled down are from the current date.
 # Obviously, the date will be changed but only if the user wishes to do so.

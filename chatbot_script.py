@@ -12,7 +12,7 @@ import asyncio
 #import NewsAPI
 
 #This specifies what extensions will be added, add the name of the script you want to access.
-initial_extensions = ['cogs.NewsAPI']
+initial_extensions = ['NewsAPI']
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
