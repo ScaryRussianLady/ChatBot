@@ -55,7 +55,7 @@ def farewellReply(msgObj):
     elif EntRNG == "the book":
         DataList = RetrieveData(msgObj.userID, "PreviousViewedBooks")
 
-    Topic = DataList[randrange(len(DataList))]
+    Topic = DataList[(len(DataList)-1)]
 
     PhraseList_1 = [" Please do enjoy ", " I hope you enjoy ", " Have fun with "]
 
@@ -112,7 +112,7 @@ def greetingReply(msgObj):
         elif EntRNG == "the book":
             DataList = RetrieveData(msgObj.userID, "PreviousViewedBooks")
 
-        Topic = DataList[randrange(len(DataList))]
+        Topic = DataList[(len(DataList)-1)]
 
         PhraseList_1 = [" I really hope you enjoyed ", " By the way, I hope you enjoyed ", " Back for more? You must have enjoyed "]
 
