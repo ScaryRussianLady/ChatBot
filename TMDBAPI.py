@@ -23,6 +23,7 @@ def firstUserInt():
     upCList = ["upcoming", "future", "releases"]
     popList = ["trending", "popular"]
     topList = ["top", "rated"]
+    showList = ["show", "shows", "tv"]
 
     #cycles through the user input and if statement makes decision on what function should be called based on the words input by the user
     for x in range(len(FnctnFinderWords)):
@@ -42,6 +43,9 @@ def firstUserInt():
         elif FnctnFinderWords[x].lower() in topList:
             top_rated()
             break
+        elif FnctnFinderWords[x].lower() in showList:
+            show_search()
+            break
 #end of block (Jamie Warnock- ID no: 9328082)
 
 
@@ -57,8 +61,15 @@ def movie_search():
     #"%20" represents a space in a link
     sQuery = query.replace(" ", "%20")
 
+    pageNum = input("would you like to see a specific page number or stick to the first page? ")
+
+    if type(pageNum) == int:
+        page = pageNum
+    else:
+        page = 1
+
     #this implements the api key and sQuery so we do not have to constantly type it out
-    url = "https://api.themoviedb.org/3/search/movie?sort_by=vote_average.lte=8&api_key="+api_key+"&language=en-US&query="+sQuery+"&page=1&include_adult=false"
+    url = "https://api.themoviedb.org/3/search/movie?sort_by=vote_average.lte=8&api_key="+api_key+"&language=en-US&query="+sQuery+"&page=1&include_adult=false"+str(page)
 
     #retreives information in json as a    
     response = req.get(url)
@@ -70,7 +81,7 @@ def movie_search():
         print('====================================')
         print('Title: '+ title['title'])
         print('Released on: '+ title['release_date'])
-        print('Rated '+ str(title['vote_average'])+'/10')
+        print('Rated '+ str(title['vote_average'])+'/10 with a total of '+str(title['vote_count'])+' votes')
         print('Overview: '+title['overview'])
         print('BackDrop: https://image.tmdb.org/t/p/original'+str(title['poster_path']))
     #end of adapted code from stack overflow
@@ -97,10 +108,17 @@ def movie_search():
 def genre_list():
     print("=================================================================================================================================")
     #used a dict to store possible search queries. more efficient than using an if statement
-    genreDict = {"Action": "28", "adventure": "12", "animation": "16", "comedy": "35", "crime": "80", "documentary": "99", "drama": "18", "family": "10751", "fantasy": "14", "history": "36", "horror": "27", "music": "10402", "mystery": "9648", "romance": "10749", "science fiction": "878", "tv movie": "10770", "thriller": "53", "war": "10752", "western": "37"}
-    UserChoice = input("here is a list of genres available: 'Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', and 'Western'. Please select one by typing it in: ")
+    genreDict = {"action": "28", "adventure": "12", "animation": "16", "comedy": "35", "crime": "80", "documentary": "99", "drama": "18", "family": "10751", "fantasy": "14", "history": "36", "horror": "27", "music": "10402", "mystery": "9648", "romance": "10749", "science fiction": "878", "tv movie": "10770", "thriller": "53", "war": "10752", "western": "37"}
+    UserChoice = input("here is a list of genres available: 'Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', and 'Western'.\n Please select one by typing it in: ")
 
-    url = "https://api.themoviedb.org/3/discover/movie?language=en-US&api_key="+api_key+"&with_genres="+str(genreDict[UserChoice.lower()])
+    pageNum = input("would you like to see a specific page number or stick to the first page? ")
+
+    if type(pageNum) == int:
+        page = pageNum
+    else:
+        page = 1
+
+    url = "https://api.themoviedb.org/3/discover/movie?language=en-US&api_key="+api_key+"&with_genres="+str(genreDict[UserChoice.lower()])+"&page="+str(page)
 
 
     #retreives the genre data from server to be used later
@@ -113,14 +131,43 @@ def genre_list():
         #titleDict = ast.literal_eval(str(title))
         print('Title: '+ title['title'])
         print('Released on: '+ title['release_date'])
-        print('Rated '+ str(title['vote_average'])+'/10')
+        print('Rated '+ str(title['vote_average'])+'/10 with a total of '+str(title['vote_count'])+' votes')
         print('Overview: '+title['overview'])
         print('BackDrop: https://image.tmdb.org/t/p/original'+title['poster_path'])
     #end of adapted code
+#end of block (Jamie Warnock- ID no: 9328082) 
+#--------------------------------------------------------SEARCH TV SHOWS--------------------------------------------------------#
+#start of block (Jamie Warnock - ID no: 9328082) 
+def show_search():
 
+    #this inputs the keyword(s) into the search
+    query = input("please type in the movie title you wish to search for: ")
+
+    #takes the input from query and replaces the spaces with "%20"
+    #"%20" represents a space in a link
+    sQuery = query.replace(" ", "%20")
+
+    pageNum = input("would you like to see a specific page number or stick to the first page? ")
+
+    if type(pageNum) == int:
+        page = pageNum
+    else:
+        page = 1
+
+    url = "https://api.themoviedb.org/3/search/tv?api_key=732f0435865bde3d7f9d58852db87043&language=en-US&query="+str(sQuery)+"&page="+str(page)
+
+    response = req.get(url)
+    showDict = response.json()
+
+    for show in showDict['results']:
+        print('====================================')
+        print('Title: '+ show['name'])
+        print('First aired: '+ show['first_air_date'])
+        print('Rated '+ str(show['vote_average'])+'/10 with a total of '+str(show['vote_count'])+' votes')
+        print('Overview: '+show['overview'])
+        print('BackDrop: https://image.tmdb.org/t/p/original'+str(show['backdrop_path']))
     
-
-
+#end of block (Jamie Warnock- ID no: 9328082) 
 #--------------------------------------------------------SEE POPULAR FUNCTION--------------------------------------------------------#
 #(kesh)
 #reference https://developers.themoviedb.org/3/trending/get-trending
