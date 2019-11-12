@@ -5,7 +5,7 @@ from UserDataManagement import RetrieveData
 
 #-------------------------------------------------------------INTRODUCTION FUNCTION---------------------------------------------------------#
 
-#[Beginning of Code by Callum Jones | ID No. ?]
+#[Beginning of Code by Callum Jones | ID No. 9406128 ]
 
 def introduction(msgList, welcome):
     for i in range(len(msgList)):
@@ -23,7 +23,7 @@ def introduction(msgList, welcome):
                 print("Message received.")
                 #botReply = "Well, that's a shame! If you change your mind just come and say hello to me again. Hope to see you soon! :)"
 
-#[End of Code by Callum Jones | ID No. ?]
+#[End of Code by Callum Jones | ID No. 9406128]
 
 #-------------------------------------------------------------------------------------------------------------------------------------------#
 

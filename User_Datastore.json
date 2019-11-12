@@ -1,36 +1,6 @@
 {
    "data": [
       {
-         "UserID": "001",
-         "Name": "Bowser",
-         "LastMessage": "Placeholder",
-         "ReplyID": "XXXX_XXXX",
-         "LastFilmReply": "Example reply",
-         "LastNewsReply": "Example reply",
-         "LastBookReply": "Romance",
-         "FavFilmGenre": [
-            "Example Genre",
-            "Another Example"
-         ],
-         "FavBookGenre": [],
-         "FavNewsTopic": [
-            "Example Topic",
-            "Another Example"
-         ],
-         "PreviousViewedFilms": [
-            "Example Film",
-            "Another Example"
-         ],
-         "PreviousViewedBooks": [
-            "Example Book",
-            "Another Example"
-         ],
-         "PreviousViewedArticles": [
-            "Example Article",
-            "Another Example"
-         ]
-      },
-      {
          "UserID": 486240496797089802,
          "Name": "Placeholder",
          "LastMessage": "Placeholder",
@@ -94,6 +64,36 @@
          "PreviousViewedArticles": [
             "Toddler, aged 3, dropkicked out of a window",
             "Headteacher fired over facilitating A-Level cheating"
+         ]
+      },
+      {
+         "UserID": 1,
+         "Name": "Fred",
+         "LastMessage": "Placeholder",
+         "ReplyID": "XXXX_XXXX",
+         "LastFilmReply": "Example reply",
+         "LastNewsReply": "Example reply",
+         "LastBookReply": "Example reply",
+         "FavFilmGenre": [
+            "Example Genre",
+            "Another Example"
+         ],
+         "FavBookGenre": [],
+         "FavNewsTopic": [
+            "Example Topic",
+            "Another Example"
+         ],
+         "PreviousViewedFilms": [
+            "Example Film",
+            "Another Example"
+         ],
+         "PreviousViewedBooks": [
+            "Example Book",
+            "Another Example"
+         ],
+         "PreviousViewedArticles": [
+            "Example Article",
+            "Another Example"
          ]
       }
    ]

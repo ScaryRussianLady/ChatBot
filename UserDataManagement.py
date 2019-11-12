@@ -2,32 +2,31 @@
 
 import json
 
-# [CALLUM] This code allows the program to update the jason file with users previous responses and allows for multiple users 
+# [Callum Jones , ID No. 9406128 ] This code allows the program to update the jason file with users previous responses and allows for multiple users 
 def SaveData(Data, UserID, Location):
 
     count = 0
     
-    with open("User_Datastore.json") as uds:
+    with open("User_Datastore.json") as uds: #opens json file for reading only and saves all data into a dictionary
         UserData = json.load(uds)
     
     if IsNewID(UserData, UserID):
         UserData = CreateNewID(UserData, UserID)
     
-    for entry in UserData['data']:  # This code check through the entrys of User Data to find the correct User ID entry
-        if entry['UserID'] == int(UserID):
-            if Location == "UserID" or Location == "Name" or Location == "ReplyID" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply": #these catagories can only take a single argument
-                UserData['data'][count][Location] = Data # This replaces the entry with the updated user data
-            else:
-                UserData['data'][count][Location].append(Data) # This adds to a list to add to user data
-        count += 1
+    count = FidnEntry(UserData , UserID) #Find Entry is used to find the data specific to specified user
     
-    with open("User_Datastore.json", 'w') as uds: #writes updated data to json file
-        json.dump(UserData, uds , indent= 3)
+    if Location == "UserID" or Location == "Name" or Location == "ReplyID" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply": #these catagories can only take a single argument
+        UserData['data'][count][Location] = Data # This replaces the entry with the updated user data
+    else:
+        UserData['data'][count][Location].append(Data) # This adds to a list to add to user data
+        
+    
+    with open("User_Datastore.json", 'w') as uds: #opens json file to be written too with updated data
+        json.dump(UserData, uds , indent= 3) # saves the updated data with an indent of 3 so file is organised and can be read by a user if needed
 
    
 
-# [CHRISTIAN] Checks if UserID already exists in the datastore and returns false if it does and true if it doesn't
-# [CALLUM] changed the loop to incorporate new method of checking through the file, old loop commented out below if neeeded
+# [Callum Jones , ID No. 9406128 ] checks through the file to check if new id is needed
 def IsNewID(jsonfile, userID):
     for entry in jsonfile["data"]:
         if userID == (entry["UserID"]):
@@ -35,9 +34,9 @@ def IsNewID(jsonfile, userID):
     return True
     
 
-# [CALLUM] creates a new entry in the json file with that user id and then returns the updated user data to have the data saved
+# [Callum Jones , ID No. 9406128 ] creates a new entry in the json file with that user id and then returns the updated user data to have the data saved
 def CreateNewID(UserData, UserID):
-    UserData['data'].append({ 'UserID' : UserID , 
+    UserData['data'].append({ 'UserID' : int(UserID) , 
     "Name": "Placeholder" , 
     "LastMessage": "Placeholder", 
     "ReplyID" : "XXXX_XXXX", # Addition [Christian Shaw | ID No. 9262834]
@@ -55,43 +54,61 @@ def CreateNewID(UserData, UserID):
         json.dump(UserData, uds , indent= 3)
     return UserData
 
-# [CALLUM] Allows Data to be removed from single dictionaries and Lists in the json File
+# [Callum Jones , ID No. 9406128 ] Allows Data to be removed from single dictionaries and Lists in the json File
 def RemoveData(DelWhole, ListPos, UserID, Location): 
     count = 0
     
     with open("User_Datastore.json") as uds:
         UserData = json.load(uds)
 
-        for entry in UserData['data']: 
-            if entry['UserID'] == int(UserID):
-                if Location == "Name" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply": 
-                    UserData['data'][count][Location] = "" 
-                else:
-                    del UserData['data'][count][Location][int(ListPos)]
-                    # UserData['data'][count][Location].remove(Item) For use if we want to remove items by name instead of position in the list
-            count += 1
+        count = FidnEntry(UserData , UserID)
+
+        if Location == "Name" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply": 
+            UserData['data'][count][Location] = "" 
+        else:
+            try:
+                del UserData['data'][count][Location][int(ListPos)]
+            except:
+                return
+            # UserData['data'][count][Location].remove(Item) For use if we want to remove items by name instead of position in the list
+            
 
         with open("User_Datastore.json", 'w') as uds:
             json.dump(UserData, uds , indent= 3)
 
 
-# [CALLUM] Allows other scripts to retrive data from the json file
+# [Callum Jones , ID No. 9406128 ] Allows other scripts to retrive data from the json file
 def RetrieveData(UserID, Location):
     count = 0
-
+    DataStr = ""
+    DataLst = []
     with open("User_Datastore.json") as uds:
         UserData = json.load(uds)
     
-    for entry in UserData['data']:
-        if UserID == entry['UserID']:
-            Data = UserData['data'][count][Location]
+    count = FidnEntry(UserData , UserID)
+
+    if Location == "Name" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply":
+        DataStr = UserData['data'][count][Location]
+        return DataStr
+    else:
+        DataLst = UserData['data'][count][Location]
+        return DataLst
+       
+    
+# [Callum Jones , ID No. 9406128 ] searches through UserData to find the entry the user or program has requested
+def FidnEntry(UserData , UserID): 
+    count = 0
+    for entry in UserData['data']:  #spilts the individual entrys in the dictionary up
+        if entry['UserID'] == int(UserID): # if the userID mathces the cuurent users ID then it returns the position of their data in list of entrys in the dictionary
+            return count 
         count += 1
-    return Data
 
 # This tests the function in the terminal
-SaveData("Bowser", "001", "Name")
 
-Data = RetrieveData("001" ,"FavBookGenre" )
+
+SaveData("Fred", 1, "Name")
+
+Data = RetrieveData(1 ,"FavBookGenre" )
 print(Data)
 
-RemoveData(False, "0" , "001", "FavBookGenre" )
+RemoveData(False, "0" , 1, "FavBookGenre" )
