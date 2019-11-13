@@ -6,14 +6,6 @@ from googletrans import Translator
 import json
 import asyncio
 
-
-
-#[Annija] simply importing everything from my API script.
-#import NewsAPI
-
-#This specifies what extensions will be added, add the name of the script you want to access.
-initial_extensions = ['NewsAPI']
-
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-------------------------------------------------------------ESTABLISHING THE BOT-------------------------------------------------------------#
