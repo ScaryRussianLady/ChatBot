@@ -179,9 +179,9 @@ def genre_list2(MsgObj):
 #--------------------------------------------------------SEARCH TV SHOWS--------------------------------------------------------#
 #start of block (Jamie Warnock - ID no: 9328082) 
 def show_search(MsgObj):
-    SaveData(FilmScriptGlobal_ID+"_ShowSearch2", MsgObj.userID, "ReplyID")
+    SaveData(FilmScriptGlobal_ID+"_MovieSearch2", MsgObj.userID, "ReplyID")
     #this inputs the keyword(s) into the search
-    return ("please type in the movie title you wish to search for: ")
+    return ("please type in the show title you wish to search for: ")
 
     #takes the input from query and replaces the spaces with "%20"
     #"%20" represents a space in a link
@@ -201,13 +201,16 @@ def show_search2(MsgObj):
     response = req.get(url)
     showDict = response.json()
 
-    for show in showDict['results']:
-        print('====================================')
-        print('Title: '+ show['name'])
-        print('First aired: '+ show['first_air_date'])
-        print('Rated '+ str(show['vote_average'])+'/10 with a total of '+str(show['vote_count'])+' votes')
-        print('Overview: '+show['overview'])
-        print('BackDrop: https://image.tmdb.org/t/p/original'+str(show['backdrop_path']))
+    # Returns a natural reply using the dictionary data to the discord main script
+    return NaturalReply(showDict, False, True, None)
+
+    #for show in showDict['results']:
+    #    print('====================================')
+    #    print('Title: '+ show['name'])
+    #    print('First aired: '+ show['first_air_date'])
+    #    print('Rated '+ str(show['vote_average'])+'/10 with a total of '+str(show['vote_count'])+' votes')
+    #    print('Overview: '+show['overview'])
+    #    print('BackDrop: https://image.tmdb.org/t/p/original'+str(show['backdrop_path']))
     
 #end of block (Jamie Warnock- ID no: 9328082) 
 #--------------------------------------------------------SEE POPULAR FUNCTION--------------------------------------------------------#
@@ -361,7 +364,7 @@ def NaturalReply(Dictionary, RandBool, SearchBool, Context):
         DictData = Dictionary["results"][0]
 
     if SearchBool == True:
-        Phrase = ["Aah, you're looking for is ", "We've found the movie that you're looking for. It's ", "Hmm, I think this is the movie you're thinking about is "]
+        Phrase = ["Aah, you're looking for is ", "We've found the movie that you're looking for. It's ", "Hmm, I think this is the film you're thinking about is "]
         MainString = (Phrase[randrange(len(Phrase))]+ DictData['title']+"\n You can find more info here: "+'https://www.themoviedb.org/movie/'+str(DictData['id']))
     else:
         Phrase = ["Well, here's my recommendation of a", "Hmmm, this is a good ", "I think you might like this "]
