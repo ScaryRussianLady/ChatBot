@@ -29,7 +29,7 @@ def introduction(msgList, welcome):
 
 #-------------------------------------------------------------GENERIC RESPONSE FUNCTIONS----------------------------------------------------#
 
-#[Start of Code by Christian Shaw | ID No. 9262834]
+#[Start of Code by Christian Shaw]
 
 # Function searches keywords and provides a farewell message if the user says an farewell keyword
 def farewellReply(msgObj):
@@ -132,6 +132,6 @@ def appreciationReply(msgObj):
 
     return str((ReplyList[randrange(len(ReplyList))])+msgObj.username+"!")
 
-#[End of Code by Christian Shaw | ID No. 9262834]
+#[End of Code by Christian Shaw]
 
 #-------------------------------------------------------------------------------------------------------------------------------------------#

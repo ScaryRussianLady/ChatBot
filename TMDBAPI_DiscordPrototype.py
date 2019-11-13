@@ -28,6 +28,7 @@ FilmScriptGlobal_ID = "6912"
 #start of block (Jamie Warnock- ID no: 9328082)
 def firstUserInt(MsgObj):
 
+    # Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_FirstUserInt2", MsgObj.userID, "ReplyID")
 
     string = ("I can sort through genres, search for movies, display upcoming, you could also view top rated or even see what is popular/trending at the moment") + (
@@ -75,7 +76,10 @@ def firstUserInt2(MsgObj):
 #start of block(Jamie Warnock- ID no: 9328082)
 #refernce https://developers.themoviedb.org/3/search/search-movies
 def movie_search(MsgObj):
+
+    # Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_MovieSearch2", MsgObj.userID, "ReplyID")
+
     #this inputs the keyword(s) into the search
     return("please type in the movie title you wish to search for: ")
 
@@ -109,10 +113,6 @@ def movies_search2(MsgObj):
         #print('====================================')
         #print("RKAEVKE", title)
 
-        # [Start of Code by Christian Shaw | ID No. 9262834]
-        # Comes up with a random phrase to appear more fluid and returns the movie the user suggested
-        # [End of Code by Christian Shaw | ID No. 9262834]
-
         #print('Released on: '+ title['release_date'])
         #print('Rated '+ str(title['vote_average'])+'/10 with a total of '+str(title['vote_count'])+' votes')
         # print('Overview: '+title['overview'])
@@ -139,8 +139,11 @@ def movies_search2(MsgObj):
 #start of block (Jamie Warnock - ID no: 9328082) 
 #reference https://developers.themoviedb.org/3/genres/get-movie-list
 def genre_list(MsgObj):
+
+    # Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_GenreList2", MsgObj.userID, "ReplyID")
-    print("=================================================================================================================================")
+
+    #print("=================================================================================================================================")
     #used a dict to store possible search queries. more efficient than using an if statement
     return ("here is a list of genres available: 'Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', and 'Western'.\n Please select one by typing it in: ")
 
@@ -179,7 +182,10 @@ def genre_list2(MsgObj):
 #--------------------------------------------------------SEARCH TV SHOWS--------------------------------------------------------#
 #start of block (Jamie Warnock - ID no: 9328082) 
 def show_search(MsgObj):
+
+    # Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_MovieSearch2", MsgObj.userID, "ReplyID")
+
     #this inputs the keyword(s) into the search
     return ("please type in the show title you wish to search for: ")
 
@@ -218,7 +224,10 @@ def show_search2(MsgObj):
 
 #reference https://developers.themoviedb.org/3/trending/get-trending
 def search_popular(MsgObj):
+
+    # Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_SearchPop2", MsgObj.userID, "ReplyID")
+
     #input allows user to choose between what they would like to see
     return ("Now, you can either see actors(and actresses) or movies. your choice. ")
 
@@ -270,7 +279,10 @@ def search_popular2(MsgObj):
 
 #reference https://developers.themoviedb.org/3/movies/get-top-rated-movies
 def top_rated(MsgObj):
+
+    # Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_TopRated2", MsgObj.userID, "ReplyID")
+
     #allows user to input a page number
     return ("what page would you like to go to? ")
 
@@ -332,7 +344,10 @@ def upcoming():
 
 #--------------------------------------------------------REPLY SELECTION FUNCTION--------------------------------------------------------#
 
-# [Start of Code by Christian Shaw | ID No. 9262834] 
+# [Start of Code by Christian Shaw] 
+
+# Essentially, this function talks to the main chatbot script to identify which reply is next in line in the conversation
+# Whatever the replyID is set to will determine the function used in this script.
 
 def FindID(obj, ID):
     if ID == "FirstUserInt2":
@@ -348,21 +363,32 @@ def FindID(obj, ID):
     if ID == "TopRated2":
         return top_rated2(obj)
 
-# [End of Code by Christian Shaw | ID No. 9262834] 
+# [End of Code by Christian Shaw] 
 
 #------------------------------------------------------RETURN RELEVANT DATA TO USER-----------------------------------------------------#
 
-# [Start of Code by Christian Shaw | ID No. 9262834]
+# [Start of Code by Christian Shaw]
 
+# Essentially, this function creates and returns a string which will be the bot's reply.
+# It takes arguments which determine how the reply will be structured.
 def NaturalReply(Dictionary, RandBool, SearchBool, Context):
     from random import randrange
 
+    # If the argument given to RandBool was True, then a random film will be taken from the dictionary and assigned to DictData
     if RandBool == True:
         RandNo = randrange(len(Dictionary["results"]))
         DictData = Dictionary["results"][RandNo]
+    
+    # Else, it will be false and will assign the first film from the dictionary to DictData
     else:
         DictData = Dictionary["results"][0]
 
+    # If the SearchBool is True, this shows that the user searched for a film instead of wanted to be recommended one
+    # the phrase list and sentence structure in the mainstring will change accordingly to this.
+
+    # The context parameter will put in the context where needed to the sentence structure. To provide fluid, natural responses.
+
+    # Phrases are also randomised, giving a more natural and fluid sounding reply. Less robotic.
     if SearchBool == True:
         Phrase = ["Aah, you're looking for is ", "We've found the movie that you're looking for. It's ", "Hmm, I think this is the film you're thinking about is "]
         MainString = (Phrase[randrange(len(Phrase))]+ DictData['title']+"\n You can find more info here: "+'https://www.themoviedb.org/movie/'+str(DictData['id']))
@@ -370,8 +396,9 @@ def NaturalReply(Dictionary, RandBool, SearchBool, Context):
         Phrase = ["Well, here's my recommendation of a", "Hmmm, this is a good ", "I think you might like this "]
         MainString = (Phrase[randrange(len(Phrase))]+Context+" movie. It's called "+DictData["title"]+"\n You can find more info here: "+'https://www.themoviedb.org/movie/'+str(DictData['id']))
 
+    # Returns the string that was created to that the relevant scripts can return it to the main discord bot to be sent to the user on discord.
     return MainString
 
-# [End of Code by Christian Shaw | ID No. 9262834] 
+# [End of Code by Christian Shaw] 
 
 #firstUserInt()
