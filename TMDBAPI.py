@@ -185,20 +185,33 @@ def search_popular():
 
         if selectionWord[i].lower() in selectionOne:
             choice = "person"
-            break
+            url = ("http://api.themoviedb.org/3/trending/"+choice+"/day?api_key="+api_key)
+            for show in popDict['results']:
+                print('====================================')
+                print('Title: '+ show['name'])
+                #print('First aired: '+ show['release_date'])
+                #print('Rated '+ str(show['vote_average'])+'/10 with a total of '+str(show['vote_count'])+' votes')
+                #print('Overview: '+show['overview'])
+                print('BackDrop: https://image.tmdb.org/t/p/original'+str(show['backdrop_path'])) 
         elif selectionWord[i].lower() in selectionTwo:
             choice = "movie"
-            break
+            url = ("http://api.themoviedb.org/3/trending/"+choice+"/day?api_key="+api_key)
+              for show in popDict['results']:
+                print('====================================')
+                print('Title: '+ show['title'])
+                print('First aired: '+ show['release_date'])
+                print('Rated '+ str(show['vote_average'])+'/10 with a total of '+str(show['vote_count'])+' votes')
+                print('Overview: '+show['overview'])
+                print('BackDrop: https://image.tmdb.org/t/p/original'+str(show['poster_path'])) 
 
   
     #url with the choice variable and api key placed in
-    url = ("http://api.themoviedb.org/3/trending/"+choice+"/week?api_key="+api_key)
-
+    
     #extracts data from the url and makes it presentable
     response = req.get(url)
     popDict = response.json()
     #prints data to screen
-    print(popDict)
+    #print(popDict)
     #print(type(popDict))
 
 
@@ -218,7 +231,14 @@ def top_rated():
     response = req.get(url)
     topDict = response.json()
     # prints readable information to screen
-    print(topDict)
+    for show in topDict'results']:
+        print('====================================')
+        print('Title: '+ show['title'])
+        print('First aired: '+ show['release_date'])
+        print('Rated '+ str(show['vote_average'])+'/10 with a total of '+str(show['vote_count'])+' votes')
+        print('Overview: '+show['overview'])
+        print('BackDrop: https://image.tmdb.org/t/p/original'+str(show['poster_path']))
+    #print(topDict)
     #print(type(topDict))
 
 
@@ -239,7 +259,7 @@ def upcoming():
     #print(upcDict)
     for show in upcDict['results']:
         print('====================================')
-        print('Title: '+ show['name'])
+        print('Title: '+ show['title'])
         print('First aired: '+ show['release_date'])
         print('Rated '+ str(show['vote_average'])+'/10 with a total of '+str(show['vote_count'])+' votes')
         print('Overview: '+show['overview'])

@@ -10,7 +10,10 @@ import asyncio
 
 #-------------------------------------------------------------ESTABLISHING THE BOT-------------------------------------------------------------#
 
-#[Start of Code by Christian Shaw | ID No. 9262834]
+#[Start of Code by Christian Shaw]
+
+#[Code in this block is adapted from the discord.py documentation: 
+# https://discordpy.readthedocs.io/en/latest/quickstart.html#a-minimal-bot]
 
 # Assigns the variable client to the bot and sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
@@ -22,19 +25,19 @@ async def on_ready():
     # For terminal use only. Creates space between information on the terminal to make it easier to read.
     print("\n--------------------------------------------------------------------------")
 
-#[End of Code by Christian Shaw | ID No. 9262834]
+#[End of Code by Christian Shaw]
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-------------------------------------------------------------BOT COMMAND ASYNC FUNCTION--------------------------------------------------------#
-#[Start of Code by Christian Shaw | ID No. 9262834]
+#[Start of Code by Christian Shaw]
 
 # This is the MAIN function for the chatbot | com = the command (bot), msg = the user input after the command is called
 # E.G The user typing "-bot My name is Bill" will make msg = "My name is Bill"
 @client.command()
 async def bot(com, *, msg):
 
-    # [Start of Code by Christian Shaw | ID No. 9262834] Calls the function that creates the message object
+    # [Start of Code by Christian Shaw] Calls the function that creates the message object
     msgObj = createMsgObj(msg, com.author.id, str(com.author), com.channel)
     print("User's message            >>", msgObj.msg)
     print("User's message as list    >>", msgObj.list)
@@ -68,13 +71,13 @@ async def bot(com, *, msg):
     #For terminal use only. Creates space between information on the terminal to make it easier to read.
     print("\n--------------------------------------------------------------------------")
 
-#[End of Code by Christian Shaw | ID No. 9262834]
+#[End of Code by Christian Shaw]
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-------------------------------------------------------------BOT REPLY COMMAND ASYNC FUNCTION--------------------------------------------------#
 
-# [Start of Code by Christian Shaw | ID No. 9262834] 
+# [Start of Code by Christian Shaw] 
 
 # This async function will handle all of the replies
 # Instead of the command -bot, for replies the user most type -r
@@ -141,10 +144,11 @@ async def r(com, *, reply):
 
     # This is for the book script
     if Global_ID == BookScriptGlobal_ID:
-        pass
+        from GoodreadsAPI import FindID
+        BotReply = FindID(msgObj, Local_ID)
 
     # Next part is going to retrieve and check the "replyID" and go to the required script & function
-    if BotReply == "":
+    if BotReply == None or BotReply == "":
         BotReply = translateText("Sorry, I didn't quite understand that reply", msgObj.lang)
         await com.send(BotReply)
     else:
@@ -154,13 +158,13 @@ async def r(com, *, reply):
     #For terminal use only. Creates space between information on the terminal to make it easier to read.
     print("\n--------------------------------------------------------------------------")
 
-# [End of Code by Christian Shaw | ID No. 9262834] 
+# [End of Code by Christian Shaw] 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-------------------------------------------------------------BOT TRANSLATION FUNCTIONS---------------------------------------------------------#
 
-# [Start of Code by Christian Shaw | ID No. 9262834] 
+# [Start of Code by Christian Shaw] 
 
 # This will translate the languages of strings using the googletrans API and returns it
 # The parameters: text = the string to be translated, lang = the language the string will be translated to
@@ -176,13 +180,13 @@ def detectLanguage(text):
     language = translator.detect(text)
     return language.lang
 
-# [End of Code by Christian Shaw | ID No. 9262834] 
+# [End of Code by Christian Shaw] 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-------------------------------------------------------------MESSAGE OBJECTS AND FUNCTIONS-----------------------------------------------------#
 
-# [Start of Code by Christian Shaw | ID No. 9262834] 
+# [Start of Code by Christian Shaw] 
 
 # This creates an object to store the message properties AND a function to create the object and give it the properties it needs
 class messageObj():
@@ -219,13 +223,13 @@ def createMsgObj(msg, authorID, usr, channel):
     msg_obj = messageObj(msg, msgList, msgLanguage, authorID, usr, channel)
     return msg_obj
 
-# [End of Code by Christian Shaw | ID No. 9262834] 
+# [End of Code by Christian Shaw] 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-------------------------------------------------------------REPLY GENERATION ALGORITHM--------------------------------------------------------#
 
-# [Start of Code by Christian Shaw | ID No. 9262834] 
+# [Start of Code by Christian Shaw] 
 # Please note: The scripts imported in the algorithm when a keyword is identified may not be ones that I have written
 
 # This algorthim will search for specific keywords from a list to determine what scripts will be used for replies
@@ -302,7 +306,7 @@ def generateReplies(msgObj):
             if msgList[i].lower() == bookKeywords[j] or msgList[i].lower() == (bookKeywords[j]+"s"):
                 # Call for book function inside of the placeholder
                 from GoodreadsAPI import UserIntro
-                #Replies.append("Placeholder Book Info")
+                Replies.append(UserIntro(msgObj))
                 break
         
         # This will identify farewell words in the list
@@ -314,7 +318,7 @@ def generateReplies(msgObj):
     
     return Replies
 
-# [End of Code by Christian Shaw | ID No. 9262834] 
+# [End of Code by Christian Shaw] 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
