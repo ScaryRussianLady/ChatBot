@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import urllib.request
 import time
+from UserDataManagement import SaveData
 #--------------------------------------------------------------------------------------------------------------------------------------------#
 
 
@@ -24,12 +25,22 @@ import time
 #The Key:NxRD7Y051igsxA6xbjQRpQ
 #The secret: u65168BEZcYv39AJsYrc8hSjkLzA4boifPdsSEYbIw
 
+# Next ONE line by Christian Shaw | Saves a STATIC global variable for the script's global reply ID
+BookScriptGlobal_ID = "2151"
 
 
 #API can retrieve specific titles of books that the user requests.
 #[kofi]
-def booksearch():
-    booktitle=input("Please type in the name of the book you would like to search")
+def booksearch(MsgObj):
+
+    # Next ONE line by Christian Shaw | Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
+    SaveData(BookScriptGlobal_ID+"_BookSearch2", MsgObj.userID, "ReplyID")
+
+    #booktitle=input("Please type in the name of the book you would like to search")
+    return "Please type in the name of the book you would like to search"
+
+def booksearch2(MsgObj):
+    booktitle = MsgObj.msg
     url = ('https://www.goodreads.com/search.xml?key=NxRD7Y051igsxA6xbjQRpQ&q=' +booktitle)
     response = requests.get(url).text
     xml = BeautifulSoup(response, 'xml')
@@ -43,8 +54,18 @@ def booksearch():
 #"https://www.goodreads.com/book/isbn/"+isbn+"?key=NxRD7Y051igsxA6xbjQRpQ"
 
 #[kofi]        
-def bookreview():
-    isbn =input("Please type in the isbn of a book you would like to see the ratings of")
+def bookreview(MsgObj):
+   
+    # Next ONE line by Christian Shaw | Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
+    SaveData(BookScriptGlobal_ID+"_BookReview2", MsgObj.userID, "ReplyID")
+
+    #isbn =input("Please type in the isbn of a book you would like to see the ratings of")
+    return "Please type in the isbn of a book you would like to see the ratings of"
+
+def bookreview2(MsgObj):
+
+    isbn = MsgObj.msg
+
     url = ("https://www.goodreads.com/book/isbn/" +isbn+ "?key=NxRD7Y051igsxA6xbjQRpQ")
     response = requests.get(url).text
     xml = BeautifulSoup(response, 'xml')
@@ -63,9 +84,20 @@ def bookreview():
     print ("Average Rating:")    
     for item in xml.findAll('average_rating')[0:1]:
         print (item.text)
+
 #[kofi]
-def releasedate():
-    booktitle=input("Please type in the name of the book you want the release date of")
+def releasedate(MsgObj):
+
+    # Next ONE line by Christian Shaw | Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
+    SaveData(BookScriptGlobal_ID+"_ReleaseDate2", MsgObj.userID, "ReplyID")
+
+    #booktitle=input("Please type in the name of the book you want the release date of")
+    return "Please type in the name of the book you want the release date of"
+
+def releasedate2(MsgObj):
+
+    booktitle = MsgObj.msg
+
     url = ('https://www.goodreads.com/search.xml?key=NxRD7Y051igsxA6xbjQRpQ&q=' +booktitle)
     response = requests.get(url).text
     xml = BeautifulSoup(response, 'xml')
@@ -80,8 +112,17 @@ def releasedate():
     for item in xml.findAll('original_publication_month')[0:1]:
         print (item.text)
 #[kofi]
-def authorMostpopular():
-    author=input("Please type in the name of the author you would like to search to see their most popular books")
+
+def authorMostpopular(MsgObj):
+
+    # Next ONE line by Christian Shaw | Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
+    SaveData(BookScriptGlobal_ID+"_AuthorMostPopular2", MsgObj.userID, "ReplyID")
+
+    #author=input("Please type in the name of the author you would like to search to see their most popular books")
+    return "Please type in the name of the author you would like to search to see their most popular books"
+
+def authorMostpopular2(MsgObj):
+    author = MsgObj.msg
     url = ('https://www.goodreads.com/search.xml?key=NxRD7Y051igsxA6xbjQRpQ&q=' +author)
     response = requests.get(url).text
     
@@ -100,10 +141,18 @@ def authorMostpopular():
         print (item.text)
 
 #[kofi]
-def UserIntro():
-    print ("Hello, Welcome to the Book directory. \n I have the ability to provide you with book searches, book reviews/ratings and the release dates of any current or upcoming books and most popular books that an author has.")
-    UserOption  = input("What would you like to see?")
-    UserOptionWords = UserOption.split(" ")
+def UserIntro(MsgObj):
+    
+    # Next ONE line by Christian Shaw | Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
+    SaveData(BookScriptGlobal_ID+"_UserIntro2", MsgObj.userID, "ReplyID")
+
+    #print ("Hello, Welcome to the Book directory. \n I have the ability to provide you with book searches, book reviews/ratings and the release dates of any current or upcoming books and most popular books that an author has.")
+    #UserOption  = input("What would you like to see?")
+
+    return "I have the ability to provide you with book searches, book reviews/ratings and the release dates of any current or upcoming books and most popular books that an author has.\nWhat would you like to see?"
+
+def UserIntro2(MsgObj):
+    UserOptionWords = MsgObj.list
     
     searchList = ["book","books","title",]
     releasedList = ["release", "releases", "date", "upcoming"]
@@ -111,17 +160,38 @@ def UserIntro():
     PopList = ["popular", "most popular",]
     for x in range(len(UserOptionWords)):
         if UserOptionWords[x].lower() in searchList:
-            booksearch()
+            booksearch(MsgObj)
             break
         elif UserOptionWords[x].lower() in releasedList:
-            releasedate()
+            releasedate(MsgObj)
             break
         elif UserOptionWords[x].lower() in reviewList:
-            bookreview()
+            bookreview(MsgObj)
             break
         elif UserOptionWords[x].lower() in PopList:
-            authorMostpopular()
+            authorMostpopular(MsgObj)
             break
-UserIntro()
+#UserIntro()
+
+#--------------------------------------------------------REPLY SELECTION FUNCTION--------------------------------------------------------#
+
+# [Start of Code by Christian Shaw] 
+
+# Essentially, this function talks to the main chatbot script to identify which reply is next in line in the conversation
+# Whatever the replyID is set to will determine the function used in this script.
+
+def FindID(obj, ID):
+    if ID == "UserIntro2":
+        return UserIntro2(obj)
+    if ID == "BookSearch2":
+        return booksearch2(obj)
+    if ID == "BookReview2":
+        return bookreview2(obj)
+    if ID == "ReleaseDate2":
+        return releasedate2(obj)
+    if ID == "AuthorMostPopular2":
+        return authorMostpopular2(obj)
+
+# [End of Code by Christian Shaw] 
 
 

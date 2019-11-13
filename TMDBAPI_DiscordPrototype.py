@@ -140,7 +140,7 @@ def movies_search2(MsgObj):
 #reference https://developers.themoviedb.org/3/genres/get-movie-list
 def genre_list(MsgObj):
 
-    # Next ONE line by Christian Shaw | can be done on discord. Very important for user input.
+    # Next ONE line by Christian Shaw | Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_GenreList2", MsgObj.userID, "ReplyID")
 
     #print("=================================================================================================================================")
@@ -186,7 +186,7 @@ def genre_list2(MsgObj):
 #start of block (Jamie Warnock - ID no: 9328082) 
 def show_search(MsgObj):
 
-    # can be done on discord. Very important for user input.
+    # Next ONE line by Christian Shaw | Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_MovieSearch2", MsgObj.userID, "ReplyID")
 
     #this inputs the keyword(s) into the search
@@ -228,7 +228,7 @@ def show_search2(MsgObj):
 #reference https://developers.themoviedb.org/3/trending/get-trending
 def search_popular(MsgObj):
 
-    # can be done on discord. Very important for user input.
+    #Next ONE line by Christian Shaw | Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_SearchPop2", MsgObj.userID, "ReplyID")
 
     #input allows user to choose between what they would like to see
@@ -283,7 +283,7 @@ def search_popular2(MsgObj):
 #reference https://developers.themoviedb.org/3/movies/get-top-rated-movies
 def top_rated(MsgObj):
 
-    # can be done on discord. Very important for user input.
+    #Next ONE line by Christian Shaw | Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_TopRated2", MsgObj.userID, "ReplyID")
 
     #allows user to input a page number

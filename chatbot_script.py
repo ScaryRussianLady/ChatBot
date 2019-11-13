@@ -144,7 +144,8 @@ async def r(com, *, reply):
 
     # This is for the book script
     if Global_ID == BookScriptGlobal_ID:
-        pass
+        from GoodreadsAPI import FindID
+        BotReply = FindID(msgObj, Local_ID)
 
     # Next part is going to retrieve and check the "replyID" and go to the required script & function
     if BotReply == None or BotReply == "":
@@ -305,7 +306,7 @@ def generateReplies(msgObj):
             if msgList[i].lower() == bookKeywords[j] or msgList[i].lower() == (bookKeywords[j]+"s"):
                 # Call for book function inside of the placeholder
                 from GoodreadsAPI import UserIntro
-                #Replies.append("Placeholder Book Info")
+                Replies.append(UserIntro(msgObj))
                 break
         
         # This will identify farewell words in the list
