@@ -169,7 +169,7 @@ def show_search():
     
 #end of block (Jamie Warnock- ID no: 9328082) 
 #--------------------------------------------------------SEE POPULAR FUNCTION--------------------------------------------------------#
-#(kesh)
+#start of block (Rishikesh Saujani - ID no: 9798610) 
 #reference https://developers.themoviedb.org/3/trending/get-trending
 def search_popular():
     print("=================================================================================================================================")
@@ -182,7 +182,7 @@ def search_popular():
     selectionTwo = ["films", "movies"]
 
     for i in range(len(selectionWord)):
-
+    #adapted code from stack overflow https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
         if selectionWord[i].lower() in selectionOne:
             choice = "person"
             url = ("http://api.themoviedb.org/3/trending/"+choice+"/day?api_key="+api_key)
@@ -192,11 +192,11 @@ def search_popular():
                 #print('First aired: '+ show['release_date'])
                 #print('Rated '+ str(show['vote_average'])+'/10 with a total of '+str(show['vote_count'])+' votes')
                 #print('Overview: '+show['overview'])
-                print('BackDrop: https://image.tmdb.org/t/p/original'+str(show['backdrop_path'])) 
+                #print('BackDrop: https://image.tmdb.org/t/p/original'+str(show['backdrop_path'])) 
         elif selectionWord[i].lower() in selectionTwo:
             choice = "movie"
             url = ("http://api.themoviedb.org/3/trending/"+choice+"/day?api_key="+api_key)
-              for show in popDict['results']:
+            for show in popDict['results']:
                 print('====================================')
                 print('Title: '+ show['title'])
                 print('First aired: '+ show['release_date'])
@@ -214,10 +214,10 @@ def search_popular():
     #print(popDict)
     #print(type(popDict))
 
-
+#end of block (Rishikesh Saujani - ID no: 9798610) 
 #--------------------------------------------------------VIEW TOP RATED FUNCTION--------------------------------------------------------#
 
-#(kesh)
+#start of block (Rishikesh Saujani - ID no: 9798610) 
 #reference https://developers.themoviedb.org/3/movies/get-top-rated-movies
 def top_rated():
     print("=================================================================================================================================")
@@ -231,7 +231,8 @@ def top_rated():
     response = req.get(url)
     topDict = response.json()
     # prints readable information to screen
-    for show in topDict'results']:
+    #adapted code from stack overflow https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
+    for show in topDict['results']:
         print('====================================')
         print('Title: '+ show['title'])
         print('First aired: '+ show['release_date'])
@@ -241,11 +242,11 @@ def top_rated():
     #print(topDict)
     #print(type(topDict))
 
-
+#end of block (Rishikesh Saujani - ID no: 9798610) 
 #--------------------------------------------------------UPCOMING TITLES FUNCTION--------------------------------------------------------#
 
 
-#(Kesh)
+#start of block (Rishikesh Saujani - ID no: 9798610) 
 #reference https://developers.themoviedb.org/3/movies/get-upcoming
 def upcoming():
     
@@ -257,6 +258,7 @@ def upcoming():
     upcDict = response.json()
     # prints somewhat readable information to screen
     #print(upcDict)
+    #adapted code from stack overflow https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
     for show in upcDict['results']:
         print('====================================')
         print('Title: '+ show['title'])
@@ -269,3 +271,4 @@ def upcoming():
 
 
 firstUserInt()
+#end of block (Rishikesh Saujani - ID no: 9798610) 
