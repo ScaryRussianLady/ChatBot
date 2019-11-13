@@ -222,10 +222,17 @@ def FindID(obj, ID):
 def NaturalReply(WorkXml, Context, MsgObj):
     from random import randrange
 
+    # The ISBN opens a different HTML file
     if Context != "ratings":
         BookTitle = WorkXml.find("best_book").find("title").text
         BookID = WorkXml.find("best_book").find("id").text
 
+        # Saves the recommended film to the json database for later use
+        SaveData(BookTitle, MsgObj.userID, "PreviousViewedBooks")
+        time.sleep(1)
+        SaveData(BookTitle, MsgObj.userID, "PreviousViewedEntertainment")
+
+    # Creates a list of months so that there is a coherent date instead of numbers
     Months = [
         "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -233,12 +240,13 @@ def NaturalReply(WorkXml, Context, MsgObj):
     ReleaseMonth = WorkXml.find("original_publication_month").text
     ReleaseYear = WorkXml.find("original_publication_year").text
 
+    # This creates the release month from a number to text if the month exists
     if ReleaseMonth != "":
         ReleaseMonth = Months[int(ReleaseMonth)-1]
 
     RatingNo = WorkXml.find("ratings_count").text
 
-
+    # Depending on the context, different things are printed.
     if Context == "search":
         Phrase = ["The book you're looking for probably is ", "I found a book called ", "The book you speak of is called "]
         MainString = (Phrase[randrange(len(Phrase))]+BookTitle+"\nHere's a link to it: "+"https://www.goodreads.com/book/show/"+BookID)
@@ -249,11 +257,8 @@ def NaturalReply(WorkXml, Context, MsgObj):
     elif Context == "ratings":
         Phrase = [" was rated ", " has been rated ", " got rated "]
         MainString = ("This book has been rated "+RatingNo+" times.")
-
-    return MainString
-
     
     # Returns the string that was created to that the relevant scripts can return it to the main discord bot to be sent to the user on discord.
-    #return MainString
+    return MainString
 
 # [End of Code by Christian Shaw] 
