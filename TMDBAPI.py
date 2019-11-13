@@ -236,7 +236,15 @@ def upcoming():
     response = req.get(url)
     upcDict = response.json()
     # prints somewhat readable information to screen
-    print(upcDict)
+    #print(upcDict)
+    for show in upcDict['results']:
+        print('====================================')
+        print('Title: '+ show['name'])
+        print('First aired: '+ show['release_date'])
+        print('Rated '+ str(show['vote_average'])+'/10 with a total of '+str(show['vote_count'])+' votes')
+        print('Overview: '+show['overview'])
+        print('BackDrop: https://image.tmdb.org/t/p/original'+str(show['poster_path']))
+
     #print(type(upcDict))
 
 
