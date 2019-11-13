@@ -61,11 +61,10 @@ def KeywordsForBranching(MsgObj):
 	FindWords = MsgObj.list
 
 	specificNewsKeywords = ["specific", "definite", "exact", "individual"]
-	#olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
-	#topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category", "different"]
+	olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
+	topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category", "different"]
 	#noKeywords = ["no", "nah", "nope"]
 
-	# await self.bot.say("News woo!")
 	#print("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.")
 	#specificFunction = input("Is there anything specific you want to look at, for example, specific topics? ")
 	# specificFunctionList = specificFunction.split(" ")
@@ -91,8 +90,13 @@ def KeywordsForBranching(MsgObj):
 
 	for word in range(len(FindWords)):
 		if FindWords[word].lower() in specificNewsKeywords:
-			specificResponse = ("Okay, give me a word or words and I will find you an article that includes it!")
-			return specificResponse + SpecificNews(MsgObj)
+			return SpecificNewsPrimary(MsgObj)
+
+		elif FindWords[word].lower() in olderNewsKeywords:
+			return OlderNews(MsgObj)
+
+		elif FindWords[word].lower() in topHeadlineKeywords:
+			return EveryTopHeadline(MsgObj)
 	#if any(element in userChoice for element in specificNewsKeywords):
 			#SpecificNews()
 
@@ -115,20 +119,20 @@ def KeywordsForBranching(MsgObj):
 
 #-------------------------------------------------------------TOP HEADLINES FUNCTION-------------------------------------------------------------#
 # Beginning of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/top-headlines
-def EveryTopHeadline():
+def EveryTopHeadline(MsgObj):
 
-	specificCategoryQuestion = input("Would you like to choose a specific category you would like to look at? ")
-	specificCategoryQuestionList = specificCategoryQuestion.split(" ")
+	#specificCategoryQuestion = input("Would you like to choose a specific category you would like to look at? ")
+	#specificCategoryQuestionList = specificCategoryQuestion.split(" ")
 
 	# Allows the user to choose a specific category from the top headlines, if they can't think of one, then the choice is set to general as default.
-	for i in range(len(specificCategoryQuestionList)):
-		if specificCategoryQuestionList[i] == 'yes':
-			categoryChoices = input("Your options are as follows: general; health; science; technology; business; sports; management; and entertaintment." + '\n' + "Which category would you like? ")
-			amountOfArticles = input("Alright! But, before I show you the articles, how many would you like to see? ")
-		else:
-			print("That's okay. I will just output the general top headline from today! :)")
-			categoryChoices = "general"
-			amountOfArticles = "1"
+	#for i in range(len(specificCategoryQuestionList)):
+	#	if specificCategoryQuestionList[i] == 'yes':
+	#		categoryChoices = input("Your options are as follows: general; health; science; technology; business; sports; management; and entertaintment." + '\n' + "Which category would you like? ")
+	#		amountOfArticles = input("Alright! But, before I show you the articles, how many would you like to see? ")
+	#	else:
+	#		print("That's okay. I will just output the general top headline from today! :)")
+	categoryChoices = "general"
+	amountOfArticles = "1"
 
 	# Gets the top headlines from the UK, 'country=gb' can be changed depending on what country you want to look at.
 	url = ('https://newsapi.org/v2/top-headlines?'
@@ -159,8 +163,8 @@ def EveryTopHeadline():
 		theAcceptedResponseURL.append(url["url"])
 
 	
-	for i in range(len(theAcceptedResponseTitle)):
-		print(i+1, str(theAcceptedResponseTitle[i]) + " by " + str(theAcceptedResponseAuthor[i]) + ": " + str(theAcceptedResponseURL[i]))
+#	for i in range(len(theAcceptedResponseTitle)):
+#		print(i+1, str(theAcceptedResponseTitle[i]) + " by " + str(theAcceptedResponseAuthor[i]) + ": " + str(theAcceptedResponseURL[i]))
 
 	
 	
@@ -177,6 +181,10 @@ def EveryTopHeadline():
 #However, this search does not allow for country-specific searches.#
 
 # Beginning of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
+def SpecificNewsPrimary(MsgObj):
+	return ("Okay, give me a word or words and I will find you an article that includes it!")
+
+
 def SpecificNews(MsgObj):
 #IMPORTANT NOTICE: This is only a rough 'sketch' of how the API will be laid out, as there will be no input statements like this, the bot will handle this differently.#
 
@@ -203,22 +211,22 @@ def SpecificNews(MsgObj):
 	response = requests.get(url).json()
 	specificArticle = response["articles"]
 
-	#theAcceptedResponseTitle = []
-	#theAcceptedResponseAuthor = []
-	#theAcceptedResponseURL = []
+	theAcceptedResponseTitle = []
+	theAcceptedResponseAuthor = []
+	theAcceptedResponseURL = []
 
-	#for title in specificArticle:
-	#	theAcceptedResponseTitle.append(title["title"])
+	for title in specificArticle:
+		theAcceptedResponseTitle.append(title["title"])
 	
-	#for author in specificArticle:
-	#	theAcceptedResponseAuthor.append(author["author"])
+	for author in specificArticle:
+		theAcceptedResponseAuthor.append(author["author"])
 
-	#for url in specificArticle:
-	#	theAcceptedResponseURL.append(url["url"])
+	for url in specificArticle:
+		theAcceptedResponseURL.append(url["url"])
 
 #	for i in range(len(theAcceptedResponseTitle)):
 #		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
-	return str("Here's an article I found based on the word(s) you gave me: " + specificArticle)
+	return str(specificArticle)
 
 	# Loops back to the beginning of the function if they wish to search another topic. Further improvements will be made.
 	#findAnotherTopic = input("Here is what I found. Hope these are okay for you!" + '\n' + "Are there any other topics you would like to look at? ")
@@ -238,7 +246,7 @@ def SpecificNews(MsgObj):
 #to a paid plan for that.#
 
 # Beginning of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
-def OlderNews():
+def OlderNews(MsgObj):
 
 	howOldQuestion = input("Please make sure to write in the format YYYY-MM-DD including the dashes (I know, it's a strange format!)" + '\n' + "From what date within the last month would you like to view news? ")
 	howOldQuestionStr = str(howOldQuestion)
