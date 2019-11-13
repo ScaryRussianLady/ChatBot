@@ -40,7 +40,7 @@
       {
          "UserID": 181396705604927498,
          "Name": "Big Boss",
-         "LastMessage": "bye",
+         "LastMessage": "Thank you, bye",
          "ReplyID": "2151_BookSearch2",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
@@ -87,7 +87,8 @@
             "The Art of War",
             "The Art of War",
             "The Art of War",
-            "Fahrenheit 451"
+            "Fahrenheit 451",
+            "Trump: The Art of the Deal"
          ],
          "PreviousViewedFilms": [
             "John Wick: Chapter 3 - Parabellum",
@@ -127,7 +128,8 @@
          "PreviousViewedBooks": [
             "Trump: The Art of the Deal",
             "A Song Of Ice And Fire",
-            "Fahrenheit 451"
+            "Fahrenheit 451",
+            "Trump: The Art of the Deal"
          ],
          "PreviousViewedArticles": [
             "Toddler, aged 3, dropkicked out of a window",
