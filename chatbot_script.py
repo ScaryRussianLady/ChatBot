@@ -139,7 +139,8 @@ async def r(com, *, reply):
 
     # This is for the news script
     if Global_ID == NewsScriptGlobal_ID:
-        pass
+        from NewsAPI import FindID
+        BotReply = FindID(msgObj, Local_ID)
 
     # This is for the film script
     if Global_ID == FilmScriptGlobal_ID:
@@ -297,18 +298,12 @@ def generateReplies(msgObj):
                 break
         
         # This will identify news related words in the list
+        #Annija
         for j in range(len(newsKeywords)):
             if msgList[i].lower() == newsKeywords[j] or msgList[i].lower() == (newsKeywords[j]+"s"):
-                # Call for news function inside of the placeholder
-                #Replies.append("Cool! Let's go look at some news!")
-                #NewsAPI.IntroductionToUser()
-                #load() 
-                #[Annija Balode ID No: 9102828]
-                #for extension in initial_extensions:
-                 #   bot.load_extension(extension)
-                for extension in initial_extensions:
-                    client.load_extension(extension)
-                return
+                from NewsAPI import IntroductionToUser
+                Replies.append(IntroductionToUser(msgObj))
+                break
 
         # This will identify book related words in the list
         for j in range(len(bookKeywords)):

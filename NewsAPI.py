@@ -36,111 +36,74 @@ from PIL import Image
 
 from io import BytesIO
 
+from UserDataManagement import SaveData
+
 # IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6
+
+NewsScriptGlobal_ID = "1423"
 
 # End of code by [Annija Balode ID No: 9102828]
 #---------------------------------------------------------------END OF IMPORT OF MODULES-------------------------------------------------------------------#
 
 
-############################################################################
-class MembersCog(commands.Cog):
-    def __init__(self, client):
-        self.client = client
-
-    @commands.command()
-    @commands.guild_only()
-    async def joined(self, ctx, *, member: discord.Member):
-        """Says when a member joined."""
-        await ctx.send(f'{member.display_name} joined on {member.joined_at}')
-
-    @commands.command(name='coolbot')
-    async def cool_bot(self, ctx):
-        """Is the bot cool?"""
-        await ctx.send('This bot is cool. :)')
-
-    @commands.command(name='top_role', aliases=['toprole'])
-    @commands.guild_only()
-    async def show_toprole(self, ctx, *, member: discord.Member=None):
-        """Simple command which shows the members Top Role."""
-
-        if member is None:
-            member = ctx.author
-
-        await ctx.send(f'The top role for {member.display_name} is {member.top_role.name}')
-    
-    @commands.command(name='perms', aliases=['perms_for', 'permissions'])
-    @commands.guild_only()
-    async def check_permissions(self, ctx, *, member: discord.Member=None):
-        """A simple command which checks a members Guild Permissions.
-        If member is not provided, the author will be checked."""
-
-        if not member:
-            member = ctx.author
-
-        # Here we check if the value of each permission is True.
-        perms = '\n'.join(perm for perm, value in member.guild_permissions if value)
-
-        # And to make it look nice, we wrap it in an Embed.
-        embed = discord.Embed(title='Permissions for:', description=ctx.guild.name, colour=member.colour)
-        embed.set_author(icon_url=member.avatar_url, name=str(member))
-
-        # \uFEFF is a Zero-Width Space, which basically allows us to have an empty field name.
-        embed.add_field(name='\uFEFF', value=perms)
-
-        await ctx.send(content=None, embed=embed)
-        # Thanks to Gio for the Command.
-
-# The setup fucntion below is neccesarry. Remember we give bot.add_cog() the name of the class in this case MembersCog.
-# When we load the cog, we use the name of the file.
-def setup(client):
-    client.add_cog(MembersCog(client))
-
-##############################################################################
-
 #-------------------------------------------------------------BEGINNING OF INTRODUCTION FUNCTION-------------------------------------------------------------#
 #Function for introducing the possibilities to the user, it allows for the file to know which function to bring up.#
 # Beginning of code by [Annija Balode ID No: 9102828]
 
-def IntroductionToUser():
-	# await self.bot.say("News woo!")
-	print("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.")
-	specificFunction = input("Is there anything specific you want to look at, for example, specific topics? ")
-	# specificFunctionList = specificFunction.split(" ")
-	specificFunctionKeywords = ["yes", "ye", "yeah", "yep", "sure", "yeh"]
+def IntroductionToUser(MsgObj):
+	SaveData(NewsScriptGlobal_ID + "_KeywordsForBranching", MsgObj.userID, "ReplyID")
+	
+	beginningResponse = ("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.") + ("\n I can tell you about an article that includes a word of your choice, I can output the top headlines of today, or you can even look into specific categories.")
+	
+	return beginningResponse
 
+def KeywordsForBranching(MsgObj):
+	FindWords = MsgObj.list
 
-	# for i in range(len(specificFunctionList)):
-		# Will later change this to accessing a list of different ways of saying 'yes' so that it can run it and check it against that (more efficient).
-	if any(element in specificFunction for element in specificFunctionKeywords):
-		# if specificFunctionList[i] == "yes":
-		userChoice = input("Okay, what would you like to look into? There's stuff like, specific topics, older news, or even different categories (stuff like sports). ")
-	else:
-		print("Cool, I will just look up the top news of today from BBC! If you want to look into films or books instead, just say 'let me go back' ")
-		userChoice = "no"
-
-
-	# userChoiceList = userChoice.split(" ")
 	specificNewsKeywords = ["specific", "definite", "exact", "individual"]
 	olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
 	topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category", "different"]
 	noKeywords = ["no", "nah", "nope"]
 
+	# await self.bot.say("News woo!")
+	#print("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.")
+	#specificFunction = input("Is there anything specific you want to look at, for example, specific topics? ")
+	# specificFunctionList = specificFunction.split(" ")
+	#specificFunctionKeywords = ["yes", "ye", "yeah", "yep", "sure", "yeh"]
 
-	if any(element in userChoice for element in specificNewsKeywords):
-			SpecificNews()
 
-	elif any(element in userChoice for element in olderNewsKeywords):
-			OlderNews()
+	# for i in range(len(specificFunctionList)):
+		# Will later change this to accessing a list of different ways of saying 'yes' so that it can run it and check it against that (more efficient).
+	#if any(element in specificFunction for element in specificFunctionKeywords):
+		# if specificFunctionList[i] == "yes":
+	#	userChoice = input("Okay, what would you like to look into? There's stuff like, specific topics, older news, or even different categories (stuff like sports). ")
+	#else:
+	#	print("Cool, I will just look up the top news of today from BBC! If you want to look into films or books instead, just say 'let me go back' ")
+	#	userChoice = "no"
 
-	elif any(element in userChoice for element in topHeadlineKeywords):
-			EveryTopHeadline()
 
-	elif any(element in userChoice for element in noKeywords):
-			NewsFromBBC()
+	# userChoiceList = userChoice.split(" ")
+	#specificNewsKeywords = ["specific", "definite", "exact", "individual"]
+	#olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
+	#topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category", "different"]
+	#noKeywords = ["no", "nah", "nope"]
 
-	else:
-			print("Sorry, I don't understand what you mean. Try rephrasing! I promise I am doing my best to understand you. :)")
-			IntroductionToUser()
+
+	#if any(element in userChoice for element in specificNewsKeywords):
+	#		SpecificNews()
+
+	#elif any(element in userChoice for element in olderNewsKeywords):
+	#		OlderNews()
+
+	#elif any(element in userChoice for element in topHeadlineKeywords):
+	#		EveryTopHeadline()
+
+	#elif any(element in userChoice for element in noKeywords):
+	#		NewsFromBBC()
+
+	#else:
+	#		print("Sorry, I don't understand what you mean. Try rephrasing! I promise I am doing my best to understand you. :)")
+	#		IntroductionToUser(MsgObj)
 
 # End of code by [Annija Balode ID No: 9102828]		
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
@@ -340,14 +303,17 @@ def NewsFromBBC():
 
 
 #-------------------------------------------------------------TESTING FUNCTION----------------------------------------------------------------#
-if __name__ == '__main__':
+#if __name__ == '__main__':
 	# Calls the function, only using this to ensure that everything is getting called correctly, these function names will
 	# be used to import from chatbot_script.py later on.
 		# NewsFromBBC()
 		# EveryTopHeadline() 
 		# SpecificNews()
 		# OlderNews()
-		IntroductionToUser()
+		#IntroductionToUser()
 #----------------------------------------------------------------------------------------------------------------------------------------------#
 
+def FindID(obj, ID):
+	if ID == "KeywordsForBranching":
+		return KeywordsForBranching(obj)
 
