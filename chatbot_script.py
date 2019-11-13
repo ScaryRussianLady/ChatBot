@@ -144,7 +144,7 @@ async def r(com, *, reply):
         pass
 
     # Next part is going to retrieve and check the "replyID" and go to the required script & function
-    if BotReply == "":
+    if BotReply == None or BotReply == "":
         BotReply = translateText("Sorry, I didn't quite understand that reply", msgObj.lang)
         await com.send(BotReply)
     else:

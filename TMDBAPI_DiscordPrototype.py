@@ -235,23 +235,38 @@ def search_popular2(MsgObj):
 
     for i in range(len(selectionWord)):
 
+        url = ""
+
         if selectionWord[i].lower() in selectionOne:
             choice = "person"
-            break
+            url = ("http://api.themoviedb.org/3/trending/"+choice+"/day?api_key="+api_key)
         elif selectionWord[i].lower() in selectionTwo:
             choice = "movie"
+            url = ("http://api.themoviedb.org/3/trending/"+choice+"/day?api_key="+api_key)
             break
 
   
     #url with the choice variable and api key placed in
-    url = ("http://api.themoviedb.org/3/trending/"+choice+"/week?api_key="+api_key)
+    #url = ("http://api.themoviedb.org/3/trending/"+choice+"/week?api_key="+api_key)
 
     #extracts data from the url and makes it presentable
     response = req.get(url)
     popDict = response.json()
+
+    from random import randrange
+    #print(popDict["results"][1])
+    randNo = randrange(len(popDict['results']))
+
+    return ("Hmm, there's a popular movie called "+str(popDict['results'][randNo]['title'])+"\n More information at: "+"https://www.themoviedb.org/movie/"+str(+popDict['results'][randNo]['id']))
+
     #prints data to screen
-    print(popDict)
-    #print(type(popDict))
+    #print(popDict)
+    #print('====================================')
+     #           print('Title: '+ show['name'])
+                #print('First aired: '+ show['release_date'])
+                #print('Rated '+ str(show['vote_average'])+'/10 with a total of '+str(show['vote_count'])+' votes')
+                #print('Overview: '+show['overview'])
+      #          print('BackDrop: https://image.tmdb.org/t/p/original'+str(show['backdrop_path'])) 
 
 # [Start of code by Rishikesh | ID No. ?]
 
