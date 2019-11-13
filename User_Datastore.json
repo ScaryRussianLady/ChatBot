@@ -36,13 +36,12 @@
       {
          "UserID": 181396705604927498,
          "Name": "Big Boss",
-         "LastMessage": "attack on titan",
-         "ReplyID": "6912_MovieSearch2",
+         "LastMessage": "action",
+         "ReplyID": "6912_GenreList2",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
          "LastBookReply": "Example reply",
          "FavFilmGenre": [
-            "comedy",
             "action"
          ],
          "FavBookGenre": [
@@ -54,8 +53,10 @@
             "business"
          ],
          "PreviousViewedFilms": [
-            "Joker 2019",
-            "John Wick 3"
+            "John Wick: Chapter 3 - Parabellum",
+            "Dragon Ball Super: Broly",
+            "Attack on Titan",
+            "Lupinranger VS Patranger VS Kyuranger"
          ],
          "PreviousViewedBooks": [
             "Trump: The Art of the Deal",

@@ -28,7 +28,7 @@ FilmScriptGlobal_ID = "6912"
 #start of block (Jamie Warnock- ID no: 9328082)
 def firstUserInt(MsgObj):
 
-    # Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
+    # # Next ONE line by Christian Shaw | Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_FirstUserInt2", MsgObj.userID, "ReplyID")
 
     string = ("I can sort through genres, search for movies, display upcoming, you could also view top rated or even see what is popular/trending at the moment") + (
@@ -58,7 +58,7 @@ def firstUserInt2(MsgObj):
             return movie_search(MsgObj)
            
         elif FnctnFinderWords[x].lower() in upCList:
-            return upcoming()
+            return upcoming(MsgObj)
           
         elif FnctnFinderWords[x].lower() in popList:
             return search_popular(MsgObj)
@@ -77,7 +77,7 @@ def firstUserInt2(MsgObj):
 #refernce https://developers.themoviedb.org/3/search/search-movies
 def movie_search(MsgObj):
 
-    # Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
+    # # Next ONE line by Christian Shaw | Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_MovieSearch2", MsgObj.userID, "ReplyID")
 
     #this inputs the keyword(s) into the search
@@ -104,8 +104,8 @@ def movies_search2(MsgObj):
     response = req.get(url)
     movDict = response.json()
 
-    # Returns a natural reply using the dictionary data to the discord main script
-    return NaturalReply(movDict, False, True, None)
+    # # Next ONE line by Christian Shaw | Returns a natural reply using the dictionary data to the discord main script
+    return NaturalReply(movDict, False, True, None, MsgObj)
  
     #adapted code from stack overflow https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
     #for title in movDict['results']:
@@ -140,7 +140,7 @@ def movies_search2(MsgObj):
 #reference https://developers.themoviedb.org/3/genres/get-movie-list
 def genre_list(MsgObj):
 
-    # Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
+    # Next ONE line by Christian Shaw | can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_GenreList2", MsgObj.userID, "ReplyID")
 
     #print("=================================================================================================================================")
@@ -152,6 +152,9 @@ def genre_list2(MsgObj):
 
     UserChoice = MsgObj.msg
     pageNum = 1
+
+    # Next ONE line by Christian Shaw | Saves the genre data to json database for use later
+    SaveData(UserChoice, MsgObj.userID, "FavFilmGenre")
 
     if type(pageNum) == int:
         page = pageNum
@@ -165,8 +168,8 @@ def genre_list2(MsgObj):
     response = req.get(url)
     genDict = response.json()
 
-    # Returns a natural reply using the dictionary data to the discord main script
-    return NaturalReply(genDict, True, False, (MsgObj.msg).lower())
+    # Next ONE line by Christian Shaw | Returns a natural reply using the dictionary data to the discord main script
+    return NaturalReply(genDict, True, False, (MsgObj.msg).lower(), MsgObj)
    
     #adapted code from stack overflow https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
     #for title in genDict['results']:
@@ -183,7 +186,7 @@ def genre_list2(MsgObj):
 #start of block (Jamie Warnock - ID no: 9328082) 
 def show_search(MsgObj):
 
-    # Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
+    # can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_MovieSearch2", MsgObj.userID, "ReplyID")
 
     #this inputs the keyword(s) into the search
@@ -207,8 +210,8 @@ def show_search2(MsgObj):
     response = req.get(url)
     showDict = response.json()
 
-    # Returns a natural reply using the dictionary data to the discord main script
-    return NaturalReply(showDict, False, True, None)
+    # Next ONE line by Christian Shaw | Returns a natural reply using the dictionary data to the discord main script
+    return NaturalReply(showDict, False, True, None, MsgObj)
 
     #for show in showDict['results']:
     #    print('====================================')
@@ -225,7 +228,7 @@ def show_search2(MsgObj):
 #reference https://developers.themoviedb.org/3/trending/get-trending
 def search_popular(MsgObj):
 
-    # Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
+    # can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_SearchPop2", MsgObj.userID, "ReplyID")
 
     #input allows user to choose between what they would like to see
@@ -259,8 +262,8 @@ def search_popular2(MsgObj):
     response = req.get(url)
     popDict = response.json()
 
-    # Returns a natural reply using the dictionary data to the discord main script
-    return NaturalReply(popDict, True, False, "popular")
+    # # Next ONE line by Christian Shaw | Returns a natural reply using the dictionary data to the discord main script
+    return NaturalReply(popDict, True, False, "popular", MsgObj)
 
     #prints data to screen
     #print(popDict)
@@ -280,7 +283,7 @@ def search_popular2(MsgObj):
 #reference https://developers.themoviedb.org/3/movies/get-top-rated-movies
 def top_rated(MsgObj):
 
-    # Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
+    # can be done on discord. Very important for user input.
     SaveData(FilmScriptGlobal_ID+"_TopRated2", MsgObj.userID, "ReplyID")
 
     #allows user to input a page number
@@ -296,8 +299,8 @@ def top_rated2(MsgObj):
     response = req.get(url)
     topDict = response.json()
 
-    # Returns a natural reply using the dictionary data to the discord main script
-    return NaturalReply(topDict, True, False, "top rated")
+    # # Next ONE line by Christian Shaw | Returns a natural reply using the dictionary data to the discord main script
+    return NaturalReply(topDict, True, False, "top rated", MsgObj)
 
 
     # prints readable information to screen
@@ -317,7 +320,7 @@ def top_rated2(MsgObj):
 # [Start of code by Rishikesh | ID No. ?]
 
 #reference https://developers.themoviedb.org/3/movies/get-upcoming
-def upcoming():
+def upcoming(MsgObj):
     
     #used to request the informaion from the servers
     url = "http://api.themoviedb.org/3/movie/upcoming?page=1&language=en-US&api_key="+api_key
@@ -326,8 +329,8 @@ def upcoming():
     response = req.get(url)
     upcDict = response.json()
 
-    # Returns a natural reply using the dictionary data to the discord main script
-    return NaturalReply(upcDict, True, False, "upcoming")
+    # # Next ONE line by Christian Shaw | Returns a natural reply using the dictionary data to the discord main script
+    return NaturalReply(upcDict, True, False, "upcoming", MsgObj)
 
     # prints somewhat readable information to terminal
         #print(upcDict)
@@ -371,7 +374,7 @@ def FindID(obj, ID):
 
 # Essentially, this function creates and returns a string which will be the bot's reply.
 # It takes arguments which determine how the reply will be structured.
-def NaturalReply(Dictionary, RandBool, SearchBool, Context):
+def NaturalReply(Dictionary, RandBool, SearchBool, Context, MsgObj):
     from random import randrange
 
     # If the argument given to RandBool was True, then a random film will be taken from the dictionary and assigned to DictData
@@ -395,6 +398,9 @@ def NaturalReply(Dictionary, RandBool, SearchBool, Context):
     else:
         Phrase = ["Well, here's my recommendation of a", "Hmmm, this is a good ", "I think you might like this "]
         MainString = (Phrase[randrange(len(Phrase))]+Context+" movie. It's called "+DictData["title"]+"\n You can find more info here: "+'https://www.themoviedb.org/movie/'+str(DictData['id']))
+
+    # Saves the recommended film to the json database for later use
+    SaveData(DictData["title"], MsgObj.userID, "PreviousViewedFilms")
 
     # Returns the string that was created to that the relevant scripts can return it to the main discord bot to be sent to the user on discord.
     return MainString
