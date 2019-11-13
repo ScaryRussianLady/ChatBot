@@ -62,12 +62,12 @@ def KeywordsForBranching(MsgObj):
 
 	specificNewsKeywords = ["specific", "definite", "exact", "individual"]
 	olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
-	topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category", "different"]
+	topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category", "different", "headline"]
 	#noKeywords = ["no", "nah", "nope"]
 
 	#print("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.")
 	#specificFunction = input("Is there anything specific you want to look at, for example, specific topics? ")
-	# specificFunctionList = specificFunction.split(" ")
+	#specificFunctionList = specificFunction.split(" ")
 	#specificFunctionKeywords = ["yes", "ye", "yeah", "yep", "sure", "yeh"]
 
 
@@ -162,7 +162,7 @@ def EveryTopHeadline(MsgObj):
 	for url in specificArticle:
 		theAcceptedResponseURL.append(url["url"])
 
-	
+	return str(theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL)
 #	for i in range(len(theAcceptedResponseTitle)):
 #		print(i+1, str(theAcceptedResponseTitle[i]) + " by " + str(theAcceptedResponseAuthor[i]) + ": " + str(theAcceptedResponseURL[i]))
 
@@ -226,7 +226,8 @@ def SpecificNews(MsgObj):
 
 #	for i in range(len(theAcceptedResponseTitle)):
 #		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
-	return str(specificArticle)
+		return str(theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL)
+
 
 	# Loops back to the beginning of the function if they wish to search another topic. Further improvements will be made.
 	#findAnotherTopic = input("Here is what I found. Hope these are okay for you!" + '\n' + "Are there any other topics you would like to look at? ")
@@ -278,6 +279,7 @@ def OlderNews(MsgObj):
 	for i in range(len(theAcceptedResponseTitle)):
 		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
 
+	return str(specificArticle)
 # End of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
 #-------------------------------------------------------------------------------------------------------------------------------------------------#
 
