@@ -99,19 +99,18 @@ def movies_search2(MsgObj):
     #retreives information in json as a    
     response = req.get(url)
     movDict = response.json()
+
+    # Returns a natural reply using the dictionary data to the discord main script
+    return NaturalReply(movDict, False, True, None)
  
     #adapted code from stack overflow https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
-    for title in movDict['results']:
+    #for title in movDict['results']:
         #titleDict = ast.literal_eval(str(title)) - i used to use this, however i found it is not necessary
         #print('====================================')
         #print("RKAEVKE", title)
 
         # [Start of Code by Christian Shaw | ID No. 9262834]
         # Comes up with a random phrase to appear more fluid and returns the movie the user suggested
-        Phrase = ["Aah, you're looking for is ", "The movie you are looking for is ", "Hmm, I think this is the movie you're thinking about is "]
-
-        from random import randrange
-        return(Phrase[randrange(len(Phrase))]+ title['title']+"\n You can find more info here: "+'https://www.themoviedb.org/movie/'+str(title['id']))
         # [End of Code by Christian Shaw | ID No. 9262834]
 
         #print('Released on: '+ title['release_date'])
@@ -163,13 +162,8 @@ def genre_list2(MsgObj):
     response = req.get(url)
     genDict = response.json()
 
-    # [Start of Code by Christian Shaw | ID No. 9262834]
-    from random import randrange
-    
-    # Takes a random movie from the API's page of movies and recommends it to the user
-    movie = genDict["results"][randrange(len(genDict["results"]))]
-    return str("Here's a recommendation: "+movie["title"]+"\n You can find more information about it here: "+'https://www.themoviedb.org/movie/'+str(movie['id']))
-    # [End of Code by Christian Shaw | ID No. 9262834]
+    # Returns a natural reply using the dictionary data to the discord main script
+    return NaturalReply(genDict, True, False, (MsgObj.msg).lower())
    
     #adapted code from stack overflow https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary
     #for title in genDict['results']:
@@ -253,11 +247,8 @@ def search_popular2(MsgObj):
     response = req.get(url)
     popDict = response.json()
 
-    from random import randrange
-    #print(popDict["results"][1])
-    randNo = randrange(len(popDict['results']))
-
-    return ("Hmm, there's a popular movie called "+str(popDict['results'][randNo]['title'])+"\n More information at: "+"https://www.themoviedb.org/movie/"+str(+popDict['results'][randNo]['id']))
+    # Returns a natural reply using the dictionary data to the discord main script
+    return NaturalReply(popDict, True, False, "popular")
 
     #prints data to screen
     #print(popDict)
@@ -290,10 +281,8 @@ def top_rated2(MsgObj):
     response = req.get(url)
     topDict = response.json()
 
-    from random import randrange
-    randNo = randrange(len(topDict['results']))
-
-    return ("Hmm, there's a top rated movie called "+str(topDict['results'][randNo]['title'])+"\n More information at: "+"https://www.themoviedb.org/movie/"+str(+topDict['results'][randNo]['id']))
+    # Returns a natural reply using the dictionary data to the discord main script
+    return NaturalReply(topDict, True, False, "top rated")
 
 
     # prints readable information to screen
@@ -322,10 +311,8 @@ def upcoming():
     response = req.get(url)
     upcDict = response.json()
 
-    from random import randrange
-    randNo = randrange(len(upcDict['results']))
-
-    return ("Hmm, there's an upcoming movie called "+str(upcDict['results'][randNo]['title'])+"\n More information at: "+"https://www.themoviedb.org/movie/"+str(+upcDict['results'][randNo]['id']))
+    # Returns a natural reply using the dictionary data to the discord main script
+    return NaturalReply(upcDict, True, False, "upcoming")
 
     # prints somewhat readable information to terminal
         #print(upcDict)
@@ -360,6 +347,28 @@ def FindID(obj, ID):
 
 # [End of Code by Christian Shaw | ID No. 9262834] 
 
+#------------------------------------------------------RETURN RELEVANT DATA TO USER-----------------------------------------------------#
 
+# [Start of Code by Christian Shaw | ID No. 9262834]
+
+def NaturalReply(Dictionary, RandBool, SearchBool, Context):
+    from random import randrange
+
+    if RandBool == True:
+        RandNo = randrange(len(Dictionary["results"]))
+        DictData = Dictionary["results"][RandNo]
+    else:
+        DictData = Dictionary["results"][0]
+
+    if SearchBool == True:
+        Phrase = ["Aah, you're looking for is ", "We've found the movie that you're looking for. It's ", "Hmm, I think this is the movie you're thinking about is "]
+        MainString = (Phrase[randrange(len(Phrase))]+ DictData['title']+"\n You can find more info here: "+'https://www.themoviedb.org/movie/'+str(DictData['id']))
+    else:
+        Phrase = ["Well, here's my recommendation of a", "Hmmm, this is a good ", "I think you might like this "]
+        MainString = (Phrase[randrange(len(Phrase))]+Context+" movie. It's called "+DictData["title"]+"\n You can find more info here: "+'https://www.themoviedb.org/movie/'+str(DictData['id']))
+
+    return MainString
+
+# [End of Code by Christian Shaw | ID No. 9262834] 
 
 #firstUserInt()
