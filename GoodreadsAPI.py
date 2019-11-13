@@ -46,7 +46,7 @@ def booksearch2(MsgObj):
     xml = BeautifulSoup(response, 'xml')
     print ("Displaying results for  " +str(booktitle) + "... \n")
     time.sleep(2)
-    print(xml.find('title').id)
+    print(xml.find("best_book").find("id").text)
     #for item in xml.findAll('title'):
     #    print (item.text)
 
