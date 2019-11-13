@@ -36,6 +36,7 @@ from PIL import Image
 
 from io import BytesIO
 
+#Importing the SaveData function from the user data management script in order to be able to save the users preferences and previous messages.
 from UserDataManagement import SaveData
 
 # IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6
@@ -45,6 +46,13 @@ NewsScriptGlobal_ID = "1423"
 # End of code by [Annija Balode ID No: 9102828]
 #---------------------------------------------------------------END OF IMPORT OF MODULES-------------------------------------------------------------------#
 
+#class MembersCog(commands.Cog):
+    #def __init__(self, client):
+     #   self.client = client
+
+
+#def setup(client):
+  #  client.add_cog(MembersCog(client))
 
 #-------------------------------------------------------------BEGINNING OF INTRODUCTION FUNCTION-------------------------------------------------------------#
 #Function for introducing the possibilities to the user, it allows for the file to know which function to bring up.#
@@ -100,7 +108,7 @@ def KeywordsForBranching(MsgObj):
 
 		elif FindWords[word].lower() in noKeywords:
 			return NewsFromBBC(MsgObj)
-			
+
 	#if any(element in userChoice for element in specificNewsKeywords):
 			#SpecificNews()
 
@@ -124,6 +132,7 @@ def KeywordsForBranching(MsgObj):
 #-------------------------------------------------------------TOP HEADLINES FUNCTION-------------------------------------------------------------#
 # Beginning of code by [Annija Balode ID No: 9102828] and referenced from documentation https://newsapi.org/docs/endpoints/top-headlines
 def EveryTopHeadline(MsgObj):
+	SaveData(NewsScriptGlobal_ID + "_EveryTopHeadline", MsgObj.userID, "ReplyID")
 
 	#specificCategoryQuestion = input("Would you like to choose a specific category you would like to look at? ")
 	#specificCategoryQuestionList = specificCategoryQuestion.split(" ")
@@ -186,6 +195,8 @@ def EveryTopHeadline(MsgObj):
 
 # Beginning of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
 def SpecificNewsPrimary(MsgObj):
+	SaveData(NewsScriptGlobal_ID + "_SpecificNews", MsgObj.userID, "ReplyID")
+
 	return ("Okay, give me a word or words and I will find you an article that includes it!")
 
 
@@ -252,6 +263,7 @@ def SpecificNews(MsgObj):
 
 # Beginning of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
 def OlderNews(MsgObj):
+	SaveData(NewsScriptGlobal_ID + "_OlderNews", MsgObj.userID, "ReplyID")
 
 	howOldQuestion = input("Please make sure to write in the format YYYY-MM-DD including the dashes (I know, it's a strange format!)" + '\n' + "From what date within the last month would you like to view news? ")
 	howOldQuestionStr = str(howOldQuestion)
@@ -293,6 +305,8 @@ def OlderNews(MsgObj):
 
 # Beginning of code by [Annija Balode ID No: 9102828] and reference  from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
 def NewsFromBBC(MsgObj): 
+	SaveData(NewsScriptGlobal_ID + "_NewsFromBBC", MsgObj.userID, "ReplyID")
+
 	responseToUser = ("No worries, if you are unsure as to what you want to see, I will just give you the top 10 headlines today from BBC News!")
 	# This is the BBC News API with our own personal API key. 
 	url = " https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=72742ae51f514418a9a6da52faf58be6"
