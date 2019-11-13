@@ -401,6 +401,9 @@ def NaturalReply(Dictionary, RandBool, SearchBool, Context, MsgObj):
 
     # Saves the recommended film to the json database for later use
     SaveData(DictData["title"], MsgObj.userID, "PreviousViewedFilms")
+    import time
+    time.sleep(1)
+    SaveData(DictData["title"], MsgObj.userID, "PreviousViewedEntertainment")
 
     # Returns the string that was created to that the relevant scripts can return it to the main discord bot to be sent to the user on discord.
     return MainString

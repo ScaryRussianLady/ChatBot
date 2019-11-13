@@ -20,6 +20,10 @@
             "Example Topic",
             "Another Example"
          ],
+         "PreviousViewedEntertainment": [
+            "Example Entertainment",
+            "Another Example"
+         ],
          "PreviousViewedFilms": [
             "Example Film",
             "Another Example"
@@ -36,12 +40,17 @@
       {
          "UserID": 181396705604927498,
          "Name": "Big Boss",
-         "LastMessage": "action",
+         "LastMessage": "bye",
          "ReplyID": "6912_GenreList2",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
          "LastBookReply": "Example reply",
          "FavFilmGenre": [
+            "action",
+            "crime",
+            "crime",
+            "crime",
+            "action",
             "action"
          ],
          "FavBookGenre": [
@@ -52,11 +61,22 @@
             "politics",
             "business"
          ],
+         "PreviousViewedEntertainment": [
+            "Example Entertainment",
+            "Another Example",
+            "Midway",
+            "10 Minutes Gone"
+         ],
          "PreviousViewedFilms": [
             "John Wick: Chapter 3 - Parabellum",
             "Dragon Ball Super: Broly",
             "Attack on Titan",
-            "Lupinranger VS Patranger VS Kyuranger"
+            "Lupinranger VS Patranger VS Kyuranger",
+            "Lupinranger VS Patranger VS Kyuranger",
+            "El Camino: A Breaking Bad Movie",
+            "10 Minutes Gone",
+            "Midway",
+            "10 Minutes Gone"
          ],
          "PreviousViewedBooks": [
             "Trump: The Art of the Deal",
@@ -82,6 +102,10 @@
          "FavBookGenre": [],
          "FavNewsTopic": [
             "Example Topic",
+            "Another Example"
+         ],
+         "PreviousViewedEntertainment": [
+            "Example Entertainment",
             "Another Example"
          ],
          "PreviousViewedFilms": [

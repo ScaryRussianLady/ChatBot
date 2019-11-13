@@ -46,9 +46,11 @@ def CreateNewID(UserData, UserID):
     "FavFilmGenre": ["Example Genre", "Another Example"],
     "FavBookGenre": ["Example Genre", "Another Example"],
     "FavNewsTopic": ["Example Topic", "Another Example"],
+    "PreviousViewedEntertainment": ["Example Entertainment", "Another Example"],
     "PreviousViewedFilms": ["Example Film", "Another Example"], 
     "PreviousViewedBooks": ["Example Book", "Another Example"],
     "PreviousViewedArticles": ["Example Article", "Another Example"]}) #[Annija Balode ID No: 9102828] removed a comma.
+    
     
     with open("User_Datastore.json", 'w') as uds:
         json.dump(UserData, uds , indent= 3)

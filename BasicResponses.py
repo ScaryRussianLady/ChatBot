@@ -43,23 +43,27 @@ def farewellReply(msgObj):
 
     # This part is going to add additional text to the greetings to make the bot more personalised.
 
-    EntList = ["the news article", "the film", "the book"]
-    DataList = []
+    #EntList = ["the news article", "the film", "the book"]
+    #DataList = []
 
-    EntRNG = EntList[randrange(len(EntList))]
+    #EntRNG = EntList[randrange(len(EntList))]
 
-    if EntRNG == "the news article":
-        DataList = RetrieveData(msgObj.userID, "PreviousViewedArticles")
-    elif EntRNG == "the film":
-        DataList = RetrieveData(msgObj.userID, "PreviousViewedFilms")
-    elif EntRNG == "the book":
-        DataList = RetrieveData(msgObj.userID, "PreviousViewedBooks")
+    #if EntRNG == "the news article":
+     #   DataList = RetrieveData(msgObj.userID, "PreviousViewedArticles")
+    #elif EntRNG == "the film":
+    #    DataList = RetrieveData(msgObj.userID, "PreviousViewedFilms")
+    #elif EntRNG == "the book":
+     #   DataList = RetrieveData(msgObj.userID, "PreviousViewedBooks")
 
-    Topic = DataList[(len(DataList)-1)]
+    #Topic = DataList[(len(DataList)-1)]
 
     PhraseList_1 = [" Please do enjoy ", " I hope you enjoy ", " Have fun with "]
 
-    SuggestiveFarewell = (PhraseList_1[randrange(len(PhraseList_1))])+EntRNG+" "+Topic
+    #SuggestiveFarewell = (PhraseList_1[randrange(len(PhraseList_1))])+EntRNG+" "+Topic
+
+    NewDataList = RetrieveData(msgObj.userID, "PreviousViewedEntertainment")
+
+    SuggestiveFarewell = (PhraseList_1[randrange(len(PhraseList_1))]+NewDataList[len(NewDataList)-1]+"!")
 
     return BasicFarewell+SuggestiveFarewell
 
