@@ -12,6 +12,9 @@ import asyncio
 
 #[Start of Code by Christian Shaw]
 
+#[Code in this block is adapted from the discord.py documentation: 
+# https://discordpy.readthedocs.io/en/latest/quickstart.html#a-minimal-bot]
+
 # Assigns the variable client to the bot and sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
 
