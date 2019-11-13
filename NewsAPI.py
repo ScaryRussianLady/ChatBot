@@ -63,7 +63,7 @@ def KeywordsForBranching(MsgObj):
 	specificNewsKeywords = ["specific", "definite", "exact", "individual"]
 	olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
 	topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category", "different", "headline"]
-	#noKeywords = ["no", "nah", "nope"]
+	noKeywords = ["no", "nah", "nope", "not sure", "idk", "dunno", "i don't know", "whatever"]
 
 	#print("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.")
 	#specificFunction = input("Is there anything specific you want to look at, for example, specific topics? ")
@@ -97,6 +97,10 @@ def KeywordsForBranching(MsgObj):
 
 		elif FindWords[word].lower() in topHeadlineKeywords:
 			return EveryTopHeadline(MsgObj)
+
+		elif FindWords[word].lower() in noKeywords:
+			return NewsFromBBC(MsgObj)
+			
 	#if any(element in userChoice for element in specificNewsKeywords):
 			#SpecificNews()
 
@@ -118,7 +122,7 @@ def KeywordsForBranching(MsgObj):
 
 
 #-------------------------------------------------------------TOP HEADLINES FUNCTION-------------------------------------------------------------#
-# Beginning of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/top-headlines
+# Beginning of code by [Annija Balode ID No: 9102828] and referenced from documentation https://newsapi.org/docs/endpoints/top-headlines
 def EveryTopHeadline(MsgObj):
 
 	#specificCategoryQuestion = input("Would you like to choose a specific category you would like to look at? ")
@@ -172,7 +176,7 @@ def EveryTopHeadline(MsgObj):
 	# theURL = response.json()
 	# print(theURL)
 
-# End of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/top-headlines
+# End of code by [Annija Balode ID No: 9102828] and referenced from documentation https://newsapi.org/docs/endpoints/top-headlines
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 
@@ -288,7 +292,8 @@ def OlderNews(MsgObj):
 #Function for fetching the top ten headlines of today from BBC News.#
 
 # Beginning of code by [Annija Balode ID No: 9102828] and reference  from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
-def NewsFromBBC(): 
+def NewsFromBBC(MsgObj): 
+	responseToUser = ("No worries, if you are unsure as to what you want to see, I will just give you the top 10 headlines today from BBC News!")
 	# This is the BBC News API with our own personal API key. 
 	url = " https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=72742ae51f514418a9a6da52faf58be6"
 
@@ -313,6 +318,8 @@ def NewsFromBBC():
 	
 	for i in range(len(theAcceptedResponseTitle)):
 		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
+		
+		return responseToUser + str(theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL)
 
 # End of code by [Annija Balode ID No: 9102828] reference from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -334,10 +341,10 @@ def FindID(obj, ID):
 		return KeywordsForBranching(obj)
 	if ID == "SpecificNews":
 		return SpecificNews(obj)
-	#if ID == "EveryTopHeadline":
-		#return EveryTopHeadline(obj)
-	#if ID == "OlderNews":
-	#	return OlderNews(obj)
-	#if ID == "NewsFromBBC":
-	#	return NewsFromBBC(obj)
+	if ID == "EveryTopHeadline":
+		return EveryTopHeadline(obj)
+	if ID == "OlderNews":
+		return OlderNews(obj)
+	if ID == "NewsFromBBC":
+		return NewsFromBBC(obj)
 

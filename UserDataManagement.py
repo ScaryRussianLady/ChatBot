@@ -8,8 +8,10 @@ def SaveData(Data, UserID, Location):
     count = 0
     
     with open("User_Datastore.json") as uds: #opens json file for reading only and saves all data into a dictionary
-        UserData = json.load(uds)
-    
+        if len(uds.readlines()) != 0:
+            uds.seek(0) #[Annija Balode, ID No: 9102828] sets the pointer to the 0 character to avoid certain errors.
+            UserData = json.load(uds.decode("utf-16")) #[Annija Balode, ID No: 9102828], addition of decoding in UTF-16, allows for 1,112,064 code points of Unicode. Less likely to throw errors.
+
     if IsNewID(UserData, UserID):
         UserData = CreateNewID(UserData, UserID)
     
@@ -61,7 +63,9 @@ def RemoveData(DelWhole, ListPos, UserID, Location):
     count = 0
     
     with open("User_Datastore.json") as uds:
-        UserData = json.load(uds)
+        if len(uds.readlines()) != 0:
+            uds.seek(0) #[Annija Balode, ID No: 9102828] sets the pointer to the 0 character to avoid certain errors.
+            UserData = json.load(uds.decode("utf-16")) #[Annija Balode, ID No: 9102828], addition of decoding in UTF-16, allows for 1,112,064 code points of Unicode. Less likely to throw errors.
 
         count = FidnEntry(UserData , UserID)
 
@@ -87,8 +91,10 @@ def RetrieveData(UserID, Location):
 
     #[Annija Balode ID No: 9102828] Addition below, slightly adjusted the reading of the JSON file, more efficient and less likely to throw an error.
     with open("User_Datastore.json") as uds:
-        content = uds.read()
-        UserData = json.loads(content)
+        if len(uds.readlines()) != 0:
+            uds.seek(0) #[Annija Balode, ID No: 9102828] sets the pointer to the 0 character to avoid certain errors.
+            content = uds.read()
+            UserData = json.load(content.decode("utf-16")) #[Annija Balode, ID No: 9102828], addition of decoding in UTF-16, allows for 1,112,064 code points of Unicode. Less likely to throw errors.
        # UserData = json.load(uds)
     #[Annija Balode ID No: 9102828] End of addition.
     count = FidnEntry(UserData , UserID)
