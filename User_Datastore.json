@@ -40,7 +40,7 @@
       {
          "UserID": 181396705604927498,
          "Name": "Big Boss",
-         "LastMessage": "fahrenheit 451",
+         "LastMessage": "test",
          "ReplyID": "6912_MovieSearch2",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
@@ -86,7 +86,10 @@
             "The Art of War",
             "The Art of War",
             "The Art of War",
-            "The Art of War"
+            "The Art of War",
+            "Fahrenheit 451",
+            "Fahrenheit 451",
+            "Fahrenheit 451"
          ],
          "PreviousViewedFilms": [
             "John Wick: Chapter 3 - Parabellum",
