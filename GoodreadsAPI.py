@@ -44,13 +44,9 @@ def booksearch2(MsgObj):
     url = ('https://www.goodreads.com/search.xml?key=NxRD7Y051igsxA6xbjQRpQ&q=' +booktitle)
     response = requests.get(url).text
     xml = BeautifulSoup(response, 'xml')
-   #print ("Displaying results for  " +str(booktitle) + "... \n")
-    #time.sleep(2)
-    Work = (xml.find("work"))
-
-    # Next ONE line by Christian Shaw | Returns a natural reply using the dictionary data to the discord main script
-    return NaturalReply(Work, "search", MsgObj)
-
+    print ("Displaying results for  " +str(booktitle) + "... \n")
+    time.sleep(2)
+    print(xml.find("best_book").find("id").text)
     #for item in xml.findAll('title'):
     #    print (item.text)
 
@@ -75,25 +71,20 @@ def bookreview2(MsgObj):
     response = requests.get(url).text
     xml = BeautifulSoup(response, 'xml')
 
-    Work = (xml.find("work"))
+    print ("Book reviews for isbn:" +str(isbn))
 
-    # Next ONE line by Christian Shaw | Returns a natural reply using the dictionary data to the discord main script
-    return NaturalReply(Work, "ratings", MsgObj)
-
-    #print ("Book reviews for isbn:" +str(isbn))
-
-   # print ("Book title:")
-    #for item in xml.findAll('title')[0:1]:
-    #    print (item.text)
-    #print ("Author name:")
-    #for item in xml.findAll('name')[0:1]:
-    #    print (item.text)
-    #print ("Star rating:")
-    #for item in xml.findAll('rating_dist'):
-    #    print (item.text)
-    #print ("Average Rating:")    
-    #for item in xml.findAll('average_rating')[0:1]:
-    #    print (item.text)
+    print ("Book title:")
+    for item in xml.findAll('title')[0:1]:
+        print (item.text)
+    print ("Author name:")
+    for item in xml.findAll('name')[0:1]:
+        print (item.text)
+    print ("Star rating:")
+    for item in xml.findAll('rating_dist'):
+        print (item.text)
+    print ("Average Rating:")    
+    for item in xml.findAll('average_rating')[0:1]:
+        print (item.text)
 
 #[kofi]
 def releasedate(MsgObj):
@@ -112,19 +103,15 @@ def releasedate2(MsgObj):
     response = requests.get(url).text
     xml = BeautifulSoup(response, 'xml')
 
-    Work = (xml.find("work"))
-
-    # Next ONE line by Christian Shaw | Returns a natural reply using the dictionary data to the discord main script
-    return NaturalReply(Work, "date", MsgObj)
     
-    #print ("Year:")
+    print ("Year:")
     
-    #for item in xml.findAll('original_publication_year')[0:1]:
-    #    print (item.text)
-    #print ("Month:")
-    #       
-    #for item in xml.findAll('original_publication_month')[0:1]:
-    #    print (item.text)
+    for item in xml.findAll('original_publication_year')[0:1]:
+        print (item.text)
+    print ("Month:")
+           
+    for item in xml.findAll('original_publication_month')[0:1]:
+        print (item.text)
 #[kofi]
 
 def authorMostpopular(MsgObj):
@@ -140,24 +127,19 @@ def authorMostpopular2(MsgObj):
     url = ('https://www.goodreads.com/search.xml?key=NxRD7Y051igsxA6xbjQRpQ&q=' +author)
     response = requests.get(url).text
     
-    #print ("Displaying " +str(author) + " most popular books... \n")
-    #time.sleep(2)
+    print ("Displaying " +str(author) + " most popular books... \n")
+    time.sleep(2)
 
     xml = BeautifulSoup(response, 'xml')
 
-    Work = (xml.find("work"))
-
-    # Next ONE line by Christian Shaw | Returns a natural reply using the dictionary data to the discord main script
-    return NaturalReply(Work, "search", MsgObj)
-
-    #print ("Author name:")
+    print ("Author name:")
     
-    #for item in xml.findAll('name')[0:1]:
-    #    print (item.text)
-    #print ("Book titles:")
+    for item in xml.findAll('name')[0:1]:
+        print (item.text)
+    print ("Book titles:")
     
-    #for item in xml.findAll('title'):
-    #    print (item.text)
+    for item in xml.findAll('title'):
+        print (item.text)
 
 #[kofi]
 def UserIntro(MsgObj):
@@ -219,46 +201,12 @@ def FindID(obj, ID):
 
 # Essentially, this function creates and returns a string which will be the bot's reply.
 # It takes arguments which determine how the reply will be structured.
-def NaturalReply(WorkXml, Context, MsgObj):
+def NaturalReply(Dictionary, RandBool, SearchBool, Context, MsgObj):
     from random import randrange
 
-    # The ISBN opens a different HTML file
-    if Context != "ratings":
-        BookTitle = WorkXml.find("best_book").find("title").text
-        BookID = WorkXml.find("best_book").find("id").text
-
-        # Saves the recommended film to the json database for later use
-        SaveData(BookTitle, MsgObj.userID, "PreviousViewedBooks")
-        time.sleep(1)
-        SaveData(BookTitle, MsgObj.userID, "PreviousViewedEntertainment")
-
-    # Creates a list of months so that there is a coherent date instead of numbers
-    Months = [
-        "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-    ReleaseDay = WorkXml.find("original_publication_day").text
-    ReleaseMonth = WorkXml.find("original_publication_month").text
-    ReleaseYear = WorkXml.find("original_publication_year").text
-
-    # This creates the release month from a number to text if the month exists
-    if ReleaseMonth != "":
-        ReleaseMonth = Months[int(ReleaseMonth)-1]
-
-    RatingNo = WorkXml.find("ratings_count").text
-
-    # Depending on the context, different things are printed.
-    if Context == "search":
-        Phrase = ["The book you're looking for probably is ", "I found a book called ", "The book you speak of is called "]
-        MainString = (Phrase[randrange(len(Phrase))]+BookTitle+"\nHere's a link to it: "+"https://www.goodreads.com/book/show/"+BookID)
-    elif Context == "date":
-        Phrase = [" released on ", " was published on ", " came out on "]
-
-        MainString = BookTitle+(Phrase[randrange(len(Phrase))])+ReleaseDay+" "+ReleaseMonth+" "+ReleaseYear
-    elif Context == "ratings":
-        Phrase = [" was rated ", " has been rated ", " got rated "]
-        MainString = ("This book has been rated "+RatingNo+" times.")
     
+
     # Returns the string that was created to that the relevant scripts can return it to the main discord bot to be sent to the user on discord.
-    return MainString
+    #return MainString
 
 # [End of Code by Christian Shaw] 
