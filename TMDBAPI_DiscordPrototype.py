@@ -274,9 +274,22 @@ def top_rated2(MsgObj):
     #makes it readable for user
     response = req.get(url)
     topDict = response.json()
+
+    from random import randrange
+    randNo = randrange(len(topDict['results']))
+
+    return ("Hmm, there's a top rated movie called "+str(topDict['results'][randNo]['title'])+"\n More information at: "+"https://www.themoviedb.org/movie/"+str(+topDict['results'][randNo]['id']))
+
+
     # prints readable information to screen
-    print(topDict)
-    #print(type(topDict))
+    #    for show in topDict'results']:
+    #    print('====================================')
+    #    print('Title: '+ show['title'])
+    #    print('First aired: '+ show['release_date'])
+    #    print('Rated '+ str(show['vote_average'])+'/10 with a total of '+str(show['vote_count'])+' votes')
+    #    print('Overview: '+show['overview'])
+    #    print('BackDrop: https://image.tmdb.org/t/p/original'+str(show['poster_path']))
+    #print(topDict)
 
 # [End of code by Rishikesh | ID No. ?]
 
