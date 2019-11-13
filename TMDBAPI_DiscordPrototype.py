@@ -293,9 +293,22 @@ def upcoming():
     #makes it readable for user
     response = req.get(url)
     upcDict = response.json()
-    # prints somewhat readable information to screen
-    return (upcDict)
-    #print(type(upcDict))
+
+    from random import randrange
+    randNo = randrange(len(upcDict['results']))
+
+    return ("Hmm, there's an upcoming movie called "+str(upcDict['results'][randNo]['title'])+"\n More information at: "+"https://www.themoviedb.org/movie/"+str(+upcDict['results'][randNo]['id']))
+
+    # prints somewhat readable information to terminal
+        #print(upcDict)
+    #for show in upcDict['results']:
+    #    print('====================================')
+    #    print('Title: '+ show['name'])
+    #    print('First aired: '+ show['release_date'])
+    #    print('Rated '+ str(show['vote_average'])+'/10 with a total of '+str(show['vote_count'])+' votes')
+    #    print('Overview: '+show['overview'])
+    #    print('BackDrop: https://image.tmdb.org/t/p/original'+str(show['poster_path']))
+
 
 # [End of code by Rishikesh | ID No. ?]
 
