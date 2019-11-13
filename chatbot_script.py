@@ -143,7 +143,8 @@ async def r(com, *, reply):
 
     # This is for the film script
     if Global_ID == FilmScriptGlobal_ID:
-        pass
+        from TMDBAPI_DiscordPrototype import FindID
+        BotReply = FindID(msgObj, Local_ID)
 
     # This is for the book script
     if Global_ID == BookScriptGlobal_ID:
@@ -290,7 +291,8 @@ def generateReplies(msgObj):
         for j in range(len(filmKeywords)):
             if msgList[i].lower() == filmKeywords[j] or msgList[i].lower() == (filmKeywords[j]+"s"):
                 # Call for film function inside of the placeholder
-                from TMDBAPI import firstUserInt
+                from TMDBAPI_DiscordPrototype import firstUserInt
+                Replies.append(firstUserInt(msgObj))
                 #Replies.append("Placeholder Film Info")
                 break
         
