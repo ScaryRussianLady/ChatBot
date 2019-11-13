@@ -46,8 +46,9 @@ def booksearch2(MsgObj):
     xml = BeautifulSoup(response, 'xml')
     print ("Displaying results for  " +str(booktitle) + "... \n")
     time.sleep(2)
-    for item in xml.findAll('title'):
-        print (item.text)
+    print(xml.find('title').id)
+    #for item in xml.findAll('title'):
+    #    print (item.text)
 
 
 #API can reviews of books that the user request by isbn.
@@ -160,17 +161,17 @@ def UserIntro2(MsgObj):
     PopList = ["popular", "most popular",]
     for x in range(len(UserOptionWords)):
         if UserOptionWords[x].lower() in searchList:
-            booksearch(MsgObj)
-            break
+            return booksearch(MsgObj)
+            #break
         elif UserOptionWords[x].lower() in releasedList:
-            releasedate(MsgObj)
-            break
+            return releasedate(MsgObj)
+            #break
         elif UserOptionWords[x].lower() in reviewList:
-            bookreview(MsgObj)
-            break
+            return bookreview(MsgObj)
+            #break
         elif UserOptionWords[x].lower() in PopList:
-            authorMostpopular(MsgObj)
-            break
+            return authorMostpopular(MsgObj)
+            #break
 #UserIntro()
 
 #--------------------------------------------------------REPLY SELECTION FUNCTION--------------------------------------------------------#
@@ -194,4 +195,18 @@ def FindID(obj, ID):
 
 # [End of Code by Christian Shaw] 
 
+#------------------------------------------------------RETURN RELEVANT DATA TO USER-----------------------------------------------------#
 
+# [Start of Code by Christian Shaw]
+
+# Essentially, this function creates and returns a string which will be the bot's reply.
+# It takes arguments which determine how the reply will be structured.
+def NaturalReply(Dictionary, RandBool, SearchBool, Context, MsgObj):
+    from random import randrange
+
+    
+
+    # Returns the string that was created to that the relevant scripts can return it to the main discord bot to be sent to the user on discord.
+    #return MainString
+
+# [End of Code by Christian Shaw] 
