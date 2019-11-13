@@ -48,7 +48,7 @@ def CreateNewID(UserData, UserID):
     "FavNewsTopic": ["Example Topic", "Another Example"],
     "PreviousViewedFilms": ["Example Film", "Another Example"], 
     "PreviousViewedBooks": ["Example Book", "Another Example"],
-    "PreviousViewedArticles": ["Example Article", "Another Example"],})
+    "PreviousViewedArticles": ["Example Article", "Another Example"]}) #[Annija Balode ID No: 9102828] removed a comma.
     
     with open("User_Datastore.json", 'w') as uds:
         json.dump(UserData, uds , indent= 3)
@@ -82,9 +82,13 @@ def RetrieveData(UserID, Location):
     count = 0
     DataStr = ""
     DataLst = []
+
+    #[Annija Balode ID No: 9102828] Addition below, slightly adjusted the reading of the JSON file, more efficient and less likely to throw an error.
     with open("User_Datastore.json") as uds:
-        UserData = json.load(uds)
-    
+        content = uds.read()
+        UserData = json.loads(content)
+       # UserData = json.load(uds)
+    #[Annija Balode ID No: 9102828] End of addition.
     count = FidnEntry(UserData , UserID)
 
     if Location == "Name" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply":

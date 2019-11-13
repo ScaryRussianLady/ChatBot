@@ -53,7 +53,7 @@ NewsScriptGlobal_ID = "1423"
 def IntroductionToUser(MsgObj):
 	SaveData(NewsScriptGlobal_ID + "_KeywordsForBranching", MsgObj.userID, "ReplyID")
 	
-	beginningResponse = ("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.") + ("\n I can tell you about an article that includes a word of your choice, I can output the top headlines of today, or you can even look into specific categories.")
+	beginningResponse = ("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.") + ("\n I can tell you about an article that includes a word of your choice, I can output the top headlines of today, or you can even look into specific categories.") + ("\n So, what would you like to do?")
 	
 	return beginningResponse
 
@@ -61,9 +61,9 @@ def KeywordsForBranching(MsgObj):
 	FindWords = MsgObj.list
 
 	specificNewsKeywords = ["specific", "definite", "exact", "individual"]
-	olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
-	topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category", "different"]
-	noKeywords = ["no", "nah", "nope"]
+	#olderNewsKeywords = ["older", "earlier", "past", "before", "ago"]
+	#topHeadlineKeywords = ["themes", "theme", "headlines", "top", "categories", "category", "different"]
+	#noKeywords = ["no", "nah", "nope"]
 
 	# await self.bot.say("News woo!")
 	#print("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.")
@@ -89,8 +89,12 @@ def KeywordsForBranching(MsgObj):
 	#noKeywords = ["no", "nah", "nope"]
 
 
+	for word in range(len(FindWords)):
+		if FindWords[word].lower() in specificNewsKeywords:
+			specificResponse = ("Okay, give me a word or words and I will find you an article that includes it!")
+			return specificResponse + SpecificNews(MsgObj)
 	#if any(element in userChoice for element in specificNewsKeywords):
-	#		SpecificNews()
+			#SpecificNews()
 
 	#elif any(element in userChoice for element in olderNewsKeywords):
 	#		OlderNews()
@@ -173,23 +177,24 @@ def EveryTopHeadline():
 #However, this search does not allow for country-specific searches.#
 
 # Beginning of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
-def SpecificNews():
+def SpecificNews(MsgObj):
 #IMPORTANT NOTICE: This is only a rough 'sketch' of how the API will be laid out, as there will be no input statements like this, the bot will handle this differently.#
 
+	chosenTopic = MsgObj.msg
 	# Stores the specific word(s) that the user enters and then will use this variable to search up the relevant articles.
-	chosenTopic = input("What topic would you like to look at?" + '\n' + "Give me one word or several words and I will fetch you the most popular article right now based on that topic! ")
+	#chosenTopic = input("What topic would you like to look at?" + '\n' + "Give me one word or several words and I will fetch you the most popular article right now based on that topic! ")
 	
 	# Stores the amount of articles that the user wants to see from the topic they chose.
-	amountOfArticles = input("Nice topic! But, before I tell you the relevant articles, how many would you like to see? ")
+	#amountOfArticles = input("Nice topic! But, before I tell you the relevant articles, how many would you like to see? ")
 
 	# currentDate = str(datetime.now())
 
 	url = ('https://newsapi.org/v2/everything?'
 	# This is the key word that should bring up the relevant article.
-       'qInTitle='+chosenTopic+'&'
-	   'pageSize='+amountOfArticles+'&'
+       'qInTitle='+str(chosenTopic.lower())+'&'
+	   'pageSize=1&'
 	   # From what date it should get searched (depending how old you want the article to be)
-	   'from=2019-10-20&'
+	   'from=2019-11-01&'
 	   # How to sort the articles (the most popular will show first, therefore, the most relevant and most likely to be in English)
        'sortBy=popularity&'
        'apiKey=72742ae51f514418a9a6da52faf58be6')
@@ -198,30 +203,31 @@ def SpecificNews():
 	response = requests.get(url).json()
 	specificArticle = response["articles"]
 
-	theAcceptedResponseTitle = []
-	theAcceptedResponseAuthor = []
-	theAcceptedResponseURL = []
+	#theAcceptedResponseTitle = []
+	#theAcceptedResponseAuthor = []
+	#theAcceptedResponseURL = []
 
-	for title in specificArticle:
-		theAcceptedResponseTitle.append(title["title"])
+	#for title in specificArticle:
+	#	theAcceptedResponseTitle.append(title["title"])
 	
-	for author in specificArticle:
-		theAcceptedResponseAuthor.append(author["author"])
+	#for author in specificArticle:
+	#	theAcceptedResponseAuthor.append(author["author"])
 
-	for url in specificArticle:
-		theAcceptedResponseURL.append(url["url"])
+	#for url in specificArticle:
+	#	theAcceptedResponseURL.append(url["url"])
 
-	for i in range(len(theAcceptedResponseTitle)):
-		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
+#	for i in range(len(theAcceptedResponseTitle)):
+#		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
+	return str("Here's an article I found based on the word(s) you gave me: " + specificArticle)
 
 	# Loops back to the beginning of the function if they wish to search another topic. Further improvements will be made.
-	findAnotherTopic = input("Here is what I found. Hope these are okay for you!" + '\n' + "Are there any other topics you would like to look at? ")
-	findAnotherTopicList = findAnotherTopic.split(" ")
-	for i in range(len(findAnotherTopicList)):
-		if findAnotherTopicList[i] == "yes":
-			SpecificNews()
-		else:
-			print("Cool. See you soon!")
+	#findAnotherTopic = input("Here is what I found. Hope these are okay for you!" + '\n' + "Are there any other topics you would like to look at? ")
+	#findAnotherTopicList = findAnotherTopic.split(" ")
+	#for i in range(len(findAnotherTopicList)):
+		#if findAnotherTopicList[i] == "yes":
+			#SpecificNews()
+	#	else:
+	#		print("Cool. See you soon!")
 
 # End of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
 #------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -316,4 +322,12 @@ def NewsFromBBC():
 def FindID(obj, ID):
 	if ID == "KeywordsForBranching":
 		return KeywordsForBranching(obj)
+	if ID == "SpecificNews":
+		return SpecificNews(obj)
+	#if ID == "EveryTopHeadline":
+		#return EveryTopHeadline(obj)
+	#if ID == "OlderNews":
+	#	return OlderNews(obj)
+	#if ID == "NewsFromBBC":
+	#	return NewsFromBBC(obj)
 
