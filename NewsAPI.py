@@ -73,7 +73,7 @@ NewsScriptGlobal_ID = "1423"
 def IntroductionToUser(MsgObj):
 	SaveData(NewsScriptGlobal_ID + "_KeywordsForBranching", MsgObj.userID, "ReplyID")
 	
-	beginningResponse = ("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.") + ("\n I can tell you about an article that includes a word of your choice, I can output the top headlines of today, or you can even look into specific categories.") + ("\n So, what would you like to do?")
+	beginningResponse = ("So you want to look at some news? Good choice! Unfortunately, I can't read your mind so you might have to help me out here.") + ("\n I can tell you about an article that includes a word of your choice, I can output the top headlines of today, or you can even look into specific categories.") + ("\n So, what would you like to do? (Please use the prefix -r to communicate with me now).")
 	
 	return beginningResponse
 
@@ -211,6 +211,8 @@ def SpecificNewsPrimary(MsgObj):
 """A function for finding news around the world depending on specific words/key terms. However, this search does not allow for country-specific searches."""
 def SpecificNews(MsgObj):
 	chosenTopic = MsgObj.msg
+
+	SaveData(chosenTopic, MsgObj.userID, "FavNewsTopic")
 	# Stores the specific word(s) that the user enters and then will use this variable to search up the relevant articles.
 	#chosenTopic = input("What topic would you like to look at?" + '\n' + "Give me one word or several words and I will fetch you the most popular article right now based on that topic! ")
 	
@@ -233,23 +235,34 @@ def SpecificNews(MsgObj):
 	response = requests.get(url).json()
 	specificArticle = response["articles"]
 
-	theAcceptedResponseTitle = []
-	theAcceptedResponseAuthor = []
-	theAcceptedResponseURL = []
+	#theAcceptedResponseTitle = []
+	#theAcceptedResponseAuthor = []
+	#theAcceptedResponseURL = []
 
 	for title in specificArticle:
-		theAcceptedResponseTitle.append(title["title"])
-	
+		theAcceptedResponseTitle = title["title"]
+
 	for author in specificArticle:
-		theAcceptedResponseAuthor.append(author["author"])
-
+		theAcceptedResponseAuthor = author["author"]
+	
 	for url in specificArticle:
-		theAcceptedResponseURL.append(url["url"])
+		thAcceptedResponseURL = url["url"]
+	#for title in specificArticle:
+		#theAcceptedResponseTitle.append(title["title"])
+	
+	#for author in specificArticle:
+		#theAcceptedResponseAuthor.append(author["author"])
 
+	#for url in specificArticle:
+		#theAcceptedResponseURL.append(url["url"])
+
+	finalResponse = (theAcceptedResponseTitle + " by " + theAcceptedResponseAuthor) + ("\n You can access the article here: " + thAcceptedResponseURL)
+	#finalResponse = ("Here's what I found for you: ") + str(theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL) 
 #	for i in range(len(theAcceptedResponseTitle)):
 #		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
-		return str("Here's what I found: " + theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL)
-
+	SaveData(chosenTopic, MsgObj.userID, "PreviousViewedArticles")
+	
+	return finalResponse
 
 	# Loops back to the beginning of the function if they wish to search another topic. Further improvements will be made.
 	#findAnotherTopic = input("Here is what I found. Hope these are okay for you!" + '\n' + "Are there any other topics you would like to look at? ")
@@ -314,7 +327,6 @@ def OlderNews(MsgObj):
 def NewsFromBBC(MsgObj): 
 	SaveData(NewsScriptGlobal_ID + "_NewsFromBBC", MsgObj.userID, "ReplyID")
 
-	responseToUser = ("No worries, if you are unsure as to what you want to see, I will just give you the top 10 headlines today from BBC News!")
 	# This is the BBC News API with our own personal API key. 
 	url = " https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=72742ae51f514418a9a6da52faf58be6"
 
@@ -340,7 +352,7 @@ def NewsFromBBC(MsgObj):
 	#for i in range(len(theAcceptedResponseTitle)):
 		#print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
 		
-		return responseToUser + str(theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL)
+		return ("No worries, if you are unsure as to what you want to see, I will just give you the top 10 headlines today from BBC News!") + str(theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL)
 
 #End of code by [Annija Balode, ID No: 9102828] reference from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/ with adaptation.
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------#

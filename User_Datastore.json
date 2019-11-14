@@ -9,34 +9,39 @@
          "LastNewsReply": "Example reply",
          "LastBookReply": "Example reply",
          "FavFilmGenre": [
-            "Example Genre",
-            "Another Example"
+            "horror"
          ],
-         "FavBookGenre": [
-            "Example Genre",
-            "Another Example"
-         ],
+         "FavBookGenre": [],
          "FavNewsTopic": [
-            "Example Topic",
-            "Another Example"
+            "games",
+            "games",
+            "apple",
+            "apples",
+            "apples",
+            "apples",
+            "apples",
+            "apples",
+            "apples",
+            "apples",
+            "apples",
+            "apples"
          ],
          "PreviousViewedEntertainment": [
-            "Example Entertainment",
-            "Another Example",
-            "Raise the Titanic"
+            "Raise the Titanic",
+            "Survival Island"
          ],
          "PreviousViewedFilms": [
-            "Example Film",
-            "Another Example",
-            "Raise the Titanic"
+            "Raise the Titanic",
+            "Survival Island"
          ],
-         "PreviousViewedBooks": [
-            "Example Book",
-            "Another Example"
-         ],
+         "PreviousViewedBooks": [],
          "PreviousViewedArticles": [
-            "Example Article",
-            "Another Example"
+            "games",
+            "apples",
+            "apples",
+            "apples",
+            "apples",
+            "apples"
          ]
       },
       {
