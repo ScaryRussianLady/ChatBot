@@ -246,7 +246,7 @@ def SpecificNews(MsgObj):
 		theAcceptedResponseAuthor = author["author"]
 	
 	for url in specificArticle:
-		thAcceptedResponseURL = url["url"]
+		theAcceptedResponseURL = url["url"]
 	#for title in specificArticle:
 		#theAcceptedResponseTitle.append(title["title"])
 	
@@ -256,13 +256,14 @@ def SpecificNews(MsgObj):
 	#for url in specificArticle:
 		#theAcceptedResponseURL.append(url["url"])
 
-	finalResponse = (theAcceptedResponseTitle + " by " + theAcceptedResponseAuthor) + ("\n You can access the article here: " + thAcceptedResponseURL)
+	#finalResponse = (theAcceptedResponseTitle + " by " + theAcceptedResponseAuthor)
+	#linkToReponse = ("\n You can access the article here: " + theAcceptedResponseURL)
 	#finalResponse = ("Here's what I found for you: ") + str(theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL) 
 #	for i in range(len(theAcceptedResponseTitle)):
 #		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
 	SaveData(chosenTopic, MsgObj.userID, "PreviousViewedArticles")
 	
-	return finalResponse
+	return theAcceptedResponseTitle + " by " + theAcceptedResponseAuthor + "\nYou can access the article here: " + theAcceptedResponseURL
 
 	# Loops back to the beginning of the function if they wish to search another topic. Further improvements will be made.
 	#findAnotherTopic = input("Here is what I found. Hope these are okay for you!" + '\n' + "Are there any other topics you would like to look at? ")
