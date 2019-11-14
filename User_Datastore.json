@@ -3,8 +3,8 @@
       {
          "UserID": 486240496797089802,
          "Name": "eg0tistical",
-         "LastMessage": "headlines",
-         "ReplyID": "1423_KeywordsForBranching",
+         "LastMessage": "apples",
+         "ReplyID": "1423_SpecificNews",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
          "LastBookReply": "Example reply",
@@ -22,11 +22,13 @@
          ],
          "PreviousViewedEntertainment": [
             "Example Entertainment",
-            "Another Example"
+            "Another Example",
+            "Raise the Titanic"
          ],
          "PreviousViewedFilms": [
             "Example Film",
-            "Another Example"
+            "Another Example",
+            "Raise the Titanic"
          ],
          "PreviousViewedBooks": [
             "Example Book",

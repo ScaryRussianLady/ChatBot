@@ -248,7 +248,7 @@ def SpecificNews(MsgObj):
 
 #	for i in range(len(theAcceptedResponseTitle)):
 #		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
-		return str(theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL)
+		return str("Here's what I found: " + theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL)
 
 
 	# Loops back to the beginning of the function if they wish to search another topic. Further improvements will be made.
