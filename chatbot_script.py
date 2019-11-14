@@ -59,7 +59,7 @@ async def bot(com, *, msg):
     if len(botReply) != 0:
         for i in botReply:
             # Uses the translateText function I created to translate the bot's reply back into the user's language
-            Reply = botReply#translateText(i, msgObj.lang)
+            Reply = i#translateText(i, msgObj.lang)
             await com.send(Reply)
     else:
         # If there weren't any replies found to send, it will reply with this:
@@ -219,6 +219,8 @@ def createMsgObj(msg, authorID, usr, channel):
             break
         
         NewUsr = NewUsr+usr[char]
+
+    msgLanguage = "en" # Temporary
 
     msg_obj = messageObj(msg, msgList, msgLanguage, authorID, usr, channel)
     return msg_obj
