@@ -59,13 +59,13 @@ async def bot(com, *, msg):
     if len(botReply) != 0:
         for i in botReply:
             # Uses the translateText function I created to translate the bot's reply back into the user's language
-            Reply = translateText(i, msgObj.lang)
+            Reply = botReply#translateText(i, msgObj.lang)
             await com.send(Reply)
     else:
         # If there weren't any replies found to send, it will reply with this:
         Reply = "Could you try rephrasing what you said? I promise I am doing my best to understand you!"
         # Uses the translateText function I created to translate the bot's reply back into the user's language
-        Reply = translateText(Reply, msgObj.lang)
+        Reply = botReply#translateText(Reply, msgObj.lang)
         await com.send(Reply)
     
     #For terminal use only. Creates space between information on the terminal to make it easier to read.
@@ -149,10 +149,10 @@ async def r(com, *, reply):
 
     # Next part is going to retrieve and check the "replyID" and go to the required script & function
     if BotReply == None or BotReply == "":
-        BotReply = translateText("Sorry, I didn't quite understand that reply", msgObj.lang)
+        #BotReply = translateText("Sorry, I didn't quite understand that reply", msgObj.lang)
         await com.send(BotReply)
     else:
-        BotReply = translateText(BotReply, msgObj.lang)
+        #BotReply = translateText(BotReply, msgObj.lang)
         await com.send(BotReply)
 
     #For terminal use only. Creates space between information on the terminal to make it easier to read.
@@ -205,9 +205,9 @@ def createMsgObj(msg, authorID, usr, channel):
     
     # This part of the script translates the raw user input into English so that the bot can interpret it better
     # Also, languages such as Korean, Japanese and Chinese don't have spaces between their characters, so finding individual words wouldn't work
-    msgLanguage = detectLanguage(msg)
-    if msgLanguage != 'en':
-        msg = translateText(msg, "en")
+    #msgLanguage = detectLanguage(msg)
+    #if msgLanguage != 'en':
+    #    msg = translateText(msg, "en")
     msgList = msg.split()
 
     # This part of the code is going to remove the hashtags and ID from the username that discord uses to identify users
