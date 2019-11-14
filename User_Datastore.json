@@ -3,8 +3,8 @@
       {
          "UserID": 486240496797089802,
          "Name": "eg0tistical",
-         "LastMessage": "thriller",
-         "ReplyID": "6912_GenreList2",
+         "LastMessage": "dunno",
+         "ReplyID": "1423_NewsFromBBC",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
          "LastBookReply": "Example reply",
@@ -12,6 +12,8 @@
             "horror",
             "thriller",
             "thriller",
+            "thriller",
+            "thriller please",
             "thriller"
          ],
          "FavBookGenre": [],
@@ -58,7 +60,11 @@
             "your article on cheese",
             "47 Meters Down: Uncaged",
             "John Wick",
-            "Glass"
+            "Glass",
+            "John Wick: Chapter 3 - Parabellum",
+            "your article!",
+            "your article!",
+            "your article!"
          ],
          "PreviousViewedFilms": [
             "Raise the Titanic",
@@ -67,7 +73,8 @@
             "Halloween",
             "47 Meters Down: Uncaged",
             "John Wick",
-            "Glass"
+            "Glass",
+            "John Wick: Chapter 3 - Parabellum"
          ],
          "PreviousViewedBooks": [],
          "PreviousViewedArticles": [
@@ -91,13 +98,16 @@
             "your article from ame",
             "your article from n",
             "2019-11-05",
-            "cheese"
+            "cheese",
+            "your article!",
+            "your article!",
+            "your article!"
          ]
       },
       {
          "UserID": 181396705604927498,
          "Name": "Big Boss",
-         "LastMessage": "Boris johnson",
+         "LastMessage": "hello",
          "ReplyID": "1423_SpecificNews",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
@@ -222,6 +232,22 @@
             "Example Article",
             "Another Example"
          ]
+      },
+      {
+         "UserID": 298204372742176770,
+         "Name": "Freiza",
+         "LastMessage": "top headlines",
+         "ReplyID": "1423_EveryTopHeadline",
+         "LastFilmReply": "",
+         "LastNewsReply": "",
+         "LastBookReply": "",
+         "FavFilmGenre": [],
+         "FavBookGenre": [],
+         "FavNewsTopic": [],
+         "PreviousViewedEntertainment": [],
+         "PreviousViewedFilms": [],
+         "PreviousViewedBooks": [],
+         "PreviousViewedArticles": []
       }
    ]
 }
