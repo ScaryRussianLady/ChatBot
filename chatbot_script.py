@@ -297,23 +297,15 @@ def generateReplies(msgObj):
                 break
         
         # This will identify news related words in the list
-        #Annija
+
         for j in range(len(newsKeywords)):
             if msgList[i].lower() == newsKeywords[j] or msgList[i].lower() == (newsKeywords[j]+"s"):
-                                # Call for news function inside of the placeholder
-                #Replies.append("Cool! Let's go look at some news!")
-                #NewsAPI.IntroductionToUser()
-                #load() 
-                #[Annija Balode ID No: 9102828]
-                #for extension in initial_extensions:
-                 #   bot.load_extension(extension)
-                #for extension in initial_extensions:
-                    #client.load_extension(extension)
-               # return
-               
+                #Beginning of code by [Annija Balode, ID No: 9102828]
+                #Calls the introduction function from the News API file for the user to be able to search through different articles and access the other functionalities from the News API.
                 from NewsAPI import IntroductionToUser
                 Replies.append(IntroductionToUser(msgObj))
                 break
+                #End of code by [Annija Balode, ID No: 9102828]
 
         # This will identify book related words in the list
         for j in range(len(bookKeywords)):

@@ -78,7 +78,7 @@ def greetingReply(msgObj):
 
     BasicGreeting = str((ReplyList[randrange(len(ReplyList))])+msgObj.username+"!")
 
-    # This part is going to add additional text to the greetings to make the bot more personalised.
+    #This part is going to add additional text to the greetings to make the bot more personalised.
     SuggestionRNG = randrange(2)
 
     if SuggestionRNG == 0:
@@ -125,7 +125,7 @@ def greetingReply(msgObj):
 
     return BasicGreeting+SuggestiveGreeting
 
-# Function searches keywords and provides a appreciation message if the user says an appeciation keyword
+#Function searches keywords and provides a appreciation message if the user says an appeciation keyword
 def appreciationReply(msgObj):
     ReplyList = [
     "No problem, ",

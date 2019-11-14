@@ -6,10 +6,13 @@ import time
 from UserDataManagement import SaveData
 #--------------------------------------------------------------------------------------------------------------------------------------------#
 
+######################################################################################################################################
+#This code was removed due to the fact that the other team members assigned to this API went through a different method. This was placed as a template and guidance for these team members.
 
-#[Annija] and referenced from https://rapidapi.com/raygorodskij/api/Goodreads#
-#The key: JnUP42tF3SjMYKotdkgrSA#
-#The secret: yy1EpTPtnKAUZLljIkeSZ8BJ9cc0QB70K6GeGQNGB0#
+#Beginning of code by [Annija Balode, ID No: 9102828] and referenced from https://rapidapi.com/raygorodskij/api/Goodreads.
+
+#The key for this API: JnUP42tF3SjMYKotdkgrSA
+#The secret necessary for this API to work: yy1EpTPtnKAUZLljIkeSZ8BJ9cc0QB70K6GeGQNGB0#
 #url = "https://goodreadsraygorodskijv1.p.rapidapi.com/getAuthorBooks"
 
 #payload = ""
@@ -18,8 +21,12 @@ from UserDataManagement import SaveData
   #  'x-rapidapi-key': "81920e6a13msh6e78958b0ee4e66p1089ccjsn2155f80b3790",
   #  'content-type': "application/x-www-form-urlencoded"
   #  }
+  
 #response = requests.request("POST", url, data=payload, headers=headers)
 #Link to documentation: https://rapidapi.com/raygorodskij/api/Goodreads?endpoint=apiendpoint_22bb56e0-f967-11e7-8a9f-ddc04c05c7d2getAuthorBooks
+
+#End of code by [Annija Balode, ID No: 9102828] and referenced from https://rapidapi.com/raygorodskij/api/Goodreads.
+######################################################################################################################################
 
 #[kofi]
 #The Key:NxRD7Y051igsxA6xbjQRpQ
