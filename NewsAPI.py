@@ -113,7 +113,7 @@ def KeywordsForBranching(MsgObj):
 			return SpecificNewsPrimary(MsgObj)
 
 		elif FindWords[word].lower() in olderNewsKeywords:
-			return OlderNews(MsgObj)
+			return OlderNewsPrimary(MsgObj)
 
 		elif FindWords[word].lower() in topHeadlineKeywords:
 			return EveryTopHeadline(MsgObj)
@@ -174,20 +174,43 @@ def EveryTopHeadline(MsgObj):
 
 	specificArticle = response["articles"]
 
-	theAcceptedResponseTitle = []
-	theAcceptedResponseAuthor = []
-	theAcceptedResponseURL = []
-
 	for title in specificArticle:
-		theAcceptedResponseTitle.append(title["title"])
-	
+		theAcceptedResponseTitle = title["title"]
+
 	for author in specificArticle:
-		theAcceptedResponseAuthor.append(author["author"])
-
+		theAcceptedResponseAuthor = author["author"]
+	
 	for url in specificArticle:
-		theAcceptedResponseURL.append(url["url"])
+		theAcceptedResponseURL = url["url"]
+	
+	#for source in specificArticle:
+		#theAcceptedResponseSource = source["source"]
 
-	return str(theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL)
+	#for nameOfSource in theAcceptedResponseSource:
+		#theAcceptedResponseName = nameOfSource[0]
+		
+	finalResponse = str(theAcceptedResponseTitle) + " by " + str(theAcceptedResponseAuthor)
+	linkToReponse = ("\n You can access the article here: " + str(theAcceptedResponseURL))
+	savedResponse = ("your article!")
+
+	SaveData(savedResponse, MsgObj.userID, "PreviousViewedArticles")
+	SaveData(savedResponse, MsgObj.userID, "PreviousViewedEntertainment")
+	
+	return finalResponse + linkToReponse
+	#theAcceptedResponseTitle = []
+	#theAcceptedResponseAuthor = []
+	#theAcceptedResponseURL = []
+
+	#for title in specificArticle:
+		#theAcceptedResponseTitle.append(title["title"])
+	
+	#for author in specificArticle:
+		#theAcceptedResponseAuthor.append(author["author"])
+
+	#for url in specificArticle:
+		#theAcceptedResponseURL.append(url["url"])
+
+	#return str(theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL)
 #	for i in range(len(theAcceptedResponseTitle)):
 #		print(i+1, str(theAcceptedResponseTitle[i]) + " by " + str(theAcceptedResponseAuthor[i]) + ": " + str(theAcceptedResponseURL[i]))
 
@@ -239,14 +262,7 @@ def SpecificNews(MsgObj):
 	#theAcceptedResponseAuthor = []
 	#theAcceptedResponseURL = []
 
-	for title in specificArticle:
-		theAcceptedResponseTitle = title["title"]
 
-	for author in specificArticle:
-		theAcceptedResponseAuthor = author["author"]
-	
-	for url in specificArticle:
-		theAcceptedResponseURL = url["url"]
 	#for title in specificArticle:
 		#theAcceptedResponseTitle.append(title["title"])
 	
@@ -255,15 +271,27 @@ def SpecificNews(MsgObj):
 
 	#for url in specificArticle:
 		#theAcceptedResponseURL.append(url["url"])
+	for title in specificArticle:
+		theAcceptedResponseTitle = title["title"]
 
-	#finalResponse = (theAcceptedResponseTitle + " by " + theAcceptedResponseAuthor)
-	#linkToReponse = ("\n You can access the article here: " + theAcceptedResponseURL)
+	for author in specificArticle:
+		theAcceptedResponseAuthor = author["author"]
+	
+	for url in specificArticle:
+		theAcceptedResponseURL = url["url"]
+
+	finalResponse = str(theAcceptedResponseTitle) + " by " + str(theAcceptedResponseAuthor)
+	linkToReponse = ("\nYou can access the article here: " + str(theAcceptedResponseURL))
+	savedResponse = ("your article on ") + str(chosenTopic)
+
+	SaveData(chosenTopic, MsgObj.userID, "PreviousViewedArticles")
+	SaveData(savedResponse, MsgObj.userID, "PreviousViewedEntertainment")
+	
+	return finalResponse + linkToReponse
 	#finalResponse = ("Here's what I found for you: ") + str(theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL) 
 #	for i in range(len(theAcceptedResponseTitle)):
 #		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
-	SaveData(chosenTopic, MsgObj.userID, "PreviousViewedArticles")
 	
-	return theAcceptedResponseTitle + " by " + theAcceptedResponseAuthor + "\nYou can access the article here: " + theAcceptedResponseURL
 
 	# Loops back to the beginning of the function if they wish to search another topic. Further improvements will be made.
 	#findAnotherTopic = input("Here is what I found. Hope these are okay for you!" + '\n' + "Are there any other topics you would like to look at? ")
@@ -279,19 +307,23 @@ def SpecificNews(MsgObj):
 
 
 #-------------------------------------------------------------OLDER ARTICLES FUNCTION-------------------------------------------------------------#
-"""Function which allows the user to look at certain articles from within the past month, does not allow for a wider space of time as need to upgrade to a paid plan if want to do so."""
+"""Functions which allows the user to look at certain articles from within the past month, does not allow for a wider space of time as need to upgrade to a paid plan if want to do so."""
 
+def OlderNewsPrimary(MsgObj):
+	SaveData(NewsScriptGlobal_ID + "_OlderNews", MsgObj.userID, "ReplyID")
+	return ("Okay, from what date would you like to look at? Please make sure it's from within the past month and in the form YYYY-MM-DD so I can understand you!")
 
 # Beginning of code by [Annija Balode ID No: 9102828] and referenced from the official News API documentation https://newsapi.org/docs/endpoints/everything
 def OlderNews(MsgObj):
-	SaveData(NewsScriptGlobal_ID + "_OlderNews", MsgObj.userID, "ReplyID")
+	
 
-	howOldQuestion = input("Please make sure to write in the format YYYY-MM-DD including the dashes (I know, it's a strange format!)" + '\n' + "From what date within the last month would you like to view news? ")
-	howOldQuestionStr = str(howOldQuestion)
+	chosenDate = MsgObj.msg
+	#howOldQuestion = input("Please make sure to write in the format YYYY-MM-DD including the dashes (I know, it's a strange format!)" + '\n' + "From what date within the last month would you like to view news? ")
+	#howOldQuestionStr = str(howOldQuestion)
 	url = ('https://newsapi.org/v2/everything?'
        'q=apples&'
 	   'pageSize=1&'
-	   'from='+howOldQuestionStr+'&'
+	   'from='+chosenDate+'&'
        'sortBy=popularity&'
        'apiKey=72742ae51f514418a9a6da52faf58be6')
 	
@@ -299,24 +331,42 @@ def OlderNews(MsgObj):
 
 	specificArticle = response["articles"]
 
-	theAcceptedResponseTitle = []
-	theAcceptedResponseAuthor = []
-	theAcceptedResponseURL = []
-
 	for title in specificArticle:
-		theAcceptedResponseTitle.append(title["title"])
-	
+		theAcceptedResponseTitle = title["title"]
+
 	for author in specificArticle:
-		theAcceptedResponseAuthor.append(author["author"])
-
+		theAcceptedResponseAuthor = author["author"]
+	
 	for url in specificArticle:
-		theAcceptedResponseURL.append(url["url"])
+		theAcceptedResponseURL = url["url"]
+		
+	finalResponse = str(theAcceptedResponseTitle) + " by " + str(theAcceptedResponseAuthor)
+	linkToReponse = ("\nYou can access the article here: " + str(theAcceptedResponseURL))
+	savedResponse = ("your article from ") + str(chosenDate)
+
+	SaveData(chosenDate, MsgObj.userID, "PreviousViewedArticles")
+	SaveData(savedResponse, MsgObj.userID, "PreviousViewedEntertainment")
+	
+	return finalResponse + linkToReponse
+
+	#theAcceptedResponseTitle = []
+	#theAcceptedResponseAuthor = []
+	#theAcceptedResponseURL = []
+
+	#for title in specificArticle:
+		#theAcceptedResponseTitle.append(title["title"])
+	
+	#for author in specificArticle:
+		#theAcceptedResponseAuthor.append(author["author"])
+
+	#for url in specificArticle:
+		#theAcceptedResponseURL.append(url["url"])
 
 	
-	for i in range(len(theAcceptedResponseTitle)):
-		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
+	#for i in range(len(theAcceptedResponseTitle)):
+		#print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
 
-	return str(specificArticle)
+	#return str(specificArticle)
 # End of code by [Annija Balode ID No: 9102828] and referenced from the official News API documentation https://newsapi.org/docs/endpoints/everything
 #-------------------------------------------------------------------------------------------------------------------------------------------------#
 

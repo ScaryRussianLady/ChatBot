@@ -3,8 +3,8 @@
       {
          "UserID": 486240496797089802,
          "Name": "eg0tistical",
-         "LastMessage": "police",
-         "ReplyID": "1423_SpecificNews",
+         "LastMessage": "bye",
+         "ReplyID": "1423_OlderNews",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
          "LastBookReply": "Example reply",
@@ -32,15 +32,29 @@
             "politics",
             "politics",
             "police",
-            "police"
+            "police",
+            "politics",
+            "politics",
+            "politics",
+            "politics",
+            "politics",
+            "politics"
          ],
          "PreviousViewedEntertainment": [
             "Raise the Titanic",
-            "Survival Island"
+            "Survival Island",
+            "The James Bond Story",
+            "your article on politics",
+            "your article from {'id': None, 'name': 'Dailymail.co.uk'}",
+            "your article from a",
+            "your article from ame",
+            "your article from n",
+            "your article from 2019-11-05"
          ],
          "PreviousViewedFilms": [
             "Raise the Titanic",
-            "Survival Island"
+            "Survival Island",
+            "The James Bond Story"
          ],
          "PreviousViewedBooks": [],
          "PreviousViewedArticles": [
@@ -52,7 +66,18 @@
             "apples",
             "politics",
             "police",
-            "police"
+            "police",
+            "politics",
+            "politics",
+            "politics",
+            "politics",
+            "politics",
+            "politics",
+            "your article from {'id': None, 'name': 'Dailymail.co.uk'}",
+            "your article from a",
+            "your article from ame",
+            "your article from n",
+            "2019-11-05"
          ]
       },
       {
