@@ -3,7 +3,7 @@
       {
          "UserID": 486240496797089802,
          "Name": "eg0tistical",
-         "LastMessage": "thank you, bye",
+         "LastMessage": "bye",
          "ReplyID": "1423_SpecificNews",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
@@ -46,6 +46,7 @@
             "politics",
             "cheese",
             "politics",
+            "politics",
             "politics"
          ],
          "PreviousViewedEntertainment": [
@@ -70,6 +71,8 @@
             "John Wick",
             "your article on politics",
             "John Wick",
+            "your article on politics",
+            "John Wick",
             "your article on politics"
          ],
          "PreviousViewedFilms": [
@@ -81,6 +84,7 @@
             "John Wick",
             "Glass",
             "John Wick: Chapter 3 - Parabellum",
+            "John Wick",
             "John Wick",
             "John Wick"
          ],
@@ -110,6 +114,7 @@
             "your article!",
             "your article!",
             "your article!",
+            "politics",
             "politics",
             "politics"
          ]
