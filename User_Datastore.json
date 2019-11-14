@@ -3,8 +3,8 @@
       {
          "UserID": 486240496797089802,
          "Name": "eg0tistical",
-         "LastMessage": "dunno",
-         "ReplyID": "1423_NewsFromBBC",
+         "LastMessage": "thank you, bye",
+         "ReplyID": "1423_SpecificNews",
          "LastFilmReply": "Example reply",
          "LastNewsReply": "Example reply",
          "LastBookReply": "Example reply",
@@ -44,7 +44,9 @@
             "politics",
             "politics",
             "politics",
-            "cheese"
+            "cheese",
+            "politics",
+            "politics"
          ],
          "PreviousViewedEntertainment": [
             "Raise the Titanic",
@@ -64,7 +66,11 @@
             "John Wick: Chapter 3 - Parabellum",
             "your article!",
             "your article!",
-            "your article!"
+            "your article!",
+            "John Wick",
+            "your article on politics",
+            "John Wick",
+            "your article on politics"
          ],
          "PreviousViewedFilms": [
             "Raise the Titanic",
@@ -74,7 +80,9 @@
             "47 Meters Down: Uncaged",
             "John Wick",
             "Glass",
-            "John Wick: Chapter 3 - Parabellum"
+            "John Wick: Chapter 3 - Parabellum",
+            "John Wick",
+            "John Wick"
          ],
          "PreviousViewedBooks": [],
          "PreviousViewedArticles": [
@@ -101,7 +109,9 @@
             "cheese",
             "your article!",
             "your article!",
-            "your article!"
+            "your article!",
+            "politics",
+            "politics"
          ]
       },
       {
