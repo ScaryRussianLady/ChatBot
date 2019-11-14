@@ -109,7 +109,7 @@ def greetingReply(msgObj):
 
         EntRNG = EntList[randrange(len(EntList))]
 
-        if EntRNG == "the news article":
+        if EntRNG == "the news article about": #[Annija Balode, ID No: 9102828] just changed the string to make more sense when communicating with the user.
             DataList = RetrieveData(msgObj.userID, "PreviousViewedArticles")
         elif EntRNG == "the film":
             DataList = RetrieveData(msgObj.userID, "PreviousViewedFilms")
