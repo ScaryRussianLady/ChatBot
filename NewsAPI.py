@@ -36,7 +36,7 @@ from googletrans import Translator
 
 #Installed pillow in terminal and then imported the module required for loading the URL of images.
 #First had an issue with importing PIL so I referenced from https://stackoverflow.com/questions/8863917/importerror-no-module-named-pil to find the solution.
-from PIL import Image
+#from PIL import Image
 
 #Importing the SaveData function from the user data management script in order to be able to save the users preferences and previous messages.
 from UserDataManagement import SaveData
