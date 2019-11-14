@@ -339,6 +339,6 @@ def generateReplies(msgObj):
 #-----------------------------------------------------BOT RUN-----------------------------------------------------------------------------------#
 
 # This runs the bot. Note: The token is specific to the bot
-client.run("NjMzMzQ0NTM5NDk0NzExMzM2.XbHZtw.CLPjwoYCqMaQDYQ0jLElxYNfIGg")
+client.run("")
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
