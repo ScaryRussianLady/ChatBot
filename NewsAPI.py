@@ -1,50 +1,59 @@
-
-#Finish of all comments.
-
 #-------------------------------------------------------------BEGINNING OF IMPORT OF MODULES-------------------------------------------------------------#
-# Beginning of code by [Annija Balode ID No: 9102828]
+"""A section for importing all modules necessary for this script."""
+#Beginning of code by [Annija Balode, ID No: 9102828]
 
-# This imports the requests package which allows for HTTP requests.
+#This imports the requests package which allows for HTTP requests.
 import requests
 
-# The following imports the News API client specifically rather than everything from the News API that is being used in this script.
-#from newsapi import NewsApiClient
+######################################################################################################################################
+#The code below was commented out as it was unnecessary when attempting to use Cogs in order to allow this file to be loaded within the main chatbot file.
 
-# This will be used to ensure that no matter when the user accesses the API, the articles that are being pulled down are from the current date.
-# Obviously, the date will be changed but only if the user wishes to do so.
+#The following imports the News API client specifically rather than everything from the News API that is being used in this script.
+#from newsapi import NewsApiClient
+######################################################################################################################################
+
+
+#This will be used to ensure that no matter when the user accesses the API, the articles that are being pulled down are from the current date. Obviously, the date will be amendable but only if the user wishes to do so.
 from datetime import datetime
 
-#
+#This allows for discord.py to be imported in order to have full access to the Discord API and the commands that can be found within the official documentation.
 import discord
 from discord.ext import commands
 
-#
+######################################################################################################################################
+#The following code is from previous versions when attempting to import the same commands from the main file to this API file so communication could continue between the bot on Discord and the user rather than everything going through terminal.
+
 # from chatbot_script import *
 # import chatbot_script
+######################################################################################################################################
 
-#
+#This imports the JSON module so things further down this file can be converted into JSON format.
 import json
 
-# Imports the translator element from the Google Translate module which will allow for the user's text to be translated between their language
-# and English if it is non-English.
+#Imports the translator element from the Google Translate module which will allow for the user's text to be translated between their language
+#and English if it is non-English.
 from googletrans import Translator
 
-# Installed pillow in terminal and then imported the module required for loading the URL of images.
-# First had an issue with importing PIL so I referenced from https://stackoverflow.com/questions/8863917/importerror-no-module-named-pil to find the solution.
+#Installed pillow in terminal and then imported the module required for loading the URL of images.
+#First had an issue with importing PIL so I referenced from https://stackoverflow.com/questions/8863917/importerror-no-module-named-pil to find the solution.
 from PIL import Image
-
-
-from io import BytesIO
 
 #Importing the SaveData function from the user data management script in order to be able to save the users preferences and previous messages.
 from UserDataManagement import SaveData
 
-# IMPORTANT: this is our API key 72742ae51f514418a9a6da52faf58be6
+#IMPORTANT: this is the API key needed for accessing the News API 72742ae51f514418a9a6da52faf58be6
 
+#The appropriate ReplyID for this script so that the main file knows to run this specific file only.
+#line 47 taken from chatbot_script.py.
 NewsScriptGlobal_ID = "1423"
 
-# End of code by [Annija Balode ID No: 9102828]
+#End of code by [Annija Balode, ID No: 9102828]
 #---------------------------------------------------------------END OF IMPORT OF MODULES-------------------------------------------------------------------#
+
+######################################################################################################################################
+#This was an attempt to add the News API file as an extension to the main file in order to be able to load it from the main script from previous versions.
+
+#Beginning of code by [Annija Balode, ID No: 9102828] and referenced from official Discord API documentation.
 
 #class MembersCog(commands.Cog):
     #def __init__(self, client):
@@ -54,9 +63,12 @@ NewsScriptGlobal_ID = "1423"
 #def setup(client):
   #  client.add_cog(MembersCog(client))
 
+#End of code by [Annija Balode, ID No: 9102828] and referenced from official Discord API documentation.
+######################################################################################################################################
+
 #-------------------------------------------------------------BEGINNING OF INTRODUCTION FUNCTION-------------------------------------------------------------#
-#Function for introducing the possibilities to the user, it allows for the file to know which function to bring up.#
-# Beginning of code by [Annija Balode ID No: 9102828]
+"""Function for introducing the possibilities available to the user, it allows for the file to know which function to branch off to."""
+#Beginning of code by [Annija Balode, ID No: 9102828] and referenced from TMDBAPI_DiscordPrototype.py with adaptations.
 
 def IntroductionToUser(MsgObj):
 	SaveData(NewsScriptGlobal_ID + "_KeywordsForBranching", MsgObj.userID, "ReplyID")
@@ -125,7 +137,7 @@ def KeywordsForBranching(MsgObj):
 	#		print("Sorry, I don't understand what you mean. Try rephrasing! I promise I am doing my best to understand you. :)")
 	#		IntroductionToUser(MsgObj)
 
-# End of code by [Annija Balode ID No: 9102828]		
+# End of code by [Annija Balode, ID No: 9102828] and referenced from TMDBAPI_DiscordPrototype.py		
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 
@@ -190,19 +202,14 @@ def EveryTopHeadline(MsgObj):
 
 
 #-------------------------------------------------------------SPECIFIC NEWS FUNCTION-------------------------------------------------------------#
-# A function for finding news around the world depending on specific words/key terms.
-#However, this search does not allow for country-specific searches.#
-
-# Beginning of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
+#Beginning of code by [Annija Balode, ID No: 9102828] and referenced from the official News API documentation https://newsapi.org/docs/endpoints/everything
 def SpecificNewsPrimary(MsgObj):
 	SaveData(NewsScriptGlobal_ID + "_SpecificNews", MsgObj.userID, "ReplyID")
 
 	return ("Okay, give me a word or words and I will find you an article that includes it!")
 
-
+"""A function for finding news around the world depending on specific words/key terms. However, this search does not allow for country-specific searches."""
 def SpecificNews(MsgObj):
-#IMPORTANT NOTICE: This is only a rough 'sketch' of how the API will be laid out, as there will be no input statements like this, the bot will handle this differently.#
-
 	chosenTopic = MsgObj.msg
 	# Stores the specific word(s) that the user enters and then will use this variable to search up the relevant articles.
 	#chosenTopic = input("What topic would you like to look at?" + '\n' + "Give me one word or several words and I will fetch you the most popular article right now based on that topic! ")
@@ -253,15 +260,15 @@ def SpecificNews(MsgObj):
 	#	else:
 	#		print("Cool. See you soon!")
 
-# End of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
+#End of code by [Annija Balode ID No: 9102828] and referenced from the official News API documentation https://newsapi.org/docs/endpoints/everything
 #------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
 #-------------------------------------------------------------OLDER ARTICLES FUNCTION-------------------------------------------------------------#
-# Function which allows the user to look at certain articles from within the past month, does not allow for a wider space of time as need to upgrade
-#to a paid plan for that.#
+"""Function which allows the user to look at certain articles from within the past month, does not allow for a wider space of time as need to upgrade to a paid plan if want to do so."""
 
-# Beginning of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
+
+# Beginning of code by [Annija Balode ID No: 9102828] and referenced from the official News API documentation https://newsapi.org/docs/endpoints/everything
 def OlderNews(MsgObj):
 	SaveData(NewsScriptGlobal_ID + "_OlderNews", MsgObj.userID, "ReplyID")
 
@@ -296,14 +303,14 @@ def OlderNews(MsgObj):
 		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
 
 	return str(specificArticle)
-# End of code by [Annija Balode ID No: 9102828] and referenced from https://newsapi.org/docs/endpoints/everything
+# End of code by [Annija Balode ID No: 9102828] and referenced from the official News API documentation https://newsapi.org/docs/endpoints/everything
 #-------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
 #-------------------------------------------------------------NEWS FROM BBC SPECIFICALLY FUNCTION-------------------------------------------------------------#
-#Function for fetching the top ten headlines of today from BBC News.#
+"""A function for fetching the top ten headlines of today from BBC News."""
 
-# Beginning of code by [Annija Balode ID No: 9102828] and reference  from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
+# Beginning of code by [Annija Balode ID No: 9102828] and reference from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/ with adaptation.
 def NewsFromBBC(MsgObj): 
 	SaveData(NewsScriptGlobal_ID + "_NewsFromBBC", MsgObj.userID, "ReplyID")
 
@@ -330,16 +337,21 @@ def NewsFromBBC(MsgObj):
 		theAcceptedResponseURL.append(url["url"])
 
 	
-	for i in range(len(theAcceptedResponseTitle)):
-		print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
+	#for i in range(len(theAcceptedResponseTitle)):
+		#print(i+1, theAcceptedResponseTitle[i] + " by " + theAcceptedResponseAuthor[i] + ": " + theAcceptedResponseURL[i])
 		
 		return responseToUser + str(theAcceptedResponseTitle + theAcceptedResponseAuthor + theAcceptedResponseURL)
 
-# End of code by [Annija Balode ID No: 9102828] reference from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/
+#End of code by [Annija Balode, ID No: 9102828] reference from https://www.geeksforgeeks.org/fetching-top-news-using-news-api/ with adaptation.
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
+######################################################################################################################################
 #-------------------------------------------------------------TESTING FUNCTION----------------------------------------------------------------#
+#A testing function which allowed for acceptance testing for specific functions through the terminal. This got removed as it was unnecessary once the News API was getting pulled through the Discord bot itself.
+
+#Beginning of code by [Annija Balode, ID No: 9102828]
+
 #if __name__ == '__main__':
 	# Calls the function, only using this to ensure that everything is getting called correctly, these function names will
 	# be used to import from chatbot_script.py later on.
@@ -348,7 +360,12 @@ def NewsFromBBC(MsgObj):
 		# SpecificNews()
 		# OlderNews()
 		#IntroductionToUser()
+
+#End of code by [Annija Balode, ID No: 9102828]
 #----------------------------------------------------------------------------------------------------------------------------------------------#
+######################################################################################################################################
+
+#Beginning of code by [Annija Balode, ID No: 9102828] and referenced from TMDBAPI_DiscordPrototype.py with adaptations.
 
 def FindID(obj, ID):
 	if ID == "KeywordsForBranching":
@@ -361,4 +378,6 @@ def FindID(obj, ID):
 		return OlderNews(obj)
 	if ID == "NewsFromBBC":
 		return NewsFromBBC(obj)
+
+#End of code by [Annija Balode, ID No: 9102828] and referenced from TMDBAPI_DiscordPrototype.py with adaptations.
 
