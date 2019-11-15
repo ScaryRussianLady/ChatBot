@@ -170,6 +170,7 @@ def releasedate2(MsgObj):
 # end of block [Gerald Owusu-Manu]
 
 #Start of block [Gerald Owusu-Manu]
+#reference https://www.goodreads.com/api/index#search.books
 def authorMostpopular(MsgObj):
 
     # Next ONE line by Christian Shaw | Saves the ReplyID to the JSON database so that dialogue can be done on discord. Very important for user input.
@@ -285,7 +286,7 @@ def UserIntro2(MsgObj):
 
 #UserIntro()
 #could not get it to function as even when the correct keywords were entered the loop would still iterate
-# End of block
+# End of block [Gerald Owusu-Manu]
 
 
 
