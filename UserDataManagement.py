@@ -40,15 +40,19 @@ def CreateNewID(UserData, UserID):
     "Name": "Placeholder" , 
     "LastMessage": "Placeholder", 
     "ReplyID" : "XXXX_XXXX", # Addition [Christian Shaw | ID No. 9262834]
-    "LastFilmReply": "Example reply", 
-    "LastNewsReply": "Example reply", 
-    "LastBookReply": "Example reply",
-    "FavFilmGenre": ["Example Genre", "Another Example"],
-    "FavBookGenre": ["Example Genre", "Another Example"],
-    "FavNewsTopic": ["Example Topic", "Another Example"],
-    "PreviousViewedFilms": ["Example Film", "Another Example"], 
-    "PreviousViewedBooks": ["Example Book", "Another Example"],
-    "PreviousViewedArticles": ["Example Article", "Another Example"]}) #[Annija Balode ID No: 9102828] removed a comma.
+    #[Annija Balode ID No: 9102828] removed the example data as this was getting brought up when the bot was running, made them empty so data can be stored into them.
+    "LastFilmReply":"", 
+    "LastNewsReply":"", 
+    "LastBookReply":"",
+    "FavFilmGenre": [],
+    "FavBookGenre": [],
+    "FavNewsTopic": [],
+    "PreviousViewedEntertainment": [],
+    "PreviousViewedFilms": [], 
+    "PreviousViewedBooks": [],
+    "PreviousViewedArticles": []}) 
+    #[Annija Balode ID No: 9102828] end of wiping example data on this function.
+    
     
     with open("User_Datastore.json", 'w') as uds:
         json.dump(UserData, uds , indent= 3)
@@ -75,7 +79,7 @@ def RemoveData(DelWhole, ListPos, UserID, Location):
 
         with open("User_Datastore.json", 'w') as uds:
             json.dump(UserData, uds , indent= 3)
-
+#End of [Callum Jones, ID No. 9406128]
 
 # [Callum Jones , ID No. 9406128 ] Allows other scripts to retrive data from the json file
 def RetrieveData(UserID, Location):
@@ -83,12 +87,12 @@ def RetrieveData(UserID, Location):
     DataStr = ""
     DataLst = []
 
-    #[Annija Balode ID No: 9102828] Addition below, slightly adjusted the reading of the JSON file, more efficient and less likely to throw an error.
+    #[Annija Balode, ID No: 9102828] Addition below, slightly adjusted the reading of the JSON file, more efficient and less likely to throw an error.
     with open("User_Datastore.json") as uds:
         content = uds.read()
         UserData = json.loads(content)
        # UserData = json.load(uds)
-    #[Annija Balode ID No: 9102828] End of addition.
+    #[Annija Balode, ID No: 9102828] End of addition.
     count = FidnEntry(UserData , UserID)
 
     if Location == "Name" or Location == "LastMessage" or Location ==  "LastFilmReply" or Location ==  "LastNewsReply" or Location == "LastBookReply":

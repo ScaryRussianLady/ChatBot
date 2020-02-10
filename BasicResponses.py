@@ -29,7 +29,7 @@ def introduction(msgList, welcome):
 
 #-------------------------------------------------------------GENERIC RESPONSE FUNCTIONS----------------------------------------------------#
 
-#[Start of Code by Christian Shaw | ID No. 9262834]
+#[Start of Code by Christian Shaw]
 
 # Function searches keywords and provides a farewell message if the user says an farewell keyword
 def farewellReply(msgObj):
@@ -43,23 +43,27 @@ def farewellReply(msgObj):
 
     # This part is going to add additional text to the greetings to make the bot more personalised.
 
-    EntList = ["the news article", "the film", "the book"]
-    DataList = []
+    #EntList = ["the news article", "the film", "the book"]
+    #DataList = []
 
-    EntRNG = EntList[randrange(len(EntList))]
+    #EntRNG = EntList[randrange(len(EntList))]
 
-    if EntRNG == "the news article":
-        DataList = RetrieveData(msgObj.userID, "PreviousViewedArticles")
-    elif EntRNG == "the film":
-        DataList = RetrieveData(msgObj.userID, "PreviousViewedFilms")
-    elif EntRNG == "the book":
-        DataList = RetrieveData(msgObj.userID, "PreviousViewedBooks")
+    #if EntRNG == "the news article":
+     #   DataList = RetrieveData(msgObj.userID, "PreviousViewedArticles")
+    #elif EntRNG == "the film":
+    #    DataList = RetrieveData(msgObj.userID, "PreviousViewedFilms")
+    #elif EntRNG == "the book":
+     #   DataList = RetrieveData(msgObj.userID, "PreviousViewedBooks")
 
-    Topic = DataList[(len(DataList)-1)]
+    #Topic = DataList[(len(DataList)-1)]
 
     PhraseList_1 = [" Please do enjoy ", " I hope you enjoy ", " Have fun with "]
 
-    SuggestiveFarewell = (PhraseList_1[randrange(len(PhraseList_1))])+EntRNG+" "+Topic
+    #SuggestiveFarewell = (PhraseList_1[randrange(len(PhraseList_1))])+EntRNG+" "+Topic
+
+    NewDataList = RetrieveData(msgObj.userID, "PreviousViewedEntertainment")
+
+    SuggestiveFarewell = (PhraseList_1[randrange(len(PhraseList_1))]+NewDataList[len(NewDataList)-1]+"!")
 
     return BasicFarewell+SuggestiveFarewell
 
@@ -74,7 +78,7 @@ def greetingReply(msgObj):
 
     BasicGreeting = str((ReplyList[randrange(len(ReplyList))])+msgObj.username+"!")
 
-    # This part is going to add additional text to the greetings to make the bot more personalised.
+    #This part is going to add additional text to the greetings to make the bot more personalised.
     SuggestionRNG = randrange(2)
 
     if SuggestionRNG == 0:
@@ -105,7 +109,7 @@ def greetingReply(msgObj):
 
         EntRNG = EntList[randrange(len(EntList))]
 
-        if EntRNG == "the news article":
+        if EntRNG == "the news article about": #[Annija Balode, ID No: 9102828] just changed the string to make more sense when communicating with the user.
             DataList = RetrieveData(msgObj.userID, "PreviousViewedArticles")
         elif EntRNG == "the film":
             DataList = RetrieveData(msgObj.userID, "PreviousViewedFilms")
@@ -121,7 +125,7 @@ def greetingReply(msgObj):
 
     return BasicGreeting+SuggestiveGreeting
 
-# Function searches keywords and provides a appreciation message if the user says an appeciation keyword
+#Function searches keywords and provides a appreciation message if the user says an appeciation keyword
 def appreciationReply(msgObj):
     ReplyList = [
     "No problem, ",
@@ -132,6 +136,6 @@ def appreciationReply(msgObj):
 
     return str((ReplyList[randrange(len(ReplyList))])+msgObj.username+"!")
 
-#[End of Code by Christian Shaw | ID No. 9262834]
+#[End of Code by Christian Shaw]
 
 #-------------------------------------------------------------------------------------------------------------------------------------------#

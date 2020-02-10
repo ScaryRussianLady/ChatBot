@@ -10,7 +10,10 @@ import asyncio
 
 #-------------------------------------------------------------ESTABLISHING THE BOT-------------------------------------------------------------#
 
-#[Start of Code by Christian Shaw | ID No. 9262834]
+#[Start of Code by Christian Shaw]
+
+#[Code in this block is adapted from the discord.py documentation: 
+# https://discordpy.readthedocs.io/en/latest/quickstart.html#a-minimal-bot]
 
 # Assigns the variable client to the bot and sets the command's prefix to "-"
 client = commands.Bot(command_prefix = "-")
@@ -22,19 +25,19 @@ async def on_ready():
     # For terminal use only. Creates space between information on the terminal to make it easier to read.
     print("\n--------------------------------------------------------------------------")
 
-#[End of Code by Christian Shaw | ID No. 9262834]
+#[End of Code by Christian Shaw]
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-------------------------------------------------------------BOT COMMAND ASYNC FUNCTION--------------------------------------------------------#
-#[Start of Code by Christian Shaw | ID No. 9262834]
+#[Start of Code by Christian Shaw]
 
 # This is the MAIN function for the chatbot | com = the command (bot), msg = the user input after the command is called
 # E.G The user typing "-bot My name is Bill" will make msg = "My name is Bill"
 @client.command()
 async def bot(com, *, msg):
 
-    # [Start of Code by Christian Shaw | ID No. 9262834] Calls the function that creates the message object
+    # [Start of Code by Christian Shaw] Calls the function that creates the message object
     msgObj = createMsgObj(msg, com.author.id, str(com.author), com.channel)
     print("User's message            >>", msgObj.msg)
     print("User's message as list    >>", msgObj.list)
@@ -56,25 +59,25 @@ async def bot(com, *, msg):
     if len(botReply) != 0:
         for i in botReply:
             # Uses the translateText function I created to translate the bot's reply back into the user's language
-            Reply = translateText(i, msgObj.lang)
+            Reply = i#translateText(i, msgObj.lang)
             await com.send(Reply)
     else:
         # If there weren't any replies found to send, it will reply with this:
         Reply = "Could you try rephrasing what you said? I promise I am doing my best to understand you!"
         # Uses the translateText function I created to translate the bot's reply back into the user's language
-        Reply = translateText(Reply, msgObj.lang)
+        Reply = botReply#translateText(Reply, msgObj.lang)
         await com.send(Reply)
     
     #For terminal use only. Creates space between information on the terminal to make it easier to read.
     print("\n--------------------------------------------------------------------------")
 
-#[End of Code by Christian Shaw | ID No. 9262834]
+#[End of Code by Christian Shaw]
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-------------------------------------------------------------BOT REPLY COMMAND ASYNC FUNCTION--------------------------------------------------#
 
-# [Start of Code by Christian Shaw | ID No. 9262834] 
+# [Start of Code by Christian Shaw] 
 
 # This async function will handle all of the replies
 # Instead of the command -bot, for replies the user most type -r
@@ -141,26 +144,27 @@ async def r(com, *, reply):
 
     # This is for the book script
     if Global_ID == BookScriptGlobal_ID:
-        pass
+        from GoodreadsAPI import FindID
+        BotReply = FindID(msgObj, Local_ID)
 
     # Next part is going to retrieve and check the "replyID" and go to the required script & function
-    if BotReply == "":
-        BotReply = translateText("Sorry, I didn't quite understand that reply", msgObj.lang)
+    if BotReply == None or BotReply == "":
+        #BotReply = translateText("Sorry, I didn't quite understand that reply", msgObj.lang)
         await com.send(BotReply)
     else:
-        BotReply = translateText(BotReply, msgObj.lang)
+        #BotReply = translateText(BotReply, msgObj.lang)
         await com.send(BotReply)
 
     #For terminal use only. Creates space between information on the terminal to make it easier to read.
     print("\n--------------------------------------------------------------------------")
 
-# [End of Code by Christian Shaw | ID No. 9262834] 
+# [End of Code by Christian Shaw] 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-------------------------------------------------------------BOT TRANSLATION FUNCTIONS---------------------------------------------------------#
 
-# [Start of Code by Christian Shaw | ID No. 9262834] 
+# [Start of Code by Christian Shaw] 
 
 # This will translate the languages of strings using the googletrans API and returns it
 # The parameters: text = the string to be translated, lang = the language the string will be translated to
@@ -176,13 +180,13 @@ def detectLanguage(text):
     language = translator.detect(text)
     return language.lang
 
-# [End of Code by Christian Shaw | ID No. 9262834] 
+# [End of Code by Christian Shaw] 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-------------------------------------------------------------MESSAGE OBJECTS AND FUNCTIONS-----------------------------------------------------#
 
-# [Start of Code by Christian Shaw | ID No. 9262834] 
+# [Start of Code by Christian Shaw] 
 
 # This creates an object to store the message properties AND a function to create the object and give it the properties it needs
 class messageObj():
@@ -201,9 +205,9 @@ def createMsgObj(msg, authorID, usr, channel):
     
     # This part of the script translates the raw user input into English so that the bot can interpret it better
     # Also, languages such as Korean, Japanese and Chinese don't have spaces between their characters, so finding individual words wouldn't work
-    msgLanguage = detectLanguage(msg)
-    if msgLanguage != 'en':
-        msg = translateText(msg, "en")
+    #msgLanguage = detectLanguage(msg)
+    #if msgLanguage != 'en':
+    #    msg = translateText(msg, "en")
     msgList = msg.split()
 
     # This part of the code is going to remove the hashtags and ID from the username that discord uses to identify users
@@ -216,16 +220,19 @@ def createMsgObj(msg, authorID, usr, channel):
         
         NewUsr = NewUsr+usr[char]
 
+    msgLanguage = "en" # Temporary
+
     msg_obj = messageObj(msg, msgList, msgLanguage, authorID, usr, channel)
     return msg_obj
 
-# [End of Code by Christian Shaw | ID No. 9262834] 
+# [End of Code by Christian Shaw] 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
+
 #-------------------------------------------------------------REPLY GENERATION ALGORITHM--------------------------------------------------------#
 
-# [Start of Code by Christian Shaw | ID No. 9262834] 
+# [Start of Code by Christian Shaw] 
 # Please note: The scripts imported in the algorithm when a keyword is identified may not be ones that I have written
 
 # This algorthim will search for specific keywords from a list to determine what scripts will be used for replies
@@ -290,19 +297,22 @@ def generateReplies(msgObj):
                 break
         
         # This will identify news related words in the list
-        #Annija
+
         for j in range(len(newsKeywords)):
             if msgList[i].lower() == newsKeywords[j] or msgList[i].lower() == (newsKeywords[j]+"s"):
+                #Beginning of code by [Annija Balode, ID No: 9102828]
+                #Calls the introduction function from the News API file for the user to be able to search through different articles and access the other functionalities from the News API.
                 from NewsAPI import IntroductionToUser
                 Replies.append(IntroductionToUser(msgObj))
                 break
+                #End of code by [Annija Balode, ID No: 9102828]
 
         # This will identify book related words in the list
         for j in range(len(bookKeywords)):
             if msgList[i].lower() == bookKeywords[j] or msgList[i].lower() == (bookKeywords[j]+"s"):
                 # Call for book function inside of the placeholder
                 from GoodreadsAPI import UserIntro
-                #Replies.append("Placeholder Book Info")
+                Replies.append(UserIntro(msgObj))
                 break
         
         # This will identify farewell words in the list
@@ -314,13 +324,13 @@ def generateReplies(msgObj):
     
     return Replies
 
-# [End of Code by Christian Shaw | ID No. 9262834] 
+# [End of Code by Christian Shaw] 
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
 
 #-----------------------------------------------------BOT RUN-----------------------------------------------------------------------------------#
 
 # This runs the bot. Note: The token is specific to the bot
-client.run("NjMzMzQ0NTM5NDk0NzExMzM2.XbHZtw.CLPjwoYCqMaQDYQ0jLElxYNfIGg")
+client.run("")
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------#
